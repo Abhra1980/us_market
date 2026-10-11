@@ -1,0 +1,95 @@
+series_id,category,why
+DFF,policy_rates,Fed funds effective rate (daily)
+FEDFUNDS,policy_rates,Fed funds effective rate (monthly)
+DFEDTARU,policy_rates,Fed funds target range upper bound
+DFEDTARL,policy_rates,Fed funds target range lower bound
+SOFR,policy_rates,Secured overnight financing rate
+DPRIME,policy_rates,Bank prime loan rate
+DTB3,treasury_curve,3-month T-bill (secondary market)
+DGS1MO,treasury_curve,1-month Treasury constant maturity
+DGS3MO,treasury_curve,3-month Treasury constant maturity
+DGS6MO,treasury_curve,6-month Treasury constant maturity
+DGS1,treasury_curve,1-year Treasury constant maturity
+DGS2,treasury_curve,2-year Treasury constant maturity
+DGS3,treasury_curve,3-year Treasury constant maturity
+DGS5,treasury_curve,5-year Treasury constant maturity
+DGS7,treasury_curve,7-year Treasury constant maturity
+DGS10,treasury_curve,10-year Treasury constant maturity
+DGS20,treasury_curve,20-year Treasury constant maturity
+DGS30,treasury_curve,30-year Treasury constant maturity
+T10Y2Y,treasury_curve,10-year minus 2-year spread
+T10Y3M,treasury_curve,10-year minus 3-month spread
+DFII10,real_rates_inflation_expectations,10-year TIPS real yield
+DFII5,real_rates_inflation_expectations,5-year TIPS real yield
+T10YIE,real_rates_inflation_expectations,10-year breakeven inflation
+T5YIE,real_rates_inflation_expectations,5-year breakeven inflation
+T5YIFR,real_rates_inflation_expectations,5-year 5-year forward inflation expectation
+MICH,real_rates_inflation_expectations,University of Michigan 1-year inflation expectation
+MORTGAGE30US,credit,30-year fixed mortgage rate
+DAAA,credit,Moody's Aaa corporate bond yield
+DBAA,credit,Moody's Baa corporate bond yield
+AAA10Y,credit,Aaa minus 10-year Treasury
+BAA10Y,credit,Baa minus 10-year Treasury
+BAMLC0A0CM,credit,ICE BofA US corporate (IG) option-adjusted spread
+BAMLH0A0HYM2,credit,ICE BofA US high yield option-adjusted spread
+CPIAUCSL,inflation,CPI all items (SA)
+CPILFESL,inflation,Core CPI (SA)
+CPIAUCNS,inflation,CPI all items (NSA)
+PCEPI,inflation,PCE price index
+PCEPILFE,inflation,Core PCE price index
+PPIFIS,inflation,PPI final demand
+UNRATE,labor,Unemployment rate
+PAYEMS,labor,Nonfarm payrolls
+CIVPART,labor,Labor force participation rate
+CES0500000003,labor,Average hourly earnings (private)
+ICSA,labor,Initial jobless claims
+CCSA,labor,Continuing jobless claims
+JTSJOL,labor,Job openings (JOLTS)
+GDP,growth,Nominal GDP
+GDPC1,growth,Real GDP
+A191RL1Q225SBEA,growth,Real GDP growth (annualized)
+INDPRO,growth,Industrial production
+TCU,growth,Capacity utilization
+RSAFS,growth,Retail sales
+DGORDER,growth,Durable goods orders
+CFNAI,growth,Chicago Fed National Activity Index
+WEI,growth,Weekly Economic Index
+UMCSENT,growth,University of Michigan consumer sentiment
+PSAVERT,households,Personal saving rate
+DSPIC96,households,Real disposable personal income
+TDSP,households,Household debt service ratio
+HOUST,housing,Housing starts
+PERMIT,housing,Building permits
+MSPUS,housing,Median sales price of houses sold
+CSUSHPINSA,housing,S&P CoreLogic Case-Shiller US home price index
+M2SL,money_fed,M2 money stock
+WALCL,money_fed,Fed balance sheet total assets
+RRPONTSYD,money_fed,Overnight reverse repo
+WRESBAL,money_fed,Reserve balances with Federal Reserve Banks
+BUSLOANS,money_fed,Commercial and industrial loans
+NFCI,financial_conditions,Chicago Fed National Financial Conditions Index
+ANFCI,financial_conditions,Adjusted NFCI
+STLFSI4,financial_conditions,St. Louis Fed Financial Stress Index
+VIXCLS,financial_conditions,Cboe VIX
+DTWEXBGS,dollar_fx,Broad trade-weighted US dollar index
+DEXUSEU,dollar_fx,USD per EUR
+DEXJPUS,dollar_fx,JPY per USD
+DEXUSUK,dollar_fx,USD per GBP
+DEXCHUS,dollar_fx,CNY per USD
+DEXINUS,dollar_fx,INR per USD
+DEXCAUS,dollar_fx,CAD per USD
+DCOILWTICO,commodities,WTI crude oil
+DCOILBRENTEU,commodities,Brent crude oil
+DHHNGSP,commodities,Henry Hub natural gas
+PCOPPUSDM,commodities,Copper price (IMF)
+USREC,recession,NBER recession indicator (monthly)
+USRECD,recession,NBER recession indicator (daily)
+SAHMREALTIME,recession,Sahm rule recession indicator (real time)
+RECPROUSM156N,recession,Smoothed recession probabilities
+SP500,equity_market,S&P 500 index level
+DJIA,equity_market,Dow Jones Industrial Average
+NASDAQCOM,equity_market,Nasdaq Composite
+NCBEILQ027S,valuation_inputs,Nonfinancial corporate equities market value (Z.1)
+CP,valuation_inputs,Corporate profits after tax
+GFDEBTN,government,Federal debt total public debt
+FYFSD,government,Federal surplus or deficit
