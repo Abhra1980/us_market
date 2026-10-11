@@ -21,6 +21,18 @@ python3 fred/load_fred.py --dry-run    # fetch and report, write nothing
 Each series is replaced in full in its own transaction. To add a series, add a line to
 `series.csv` (`series_id,category,why`) and rerun for it.
 
+## Daily refresh (Abhrajit's Mac)
+
+A launchd job runs `load_fred.py --changed-only` every day at 07:00 IST, which reloads only the
+series FRED updated since the last load. If the Mac is asleep at 07:00, it runs on wake.
+
+- Job: `~/Library/LaunchAgents/com.abhra.usmarket-fred-daily.plist`
+- Script: `~/.local/bin/com.abhra.usmarket-fred-daily.sh` (skips quietly if SSD1 or Postgres is down)
+- Key: macOS Keychain, service `FRED_API_KEY`
+- Log: `~/Library/Logs/com.abhra.usmarket-fred-daily.log`
+- Run now: `launchctl kickstart gui/$(id -u)/com.abhra.usmarket-fred-daily`
+- Stop: `launchctl bootout gui/$(id -u)/com.abhra.usmarket-fred-daily`
+
 ## What is loaded
 
 94 series in 17 groups: Treasury curve, policy rates, real rates and inflation expectations,

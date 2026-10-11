@@ -21,6 +21,7 @@ Usage:
     python3 fred/load_fred.py                 # every series in series.csv
     python3 fred/load_fred.py DGS10 UNRATE    # just these
     python3 fred/load_fred.py --dry-run       # fetch and report, write nothing
+    python3 fred/load_fred.py --changed-only  # skip series FRED has not updated since the last load (daily job)
 """
 from __future__ import annotations
 
@@ -94,6 +95,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("series", nargs="*", help="only these series ids (default: all in series.csv)")
     ap.add_argument("--dry-run", action="store_true", help="fetch and report; write nothing")
+    ap.add_argument("--changed-only", action="store_true",
+                    help="skip series whose FRED last_updated equals the stored one")
     ap.add_argument("--dsn", default=os.environ.get("USMARKET_DSN") or DEFAULT_DSN)
     args = ap.parse_args()
 
@@ -112,11 +115,21 @@ def main() -> int:
         with conn, conn.cursor() as cur:
             cur.execute((HERE / "schema.sql").read_text())
 
-    loaded, restricted, failed = [], [], []
+    stored = {}
+    if conn and args.changed_only:
+        with conn.cursor() as cur:
+            cur.execute("select series_id, last_updated from usmarket.fred_series")
+            stored = dict(cur.fetchall())
+
+    loaded, restricted, failed, unchanged = [], [], [], []
     for w in wanted:
         sid = w["series_id"]
         try:
             meta = fred("series", series_id=sid)["seriess"][0]
+            if sid in stored and stored[sid] and \
+                    datetime.fromisoformat(meta["last_updated"].replace(" ", "T")) == stored[sid]:
+                unchanged.append(sid)
+                continue
             reason = restriction(meta.get("notes", ""))
             obs = [] if reason else fred("series/observations", series_id=sid, limit=100000)["observations"]
         except Exception as e:  # noqa: BLE001 - one bad series must not stop the rest
@@ -147,6 +160,7 @@ def main() -> int:
                                    rows, page_size=10000)
 
     log(f"done: {len(loaded)} series loaded ({sum(n for _, n in loaded)} observations), "
+        f"{len(unchanged)} unchanged since the last load, "
         f"{len(restricted)} restricted (description only), {len(failed)} failed")
     for sid, title, why in restricted:
         log(f"   restricted {sid}: {why[:160]}")
