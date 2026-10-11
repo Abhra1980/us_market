@@ -363,9 +363,16 @@ def main() -> int:
 
     with psycopg2.connect(args.dsn) as conn, conn.cursor() as cur:
         cur.execute((HERE / "schema.sql").read_text())
-        for t in ("index_membership", "index_membership_coverage", "index_membership_reconciliation",
-                  "index_change_event", "index_symbol_change", "index_constituent_list"):
-            cur.execute(f"delete from usmarket.{t} where index_type = %s", (INDEX,))
+        # Replace only this build's rows (1999-2002); build_sp500_modern.py owns 2010 onward.
+        own = [s[0] for s in SOURCES]
+        for t, where in (("index_membership", "effective_date < '2003-01-01'"),
+                         ("index_membership_coverage", "covered_from < '2003-01-01'"),
+                         ("index_membership_reconciliation", "check_date < '2003-01-01'"),
+                         ("index_change_event", "source = any(%(own)s)"),
+                         ("index_symbol_change", "source = any(%(own)s)"),
+                         ("index_constituent_list", "source = any(%(own)s)")):
+            cur.execute(f"delete from usmarket.{t} where index_type = %(ix)s and {where}",
+                        {"ix": INDEX, "own": own})
         execute_values(cur, """insert into usmarket.index_source_file
             (source, publisher, kind, path, url, captured_on, note) values %s
             on conflict (source) do update set publisher = excluded.publisher, kind = excluded.kind,

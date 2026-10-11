@@ -126,3 +126,24 @@ select index_type, symbol,
        bool_or(is_verified) as touches_verified_list
 from runs
 group by index_type, symbol, grp;
+
+-- 2010 onward (build_sp500_modern.py): S&P press releases, SEC fund holdings, SEC CUSIP map.
+alter table usmarket.index_change_event add column if not exists announced_date date;
+alter table usmarket.index_change_event add column if not exists release_url text;
+alter table usmarket.index_constituent_list add column if not exists cusip text;
+alter table usmarket.index_constituent_list add column if not exists isin text;
+alter table usmarket.index_constituent_list add column if not exists fund_count integer;
+alter table usmarket.index_symbol_change add column if not exists cusip text;
+
+-- CUSIP <-> ticker pairs seen in the SEC's fails-to-deliver files, with the first and last
+-- settlement date each pair appeared. Join prices through this, nearest to the date wanted.
+create table if not exists usmarket.sec_cusip_symbol (
+    cusip        text not null,
+    symbol       text not null,
+    description  text,
+    first_seen   date not null,
+    last_seen    date not null,
+    placeholder  boolean not null default false,   -- temporary XXXX/ZZZZ codes around a CUSIP change
+    primary key (cusip, symbol)
+);
+create index if not exists sec_cusip_symbol_symbol on usmarket.sec_cusip_symbol (symbol);
