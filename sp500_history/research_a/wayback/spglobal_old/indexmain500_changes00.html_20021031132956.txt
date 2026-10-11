@@ -1,0 +1,400 @@
+ 
+ Standard & Poor's 
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSE 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+ Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Index Changes 2000 
+(all changes effective after close of trading) 
+ ADDITIONS 
+ DELETIONS 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 01/03 
+ NCR Corp. 
+ NCR 
+ ----------- 
+ ----- 
+ 01/05 
+ Young & Rubicam 
+ YNR 
+ General Instrument 
+ GIC 
+ 01/28 
+ Conexant Systems 
+ CNXT 
+ Consolidated Natural Gas 
+ CNG 
+ 01/28 
+ Biogen, Inc. 
+ BGEN 
+ Foster Wheeler 
+ FWC 
+ 01/28 
+ Harley-Davidson 
+ HDI 
+ Fleetwood Enterprises 
+ FLE 
+ 03/15 
+ Sabre Holdings Corporation 
+ TSG 
+ Service Corp. International 
+ SRV 
+ 03/31 
+ Pharmacia Corp. 
+ PHA 
+ Pharmacia & Upjohn, Inc. 
+ PNU 
+ 03/31 
+ Veritas Software 
+ VRTS 
+ Pep Boys 
+ PBY 
+ 03/31 
+ Linear Technology 
+ LLTC 
+ Monsanto Company 
+ MTC 
+ 04/17 
+ Altera Corp. 
+ ALTR 
+ Atlantic Richfield 
+ ARC 
+ 05/04 
+ Sapient Corp. 
+ SAPE 
+ Reynolds Metals 
+ RLM 
+ 05/04 
+ Siebel Systems, Inc. 
+ SEBL 
+ CBS Corp. 
+ CBS 
+ 05/09 
+ Maxim Integrated Products 
+ MXIM 
+ Jostens Inc. 
+ JOS 
+ 05/31 
+ American Power Conversion 
+ APCC 
+ Mirage Resorts 
+ MIR 
+ 06/02 
+ Agilent Technologies 
+ A 
+ NACCO Industries 
+ NC 
+ 06/07 
+ Starbucks Corp. 
+ SBUX 
+ Shared Medical Systems 
+ SMS 
+ 06/12 
+ Convergys Corp. 
+ CVG 
+ Times Mirror 
+ TMC 
+ 06/15 
+ MedImmune 
+ MEDI 
+ Central & South West 
+ CSR 
+ 06/15 
+ ----- 
+ ----- 
+ MediaOne Group Inc. 
+ UMG 
+ 06/16 
+ Charter One Financial 
+ CF 
+ ----- 
+ ----- 
+ 06/16 
+ Novellus Systems 
+ NVLS 
+ Champion International 
+ CHA 
+ 06/20 
+ Tiffany & Co. 
+ TIF 
+ Silicon Graphics 
+ SGI 
+ 06/20 
+ Sanmina Corp. 
+ SANM 
+ Warner-Lambert 
+ WLA 
+ 06/28 
+ Visteon Corp. 
+ VC 
+ IKON Office Solutions 
+ IKN 
+ 06/28 
+ Mercury Interactive 
+ MERQ 
+ Milacron Inc. 
+ MZ 
+ 06/30 
+ Broadcom Corporation 
+ BRCM 
+ GTE Corp. 
+ GTE 
+ 07/05 
+ Qwest Communication Int'l 
+ Q 
+ US West 
+ USW 
+ 07/12 
+ Stilwell Financial 
+ SV 
+ Kansas City Southern Industries 
+ KSU 
+ 07/14 
+ CIT Group Inc. 
+ CIT 
+ Union Pacific Resources 
+ UPR 
+ 07/26 
+ JDS Uniphase Corp. 
+ JDSU 
+ Rite Aid Corp. 
+ RAD 
+ 07/27 
+ Palm Inc. 
+ PALM 
+ 3Com Corp. 
+ COMS 
+ 08/18 
+ KeySpan Corp. 
+ KSE 
+ New Century Energies 
+ NCE 
+ 08/29 
+ Devon Energy Corp. 
+ DVN 
+ Great A&P 
+ GAP 
+ 09/29 
+ Avaya Inc. 
+ AV 
+ Owens Corning 
+ OWC 
+ 10/02 
+ King Pharmaceuticals 
+ KG 
+ Young & Rubicam 
+ YNR 
+ 10/02 
+ Moody's Corp. 
+ MCO 
+ Dun & Bradstreet 
+ DNB 
+ 10/02 
+ Dynegy Inc. 
+ DYN 
+ BestFoods 
+ BFO 
+ 10/17 
+ Nabors Industries 
+ NBR 
+ Mallinckrodt Inc. 
+ MKG 
+ 10/20 
+ Power-One Inc. 
+ PWER 
+ Unicom Corp. 
+ UCM 
+ 11/01 
+ EOG Resources 
+ EOG 
+ Eastern Enterprises 
+ EFU 
+ 11/01 
+ NiSource Inc. 
+ NI 
+ Columbia Energy Group 
+ CG 
+ 11/03 
+ BroadVision Inc. 
+ BVSN 
+ PainWebber Group 
+ PWJ 
+ 11/16 
+ Starwood Hotels & Resorts 
+ HOT 
+ Armstrong Holdings, Inc. 
+ ACK 
+ 11/21 
+ Forest Laboratories 
+ FRX 
+ Seagate Technology 
+ SEG 
+ 11/22 
+ Chiron Corp. 
+ CHIR 
+ Fort James Corp. 
+ FJ 
+ 11/30 
+ Calpine Corp. 
+ CPN 
+ Florida Progress 
+ FPC 
+ 12/01 
+ ---------- 
+ --- 
+ Associates First Capital 
+ AFS 
+ 12/04 
+ Robert Half International 
+ RHI 
+ ------------ 
+ --- 
+ 12/08 
+ Allegheny Energy Inc. 
+ AYE 
+ Bethlehem Steel 
+ BS 
+ 12/08 
+ Ambac Financial Group 
+ ABK 
+ Crown Cork & Seal 
+ CCK 
+ 12/08 
+ Symbol Technologies 
+ SBL 
+ Grace (W.R.) & Co. (New) 
+ GRA 
+ 12/08 
+ Intuit, Inc. 
+ INTU 
+ Owens-Illinois 
+ OI 
+ 12/08 
+ MetLife Inc. 
+ MET 
+ Seagram Co. Ltd. 
+ VO 
+ 12/11 
+ Kinder Morgan, Inc. 
+ KMI 
+ Nabisco Group Hldgs. 
+ NGH 
+ 12/11 
+ QLogic Corp. 
+ QLGC 
+ Polaroid Corp. 
+ PRD 
+ 12/11 
+ Vitessa Semiconductor 
+ VTSS 
+ Springs Industries, Inc. 
+ SMI 
+ 12/11 
+ Stryker Corp. 
+ SYK 
+ Russell Corp. 
+ RML 
+ 12/13 
+ Aetna Inc. (New) 
+ AET 
+ Aetna Inc. (Old) 
+ AET 
+ 12/21 
+ Fluor Corp. (New) 
+ FLR 
+ Massey Energy Company 
+ MEE 
+ 12/29 
+ Applied Micro Circuits 
+ AMCC 
+ Morgan (J.P.) & Co. 
+ JPM 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved. Privacy Policy 
+

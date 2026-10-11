@@ -1,0 +1,1231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" 
+      "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><!-- #BeginTemplate "/Templates/news.dwt" -->
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+<!-- #BeginEditable "doctitle" --> 
+<title>Standard &amp; Poor's</title>
+<!-- #EndEditable --> 
+<script language="JavaScript">
+    <!--
+      //prototype for the Is containing user agent information
+      function Is ()
+      {   // convert all characters to lowercase to simplify testing 
+        var agt=navigator.userAgent.toLowerCase(); 
+
+        // browser version
+        // Note: On IE5, these return 4, so use is.ie5up to detect IE5. 
+        this.major = parseInt(navigator.appVersion); 
+        this.minor = parseFloat(navigator.appVersion); 
+
+        this.nav  = ((agt.indexOf('mozilla')!=-1) && (agt.indexOf('spoofer')==-1) 
+                && (agt.indexOf('compatible') == -1) && (agt.indexOf('opera')==-1) 
+                && (agt.indexOf('webtv')==-1)); 
+        this.nav2 = (this.nav && (this.major == 2)); 
+        this.nav3 = (this.nav && (this.major == 3)); 
+        this.nav4 = (this.nav && (this.major == 4)); 
+        this.nav4up = (this.nav && (this.major >= 4)); 
+        this.navonly      = (this.nav && ((agt.indexOf(";nav") != -1) || 
+                          (agt.indexOf("; nav") != -1)) ); 
+        this.nav5 = (this.nav && (this.major == 5)); 
+        this.nav5up = (this.nav && (this.major >= 5)); 
+  
+        this.ie   = (agt.indexOf("msie") != -1); 
+        this.ie3  = (this.ie && (this.major < 4)); 
+        this.ie4  = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")==-1) ); 
+        this.ie4up  = (this.ie  && (this.major >= 4)); 
+        this.ie5  = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")!=-1) ); 
+        this.ie5up  = (this.ie  && !this.ie3 && !this.ie4); 
+
+        this.ver4up  = (this.ie4up || this.nav4up); 
+
+        //platform
+        this.mac    = (agt.indexOf("mac")!=-1); 
+      } 
+
+      //create the is.user agent object
+      var is = new Is();
+
+      //create an array object supported in js 1.0
+      //start at 1 so the date functions make sense
+      function makeArray(i){
+        this.length = i;
+        for(index=1;index<(i+1);index++)
+        {
+          this[index] = null;
+        }
+        return this;
+      }
+
+      //open multiple windows
+      //define an array so only one open window function is necessary
+      windowContainer = new makeArray(3);
+
+      /*parameters are the window number (index in the array) starting with 1,
+        url, name of the window, width, height, x position, y position, turn scrollbars on/off */
+      function makeRemote(indx,url,winName,x,y,sX,sY,scroll)
+      {
+        if (!windowContainer[indx] || windowContainer[indx].closed)
+        {
+          if (is.ver4up) windowContainer[indx]=window.open(url,winName,"width=" + x + ",height=" + y + ",screenX=" + sX + ",screenY=" + sY + ",left=" + sX + ",top=" + sY + ",scrollbars=" + scroll );
+          else windowContainer[indx]=window.open(url,winName,"width=" + x + ",height=" + y + ",scrollbars=" + scroll );
+        }
+        else
+        {   //check if a new url is to loaded
+            if ( windowContainer[indx].document.location.href.indexOf(url) == -1 ) windowContainer[indx].document.location.href = url;
+        }
+        if (window.focus) windowContainer[indx].focus();
+      return;
+      }
+
+      function showStatus(msg)
+      {
+        window.status = msg;
+        return true;
+      }
+    // -->
+    </script>
+    <script language="JavaScript">
+    <!--
+      if (is.ver4up) document.write ("<script language ='JavaScript1.2' src='js/menu2.js' type = 'text/javascript'><\/script>")
+      else document.write("<script language ='JavaScript'>function activateMenu(){}\nfunction resetLayout(){}<\/script>")
+    // -->
+    </script>
+    <script language="JavaScript1.2">
+    <!--
+      function init ()
+      {
+        if (is.ver4up)
+        {
+          menuInit ();
+          isLoaded = true;
+        }
+      }
+      onload = init;
+      onresize = resetLayout;
+     // -->
+    </script>
+    <link rel="stylesheet" href="sp_index.css" type="text/css" media="screen">
+  </head>
+  <body bgcolor="white" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" text="black" link="#003366" vlink="#333333" alink="#003366">
+    <script language="JavaScript">
+    <!--
+      if (is.ver4up)
+      {
+        clientWidth = (is.nav) ? window.innerWidth-16 : document.body.offsetWidth-20;
+        clientHeight = (is.nav) ? window.innerHeight : document.body.offsetHeight;
+        menuWrite()
+      }
+    // -->
+    </script>
+    <!-- MASTHEAD -->
+    <center>
+      <table border="0" width="777" cellspacing="0" cellpadding="0">
+        <tr>
+          <td rowspan="4"><a href="http://www.standardandpoors.com"><img src="images/m_sp_logo_.gif" alt="Standard &amp; Poor's" width="195" height="80" border="0"></a></td>
+          <td rowspan="4"><img src="images/is.home.gif" alt=" " width="194" height="80" border="0"></td>
+          <td colspan="2"><a href="index.html"><img src="images/is.m_head_006699.gif" alt="Index Services" width="388" height="20" border="0"></a></td>
+        </tr>
+        <!-- UTILITIES/SERVICES NAVIGATION-->
+        <tr>
+          <td><a href="index.html"><img src="images/nav/m_home_6699CC.gif" alt="Home" width="194" height="20" border="0"></a></td>
+          <td><a href="faq.html"><img src="images/nav/m_faq_6699CC.gif" alt="FAQ" width="194" height="20" border="0"></a></td>
+        </tr>
+        <tr>
+          <td><a href="contacts.html"><img src="images/nav/m_contacts_6699CC.gif" alt="Contacts" width="194" height="20" border="0"></a></td>
+          <td><a href="licensing.html"><img src="images/nav/m_licensing_6699CC.gif" alt="Licensing" width="194" height="20" border="0"></a></td>
+        </tr>
+        <tr>
+          <td><a href="research.html"><img src="images/nav/m_research_6699CC.gif" alt="Research" width="194" height="20" border="0"></a></td>
+          
+      <td><a href="http://www.spglobaldata.com"><img src="images/nav/m_dataquery_6699CC.gif" alt="Data Query" width="194" height="20" border="0"></a></td>
+        </tr>
+        <!-- QUICK LINK -->
+        <tr>
+          <td bgcolor="#cccc99"><a href="javascript:makeRemote(1,'quicklink.html','nav',220,168,20,20,1);" onmouseover="activateMenu('1'); return showStatus('S&amp;P QuickLink');" onclick="if (is.ver4up) return false;" onmouseout="return showStatus('');"><img height="20" width="146" src="images/m_quicklink.gif" border="0" alt="S&amp;P QuickLink"></a></td>
+          <!-- SECTIONAL NAVIGATION -->
+          <td colspan="3" bgcolor="#cccc99">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td bgcolor="#cccc99" width="100"><img src="images/select.gif" width="100" height="20" border="0"></td>
+<script language="JavaScript">
+<!-- Hide from old browsers
+ function surfto(form) {
+        var myindex=form.select1.selectedIndex
+        if (form.select1.options[myindex].value != "0") {
+         location=form.select1.options[myindex].value;}
+}
+//-->
+</script>
+<FORM NAME="form1">
+                
+                <td bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">Index Values
+                    <option value="nolink">__________
+                    <option value="dataframe.html">Real Time 
+                    <option value="closes_us.html">Closing Values</option>
+                          </select></td>
+                </form>
+               <FORM NAME="form1">
+                <td bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">News
+                    <option value="nolink">__________
+                    <option value="news.html">Index News
+                    <option value="newsletter.html">Newsletter
+					<option value="conf.html">Conferences
+                  </select></td>
+                </form>
+                <FORM NAME="form1">
+                <td bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">Index Coverage
+                    <option value="nolink">___________
+                    <option value="indexmain1200.html"><i>S&P Global 1200 Index </i>
+                    <option value="indexmain500.html">S&P 500                             
+                    <option value="indexmaincanada.html">S&P/TSE 60
+                    <option value="indexmainlatin.html">S&P Latin America 40
+                    <option value="indexmaintopix.html">S&P/TOPIX 150
+					<option value="indexmainasia.html">S&P Asia Pacific 100
+                    <option value="indexmaineuro350.html">S&P Europe 350
+					<option value="indexmain1200.html
+">S&P Global 100
+					
+					
+                    <option value="indexmainasx.html">S&P Australian Indices
+                    <option value="indexmaincanada.html">S&P Canadian Indices
+                    <option value="indexmainemdb.html">S&P Emerging Markets 	
+					<option value="indexmaineuro350.html">S&P European Indices
+                  <option value="indexmaintopix.html">S&P Japanese Indices 
+					
+                   <option value="indexmain500.html">S&P US Indices
+				   
+				   <option value="nolink">___________
+				   <option value="indexmaincommodity.html">S&P Commodity Index
+				   <option value="indexmaincredit.html">S&P Credit Indices
+				   <option value="indexmainperform.html">S&P JJ Kenny/PERFORM 
+				  </select></td>
+                </form>				            
+              </tr>
+            </table>
+          </td>
+          
+        </tr>
+      </table>
+      <!-- MAIN CONTENT AREA -->
+	  
+	        <!-- BEGIN MAIN CONTENT AREA -->
+      <table border="0" width="777" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="1" rowspan="4" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+          <td valign="top">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="193" align="center" valign="top">
+                  <!-- BEGIN A1 CONTENT -->
+          <!-- BEGIN 1 CELL SAMPLE CONTENT -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td><img height="5" width="5" src="images/1x1_transparent.gif"></td>
+                <td colspan="1">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr height="20">
+                      <td height="33">
+					
+					<a href="sitemap.html"><img src="images/sitemap.gif" alt="Sitemap" width="15" height="15" border="0"></a><font size="1" class="text2" face="arial,geneva,sans serif" align="left" color="#003366">&nbsp;&nbsp;Sitemap</font></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr height="1">
+                <td bgcolor="#cccc99" colspan="4" height="1"><img height="1" width="1" src="images/1x1_transparent.gif"></td>
+              </tr>
+<tr>
+                   
+                      <td colspan="3"><IMG alt=" " border =0 height=193 src="images/image_indices.gif" width=193 ></td></tr>
+         
+</table>
+
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    
+                    
+                      <td width="33"><img src="images/1x1_transparent.gif" width="5" height="5" border="0"></td>
+                      <td width="183">
+                <p class="head1"><font class="text2" size="2" color="#003399" face="arial,helvetica,sans serif"><strong>NEWS</strong></font> 
+                
+                <font class="text2"> 
+                <p> <a href="news.html"><b>Chronological</b></a> 
+                <b> 
+                <p> <a href="newsregion2000.html">By Region</a><br>
+                <p><a href="emdbmktsnews00.html">Emerging Markets</a> 
+                <p> <a href="newsletter.html"><i>Keeping Score</i> Newsletter</a> 
+				  <p> <a href="commoditynews.html">Commodity Index</a> 
+				  <p> <a href="newscredit.html">Credit Indices</a> 
+                <p> <a href="newskenny.html">S&P J.J. Kenny/PERFORM</a> <br>&nbsp;&nbsp;&nbsp;<a href="newskenny.html">Index</a> 
+                <p>
+
+                </b></font></td>
+              </tr>
+            </table>
+
+
+                  <!-- END A2 CONTENT -->
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+          <td width="581" valign="top">
+            <!-- BEGIN BCD1 CONTENT -->
+          <!-- BEGIN 3 CELL SAMPLE CONTENT (Text changes begin here)-->
+             <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td><img height="5" width="5" src="images/1x1_transparent.gif"></td>
+                <td colspan="3">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr height="20">
+                      <td height="33">
+					
+                      <td height="33" align="left"><a href="index.html"><img src="images/button.gif" alt="All S&P Indices" width="15" height="15" border="0"></a><font size="1" class="text2" face="arial,geneva,sans serif" color="#003399">All S&amp;P Indices</font>&nbsp;&nbsp;</td>
+                      <td height="33" align="left"><a href="exchange.html"><img src="images/button.gif" alt="Exchange Links" width="15" height="15" border="0"></a><font size="1" class="text2" face="arial,geneva,sans serif" color="#003399">Exchange Links</font>&nbsp;&nbsp;</td>
+                      <td height="33" align="left"><a href="gics.html"><img src="images/button.gif" alt="Global Industry Classification Standard" width="15" height="15" border="0"></a><font size="1" class="text2" face="arial,geneva,sans serif" color="#003399">Global Industry Classification Standard (GICS)</font>&nbsp;&nbsp;</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr height="1">
+                <td bgcolor="#cccc99" colspan="4" height="1"><img height="1" width="1" src="images/1x1_transparent.gif"></td>
+              </tr>
+
+
+			                <tr height="22">
+                <td bgcolor="#ffffff" colspan="4" height="1"><img height="22" width="22" src="images/1x1_transparent.gif"></td>
+              </tr>
+             <tr>
+                <td rowspan="3"><img height="5" width="10" src="images/1x1_transparent.gif"></td>
+
+				
+			
+<!--  (Text changes begin here)-->
+               
+            <td><!-- #BeginEditable "text" -->
+              <h4><b>Index Services News 2000 - United States</b></h4></font>
+              <font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+			  
+<P><STRONG>Eaton Corporation (ETN)<br></strong>
+New York, NY, December 29, 2000<br>
+Standard & Poor’s will adjust ETN’s share price after the close of trading tonight to account for the distribution of Axcelis Technologies (ACLS) to ETN shareholders. ETN shareholders will receive 1.179023 ACLS shares for each share of ETN held. Axcelis Technologies will be added to the S&P SmallCap 600 Index. ETN now has 70.000 million shares in the Index.
+  Please see <a href="121900.html">previous announcement</a>.
+<P><STRONG><a href="122700.html">Standard & Poor's Announces Changes in S&P 500, S&P 100, S&P MidCap 400 and S&P SmallCap 600 Indices
+</a><br></strong>
+New York, N.Y., December 27, 2000    <br>
+Jabil Circuit, Coastal Corp., El Paso Energy, Entercom Communications, Sterling Bancshares, AstroPower Inc., 
+Spartan Motors, Bombay Company
+
+
+<P><STRONG>S&P 500, S&P MidCap 400 Industry Group Transfers<br>
+              </strong> New York, NY December 26, 2000:<br>
+          At the close of trading on Friday, December 29, 2000, Standard & Poor's
+   will be making Industry Group transfers in the 
+ <a href="Dec00chgs.html">S&P 500 and S&P MidCap 400
+</a> Indices.
+
+<P><STRONG><a href="121900.html">Standard & Poor's Announces Changes in S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices
+</a><br></strong>
+New York, N.Y., December 19, 2000    <br>
+Applied Micro Circuits, J.P. Morgan, Noble Drilling, Time Warner,  Tootsie Roll, Noble Drilling, National Instruments, 
+Mynd Corporation, MGI PHARMA, Inc., IMPATH Inc., ArthroCareCorp., Lilly Industries, Laser Vision Centers, Axcelis Technologies, 
+Books-A-Million, 
+
+			  <P><STRONG><a href="121200.html">Standard & Poor's Announces Changes in S&P 500 and S&P SmallCap 600 Indices</a><br></strong>
+New York, N.Y., December 12, 2000 <br>
+Fluor Corp. (New), Massey Energy Company, American Freightways, Cymer, Inc., ADAC Laboratories, RARE Hospitality, 
+Taco Cabana 'A'
+			  <P><STRONG>Nabisco Group Hldgs. (NGH), Kinder Morgan, Inc. (KMI)<br></strong>
+New York, NY, December 11, 2000<br>
+Standard & Poor’s received notification that R.J. Reynolds Tobacco Holdings (RJR-in the S&P MidCap 400 Index) acquisition of NGH is anticipated to close this evening. Standard & Poor's will make the previously announced changes in the S&P 500 and S&P MidCap 400 Indices after the close tonight.  Please see <a href="120800.html">previous announcement</a>.
+			  <P><STRONG><a href="120800.html">Standard & Poor's Announces Changes in the S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices</a><br></strong>
+New York, NY, December 8, 2000<br>
+Kinder Morgan, Inc., Nabisco Group Hldgs., SanDisk Corp., Ultimate Electronics, Hanger Orthopedic Group
+			  <P><STRONG><a href="120700.html">Standard & Poor's Announces Changes in S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices</a><br></strong>
+New York, NY, December 7, 2000  <br>Aetna Inc. (New), Aetna Inc. (Old), Macrovision Corporation, LG& E Energy, 
+Supertex Inc., Frozen Food Express Ind. Inc., Sybron Dental Specialties, Inc., Ames Department Stores, P.F. Chang's China Bistro, 
+WMS Industries,<br> Biomatrix, Inc., Simpson Industries,  
+           <P><STRONG><a href="120600.html">Standard & Poor's Announces Changes in S&P MidCap 400 and S&P SmallCap 600 Indices</a><br></strong>
+New York, NY, December 6, 2000  <br>
+Jack Henry & Assoc., ChoicePoint Inc., Investors Financial Services, BISYS Group, Arthur J. Gallagher, Expeditors International,
+OfficeMax Inc., Warnaco Group, PSS World Medical, MagneTek, Inc., Wellman, Inc., Arnold Industries, Advanced Energy Industries, 
+Varian Semiconductor Equipment, Genesco Inc., MagneTek, Inc.,  
+
+		   <P><STRONG>Seagram Co. Ltd. (VO), MetLife Inc. (MET), Crosskeys Systems Corporation (CKY), CAE Inc. (CAE), Methanex Corporation (MX), AGF Management Ltd. (AFG.B), Shaw Communications Inc. (SJR.B) <br></strong>
+New York, NY, December 5, 2000<br>
+Standard & Poor’s received notification that Vivendi’s (in the S&P Global 1200 Index) acquisition of VO will close after Friday’s trading, December 8th. Standard & Poor's will make the previously announced changes after the close December 8, 2000.  Please see <a href="112900.html">previous announcement</a>.
+		   <P><STRONG><a href="120500a.html">Standard & Poor's Announces Changes In S&P Indices</a><br></strong>
+New York, NY, December 05, 2000 <br>
+Qlogic Corp., Vitesse Semiconductor, Stryker Corp., Polaroid Corp., Springs Industries Inc., Russell Corp., Barr Laboratories, Dallas Semiconductor, Plexus Corp., Gillette Co.  
+
+		  <P><STRONG>Quarterly Shares Rebalance<br></strong>
+The quarterly share rebalance for the S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices will be effective after the close Friday, December 15. Changes will be posted on Index Alert on Wednesday, December 13th by 6:00 p.m.
+
+<P><STRONG>S&P/BARRA Growth and Value Rebalance<br></strong>
+The rebalance for the S&P 500/BARRA, S&P MidCap 400/BARRA, and S&P SmallCap 600/BARRA Growth and Value Indices will be effective after the close Wednesday, December 27th.  Changes will be posted on Index Alert on Wednesday, December 20th by 6:00 p.m.<p>
+For more information regarding rebalancing or Index Alert, contact <a href="mailto:index_services@sandp.com">Index_Services@sandp.com</a> or 212-438-2046.
+			  <P><STRONG><a href="120400.html">Standard & Poor's Announces Changes In S&P Indices</a><br></strong>
+New York, N.Y., December 04, 2000 <br>Allegheny Energy, Ambac Financial Group, Symbol Technologies, Intuit, Inc.,
+Bethlehem Steel, Crown Cork & Seal, W.R. Grace & Co., Owens-Illinois, Plantronics Inc., AmeriCredit Corp.,
+Leucadia National, MIPS Technologies, Rogers Corp., Accredo Health, Enron Corp.
+			  <P><STRONG><a href="120100.html">Standard & Poor's Announces Changes In S&P Indices</a><br></strong>
+New York, N.Y., December 1, 2000 <br>Robert Half Int'l., RF Micro Devices, Inc., Cor Therapeutics, Cambridge Technology Partners,
+Bel Fuse, Inc., Boston Communications, Cor Therapeutics, Insteel Industries Inc.
+			 <P><STRONG><a href="trnov00.html">Standard & Poor's Reports November Index Returns</a></strong><br>
+New York, NY, December 1, 2000<p>
+<P><STRONG>Citigroup Inc. (C), Associates First Capital (AFS)</strong><br>
+New York, NY, December 1, 2000 <br>
+	Citigroup’s merger with Associates First Capital closed yesterday evening. In today’s S&P 500 index calculation, S&P will use C’s price times the exchange ratio of 0.7334 in calculating AFS’s price. As a result, S&P will remove AFS from the S&P 500 Index after tonight’s close of trading. S&P will announce a replacement for AFS at 5:15 p.m. tonight. 
+			  <P><STRONG><a href="112900.html">Vivendi's Acquisition Of Seagram CO. Ltd. Triggers Changes In Standard & Poor's  Indices</a><br></strong>
+New York, NY, November 29, 2000<br>MetLife, Seagrams Co., Vivendi Universal
+			  <P><STRONG>S&P 500, S&P MidCap 400, S&P SmallCap 600 Industry Group Transfers<br>
+              </strong> New York, NY November 27, 2000:<br>
+          At the close of trading on Thursday, November 30, 2000, Standard & Poor's
+   will be making Industry Group transfers in the 
+ <a href="nov00chgs.html">S&P 500, S&P MidCap 400, S&P SmallCap 600 
+</a> Indices.
+			  <P><STRONG><a href="112700.html">Standard & Poor's Announces Changes In S&P Indices</a></strong><br>
+New York, N.Y., November 27, 2000  <br>Calpine Corp., Florida Progress, KEMET Corp., SCM Microproducts, International Fibercom, 
+ Telxon Corp.,  M&T Bank, Emmis Communications, Advanced Fibre Communications, Federal-Mogul, MarchFirst Inc., Tom Brown, 
+Radiant Systems, Bell Microproducts, Sunrise Medical, Masco Tech, Inc., TALK.Com, Inc.
+			  <P><STRONG>Standard & Poor's Announces Changes in S&P MidCap 400 Index</strong><br>
+New York, NY, November 22, 2000 <br>
+HSB Group Inc. (HSB)--Standard & Poor's received notification the acquistion of HSB by American International Group (AIG-S&P 500) closed late Wednesday afternoon. In Friday's index calculation, S&P will use AIG's price times the exchange ratio of 0.4178 for HSB's price. S&P will remove HSB after the close of trading on Friday, November 24th. Monday and Tuesday there will be 399 constituents in the S&P MidCap 400. S&P will announce a replacement for HSB on Monday, November 27th at 5:15 p.m.
+
+			  <P><STRONG>Chiron Corp., Fort James Corp., Neuberger Berman Inc.</strong><br>
+New York, NY November 22, 2000<br>
+Georgia Pacific's exchange offer for Fort James (FJ) will expire this evening at 6:00 pm. Standard & Poor's will make the previously announced changes after today's close. Please see <a href="112000.html">previous announcement</a> for more information.
+
+			  <P><STRONG>Forest Laboratories, Seagate Technology, National-Oilwell Inc.</strong><br>
+New York, NY, November 21, 2000<br>
+Standard & Poor’s received notification that Veritas Software’s (VRTS—also in the S&P 500 Index) acquisition of SEG will close after tonight’s trading. Forest Laboratoris will replace Seagate Technology in the S&P 500 Index and National-Oilwell Inc. will replace Forest Laboratories in the S&P MidCap 400 Index after tonight's close. Please see <a href="111400.html">previous announcement</a> for more information.
+
+			  <P><STRONG><a href="112000.html">Standard & Poor's Announces Changes In S&P Indices</a></strong><br>
+New York, N.Y., November 20, 2000 <br>Chiron Corp., Fort James, Neuberger & Berman, National Discount Brokers, DuPont Photomasks
+
+			  <P><STRONG><a href="111500.html">Standard & Poor's Announces Changes In S&P 500, 
+S&P Smallcap 600 Indices
+</a></strong><br>
+New York, N.Y., November 15, 2000 <br>Starwood Hotels & Resorts, Armstrong Holdings, Inc., LandAmerica Financial Group, 
+Birmingham Steel
+			  <P><STRONG><a href="111400.html">Standard & Poor's Announces Changes In S&P Indices</a></strong><br>
+New York, N.Y., November 14, 2000 <br>Forest Laboratories, Seagate Technology, National-Oilwell Inc., Kopin Corp.
+Specialty Equipment, PS Business Parks, Pacific Gulf Properties
+
+			  <P><STRONG><a href="110600.html">Standard & Poor's Announces Changes In S&P MidCap 400, S&P SmallCap 600 Indices</a></strong><br>
+New York, N.Y., November 6, 2000<br>Radian Group, East West Bancorp, Rainbow Tech., CryoLife Inc. 
+			  <P><STRONG><a href="110200.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400, S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, November 2, 2000<br>
+                Catalina Marketing, Information Holdings 
+              <P><STRONG><a href="110100.html">Standard & Poor's Announces Changes 
+                in S&P SmallCap 600 Index</a></strong><br>
+                New York, NY, November 1, 2000<br>
+                Keithley Instruments, Dura Pharmaceuticals, PCTEL Inc., Epicor 
+                Software 
+              <P><STRONG><a href="troct00.html">Standard & Poor's Reports October 
+                Index Returns</a></strong><br>
+                New York, NY, November 1, 2000
+              <p> 
+              <P><STRONG><a href="103100.html">EGO Resources Added to S&P 500 
+                Index</a></strong><br>
+                New York, N.Y., October 31, 2000<br>
+              <P><STRONG>PaineWebber Group (PWJ), BroadVision Inc. (BVSN)<br>
+                </strong> New York, NY, October 30, 2000<br>
+                Standard & Poor's received notification that PWJ's merger with 
+                UBS AG (S&P Global 1200) will be completed after the close of 
+                trading on Friday, November 3. Standard & Poor's will make the 
+                previously announced changes after the close of trading on Friday, 
+                November 3, 2000. Please see <a href="1016200.html">previous announcement</a> 
+                for more information. 
+              <P><STRONG>S&P SmallCap 600 Industry Group Transfers<br>
+                </strong> New York, NY October 26, 2000:<br>
+                At the close of trading on Tuesday, October 31, 2000, Standard 
+                & Poor's will be making Industry Group transfers in the <a href="oct00chgs.html">S&P 
+                MidCap 400 and S&P SmallCap 600</a> Indices. 
+              <P><STRONG><a href="102500.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400 and S&P Small Cap 600 Indices </a></strong><br>
+                New York, N.Y., October 25, 2000<br>
+                NiSource Inc., Columbia Energy, Dycom Industries, Harmonic Inc., 
+                Price Communications, FINOVA Group, Protein Design Labs, Vertex 
+                Pharmaceuticals, Standard Register, Georgia Gulf 
+              <P><STRONG>First Security Corp. (FSCO), True North Communications 
+                (TNO), Photon Dynamics (PHTN)First Security Corp. (FSCO)<br>
+                </strong> October 25, 2000<br>
+                Standard & Poor's received confirmation that Wells Fargo’s (WFC—in 
+                the S&P 500 Index) acquisition of FSCO has been completed. Standard 
+                & Poor’s will make the previously announced changes In the S&P 
+                MidCap 400 and S&P SmallCap 600 Indices after the close of trading 
+                tonight. Please see <a href="102300.html">previous announcement</a> 
+                for more information. 
+              <P><STRONG><a href="102300.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400, S&P Small Cap 600, S&P REIT Composite Indices 
+                </a></strong><br>
+                New York, N.Y., October 23, 2000<br>
+                True North Communications, Photon Dynamics, LaSalle Hotel Properties 
+              <P><STRONG>PECO Energy (PE), Unicom Corp. (UCM), Power-One Inc. 
+                (PWER)</strong><br>
+                New York, NY October 20, 2000<br>
+                The Securities and Exchange Commission approved last night PECO’s 
+                acquisition of Unicom Corp. (UCM--also in the S&P 500 Index). 
+                Immediately after the acquisition, PECO Energy will change its 
+                name to Exelon Corp. The announced changes in the S&P 500 and 
+                S&P 100 Indices will be effective after the close of trading tonight, 
+                October 20, 2000. See <a href="101200.html">previous announcement</a> 
+                for more information. 
+              <P><STRONG>PECO Energy (PE), Unicom Corp. (UCM), Power-One Inc. 
+                (PWER) </strong><br>
+                New York, NY October 19, 2000<br>
+                The Securities and Exchange Commission has still not approved 
+                the PECO Energy/Unicom merger. In speaking with PECO Energy this 
+                afternoon, even if the SEC approves the deal later today, Unicom 
+                is expected to trade tomorrow. As a result, S&P will not make 
+                the previously announced changes in the S&P 500 Index tonight 
+                nor change the shares outstanding for PECO Energy until the acquisition 
+                is completed. Please see <a href="101200.html">previous announcement</a>.	
+              <P><STRONG>PECO Energy (PE), Unicom Corp. (UCM), Power-One Inc. 
+                (PWER) </strong><br>
+                New York, NY October 17, 2000<br>
+                Standard & Poor’s received notification this afternoon that PECO 
+                Energy’s merger with Unicom Corp. will be completed after the 
+                close of trading on Thursday, October 19, not October 18 as previously 
+                announced. The announced changes in the S&P 500 and S&P 100 wil 
+                be effective after the close of October 19, 2000. Please see <a href="101200.html">previous 
+                announcement</a>. 
+              <P><STRONG>Mallinckrodt Inc. (MKG), Tyco International (TYC), Nabors 
+                Industries (NBR), MasTec Inc. (MTZ)</strong><br>
+                New York, NY October 17, 2000<br>
+                Standard & Poor’s received notification this afternoon that the 
+                Federal Trade Commission approved Tyco’s acquisition of Mallinckrodt. 
+                As a result, the New York Stock Exchange will suspend trading 
+                in MKG before tomorrow’s open. The announced changes in the S&P 
+                500, S&P MidCap 400 and S&P 100 will be effective after the close 
+                of trading tonight. Please see <a href="10200.html">previous announcement</a>. 
+              <P><STRONG>BroadVision Inc.(BVSN), PaineWebber Group(PWJ) </strong><br>
+                New York, NY, October 17, 2000<br>
+                Standard & Poor’s received notification from PaineWebber this 
+                morning that UBS AG’s (UBS—in the Global 1200 Index) acquisition 
+                of PWJ will close in November, not October 23 as previously announced. 
+                The date at this time is TBA. Please see <a href="1016200.html">previous 
+                announcement.</a> 
+              <P><STRONG><a href="1016200.html">Broadvision Inc. Added to S&P 
+                500 Index </a></strong><br>
+                New York, N.Y., October 16, 2000 
+              <P><STRONG>Power-One Inc. (PWER), Exelon Corp. (EXC), Unicom Corp. 
+                (UCM) </strong><br>
+                New York, NY, October 13, 2000<br>
+                Standard & Poor’s received notification this morning that PECO 
+                Energy’s merger with Unicom Corp. will be completed after the 
+                close of trading on Wednesday, October 18, not October 16 as previously 
+                announced. Please see <a href="101200.html">previous announcement</a> 
+                for more information. 
+              <P><STRONG><a href="101200.html">Power-One Inc. Added to S&P 500 
+                Index</a></strong><br>
+                New York, N.Y., October 12, 2000 <br>
+                Power-One Inc., Exelon Corp. 
+              <P><STRONG>S&P 500 Industry Group Transfers</strong><br>
+                New York, NY, October 10, 2000<br>
+                Standard & Poor's will make the following changes in the S&P Indices 
+                sector classifications after the close of trading Tuesday, October 
+                10, 2000: <br>
+              <Table border>
+                <TR VALIGN="bottom"> 
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-1><B>Company</b></FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-1><B>From</B></FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-1><B>To</B></FONT></TD>
+                </TR>
+                <TR VALIGN="bottom"> 
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>Mercury Interactive 
+                    Corp (MERQ)</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>45103020</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>45103010</FONT></TD>
+                </TR>
+                <TR VALIGN="bottom"> 
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>Sapient Corp (SAPE)</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>45103020</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>45102010</FONT></TD>
+                </TR>
+                <TR VALIGN="bottom"> 
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>QWEST COMMUNICATIONS 
+                    INTL (Q)</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>50101010</FONT></TD>
+                  <TD ALIGN="left"><FONT FACE="Arial" SIZE=-2>50101020</FONT></TD>
+                </TR>
+              </Table>
+              <P><STRONG><a href="10200.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, October 3, 2000<br>
+                Nabors Industries, Tyco International, MasTec Inc., Korn/Ferry 
+                International, Hall, Kinion & Associates, Pac-West Telecommunications 
+              <P><STRONG><a href="trsep00.html">Standard & Poor's Reports September 
+                Index Returns</a></strong><br>
+                New York, NY, October 2, 2000<br>
+              <P><STRONG> Young & Rubicam (YNR), King Pharmaceuticals (KG)</strong><br>
+                New York, NY, September 29, 2000 <br>
+                Standard & Poor’s received notification this afternoon that YNR’s 
+                merger with WPP Group (WPP-in the S&P Global 1200) will be completed 
+                after the close of trading on Monday, October 2, not October 3 
+                as previously announced. Please see <a href="092700.html">previous 
+                announcement</a> for more information. 
+              <P><STRONG><a href="092900.html">Pericom Semiconductor Added to 
+                S&P SmallCap 600 Index</a></strong><br>
+                New York, NY, September 29, 2000 <br>
+              <P><STRONG><a href="092700.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, S&P SmallCap 600, and S&P REIT Composite 
+                Indices</a></strong><br>
+                New York, NY, September 27, 2000 <br>
+                King Pharmaceuticals, Young & Rubicam, EGL Inc., AmeriSource Health 
+                'A, International Multifoods, Cleveland-Cliffs, Circle International 
+                Group, Town & Country Trust, LTC Properties 
+              <P><STRONG><a href="092600.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, September 26, 2000 <br>
+                Moody's Corp., Dun & Bradstreet Corp., Navigant Consulting, Retek 
+                Inc, Stewart Enterprises 
+              <P><STRONG><a href="092500.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, September 25, 2000 <br>
+                Avaya Inc., Owens Corning, Dynegy Inc., BestFoods Inc., Lam Research, 
+                Dynegy Inc., SPSS Inc., WHX Corp. 
+              <P><STRONG><a href="092200.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400 Index</a></strong><br>
+                New York, NY, September 22, 2000 <br>
+                United Rentals, Buffets Inc., Cabot Microelectronics, Ethyl Corp.	
+              <P><STRONG>S&P SmallCap 600 Index - NYFIX Inc., Snyder Communications</strong><br>
+                New York, NY, September 22, 2000 <br>
+                Standard & Poor’s received notification this morning from Snyder 
+                Communications that its merger with Havas Advertising (not in 
+                an S&P Index) will be completed after the close of trading on 
+                Tuesday, September 26, not September 25 as previously announced. 
+                Please see <a href="092100.html">previous announcement</a> for 
+                more information. 
+              <P><STRONG><a href="092100.html">Standard & Poor's Announces Changes 
+                in S&P SmallCap 600 Index</a></strong><br>
+                New York, NY, September 21, 2000 <br>
+                NYFIX Inc., Snyder Communications, RGS Energy Group, Province 
+                Healthcare, Beringer Wine Estates, Pioneer Group 
+              <P><STRONG><a href="091900.html">CACI International Added to S&P 
+                SmallCap 600 Index</a></strong><br>
+                New York, NY, September 19, 2000 <br>
+                CACI International, GC Companies 
+              <p><a href="091800gics.html"><strong>Standard & Poor's Implements 
+                New Standard For Classifying S&P 500 and Other US Indices </strong></a> 
+                New York, N.Y., September 18, 2000 <br>
+              <P><STRONG><a href="090700.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, September 7, 2000 <br>
+                InFocus Group, Dexter Corp., Burlington Coat Factory, Primark 
+                Corp. 
+              <P><STRONG><a href="traug00.html">Standard & Poor's Reports August 
+                Index Returns</a></strong><br>
+                New York, NY, September 1, 2000<br>
+              <P><STRONG>ReliaStar Financial Corp. (RLR), Wind River Systems (WIND)</strong><br>
+                New York, NY, August 31, 2000<br>
+                Standard & Poor's received confirmation that ING Group’s (in the 
+                S&P Global 1200 Index) acquisition of RLR will close on Friday, 
+                September 1, 2000. Standard & Poor's will make the previously 
+                announced changes after the close of trading on Friday, September 
+                1, 2000. Please see <a href="0824.html">previous announcement</a> 
+                for more information. 
+              <P><STRONG>Clear Channel Communications (CCU)</strong><br>
+                New York, NY, August 31, 2000<br>
+                Standard & Poor’s will increase CCU’s shares outstanding after 
+                the close of trading tonight to account for the 204.798 million 
+                shares issued to acquire AMFM Inc. (AFM--not in an S&P index). 
+                CCU will exchange 0.94 CCU share for each of AFM’s 217.870 million 
+                shares. CCU now has 380.017 million shares in the Index. Please 
+                see page 503 of Index Alert at 5:15 p.m. for CCU’s new share total. 
+              <P><STRONG><a href="0830.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, August 30, 2000<br>
+                The MONY Group, CMP Group Inc., Greater Bay Bancorp, Mark IV Industries, 
+                Swift Energy, National Computer Systems 
+              <P><STRONG><a href="0830indtrans.html">S&P 500, S&P SmallCap 600 
+                Industry Group Transfers</a></strong><br>
+                New York, NY, August 30, 2000<br>
+                At the close of trading on Thursday, August 31, 2000, Standard 
+                & Poor's will be making Industry Group transfers in the S&P 500 
+                and S&P SmallCap 600 Indices. 
+              <P><STRONG>Harman Industries (HRMN), Patina Oil & Gas (POG)</strong><br>
+                New York, NY, August 28, 2000<br>
+                Standard & Poor’s received notification that General Electric’s 
+                (GE—in the S&P 500 Index) acquisition of HRMN is anticipated to 
+                close this evening. As a result, Standard & Poor’s will remove 
+                HRMN after tonight’s close of trading. Please see <a href="0821.html">previous 
+                announcement</a> for more information. 
+              <P><STRONG>Consolidated Papers (CDP), International Rectifier (IRF), 
+                TelCom Semiconductor (TLCM)</strong><br>
+                New York, NY, August 28, 2000<br>
+                Standard & Poor’s received confirmation that Stora Enso Oyj (in 
+                the S&P Global 1200 Index) acquisition of CDP will close on Thursday, 
+                August 31, 2000, not Wednesday, August 30 as previously announced. 
+                Standard & Poor’s will make the previously announced changes after 
+                the close of trading on Thursday August 31, 2000. Please see <a href="0823.html">previous 
+                announcement</a> for more information. 
+              <P><STRONG><a href="0824.html">Standard & Poor's Announces Changes 
+                in S&P 400, S&P SmallCap 600 Indices and S&P Reit Composite Index</a></strong><br>
+                New York, N.Y., August 24, 2000 <br>
+                Wind River Systems, ReliaStar Financial, SEI Corp., M.A. Hanna 
+                Co., PolyOne Corp., 4 Kids Entertainment, Meade Instruments, Geon 
+                Co., Jones Pharma Inc., Great Lakes REIT, Bradley Real Estate	
+              <P><STRONG><a href="0823.html">Standard & Poor's Announces Changes 
+                in S&P 400, S&P MidCap 500, and S&P SmallCap 600 Indices</a></strong><br>
+                New York, N.Y., August 23, 2000 <br>
+                Devon Energy Corp., Great A&P, Western Resources, Lattice Semiconductor, 
+                Santa Fe Snyder Corp., Intl. Rectifier, Consolidated Papers, Telcom 
+                Semiconductor 
+              <P><STRONG><a href="0821.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400, S&P SmallCap 600 Indices</a></strong><br>
+                New York, N.Y., August 21, 2000 <br>
+                DSP Group, Burr-Brown Corp., Patina Oil & Gas, Harmon Industries	
+              <P><STRONG>New Century Energies (NCE), Northern States Power (NSP), 
+                Cooper Cameron Corp. </strong><br>
+                New York, N.Y., August 17, 2000 <br>
+                Standard & Poor's has received notification the merger between 
+                NCE and NSP will become effective after the close of trading on 
+                August 18, 2000. Standard & Poor's will make the previously announced 
+                changes after the close of trading on Friday, August 18, 2000. 
+                Please see <a href="0807.html">previous announcment.</a> 
+              <P><STRONG><a href="0809.html">Chico's Fas Added to S&P SmallCap 
+                600 Index</a></strong><br>
+                New York, NY, August 9, 2000<br>
+              <P><STRONG><a href="0808.html">Tucker Anthony Sutro Added to S&P 
+                SmallCap 600 Index</a></strong><br>
+                New York, NY, August 8, 2000<br>
+              <P><STRONG><a href="0807.html">Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, August 7, 2000<br>
+                KeySpan Corp., New Century Energies, Cooper Cameron Corp., NUI 
+                Corp., Mid Atlantic Medical Services, Lason Inc., Oakwood Homes 
+              <P><STRONG> S&P 500 - Ford Motor (F)</strong><br>
+                New York, NY, August 2, 2000<br>
+                Ford shareholders approved the company’s Value Enhancement Program 
+                at a special meeting held today. Preliminary election results 
+                indicate that the total cash distribution will be approximately 
+                $6 billion and the total number of new Ford common and Class B 
+                shares outstanding will be approximately 1.9 billion. After tonight’s 
+                close, Ford (F) (OLD) will be suspended from trading. In determining 
+                the new price and shares outstanding for New Ford, Standard & 
+                Poor’s will subtract $20 from the final price of Ford tonight, 
+                which will not necessarily be identical to the closing F when 
+                issued price. F when issued trading began July 31, and will continue 
+                through August 8. Each F shareholder will receive 1.546 shares 
+                of New Ford plus $5.40 in cash. The new CUSIP number for New Ford 
+                will be 345370860. F now has 1205.286 million shares in the Index. 
+                If final results differ from the preliminary results, Standard 
+                & Poor’s will adjust Ford’s shares to reflect the final results.	
+              <P><STRONG><a href="0801.html">Standard & Poor's Announces Changes 
+                in S&P MidCap 400, S&P SmallCap 600 Indices</a></strong><br>
+                New York, NY, August 1, 2000<br>
+                Credence Systems, COMSAT Corp., GBC Bancorp, Komag Inc. 
+              <P><STRONG><a href="trjuly.html">Standard & Poor's Reports July 
+                Index Returns</a></strong><br>
+                New York, NY, August 1, 2000<br>
+              <P><a href="0726.html"><STRONG>Standard & Poor's Announces Changes 
+                in the S&P SmallCap 600 Index </strong></a><BR>
+                New York, NY, July 26, 2000<BR>
+                Robotic Vision Systems, Forward Air, Factory 2-U Stores, Centigram 
+                Communications, Coeur d'Alene Mines, Swiss Army Brands, APW Ltd., 
+                Applied Power 
+              <P><STRONG>Atlas Air, Hannaford Brothers</strong><BR>
+                New York, NY, July 25, 2000<BR>
+                Standard & Poor’s received confirmation that Delhaize America’s 
+                (DZA—not in an S&P Index) acquisition of HRD received final regulatory 
+                approval this morning. Standard & Poor’s will make the previously 
+                announced change after the close of trading on Friday, July 28, 
+                2000. Please see <a  href="0711.html">previous announcement</a>. 
+              <P><a href="0720.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices </strong></a><BR>
+                New York, NY, July 20, 2000<BR>
+                Palm Inc., 3Com Corp., Burlington Industries, Avista Corp., Justin 
+                Industries, School Specialty, United Water Resources 
+              <P><a href="0719.html"><STRONG>JDS Uniphase Added to S&P 500 Index 
+                </strong></a><BR>
+                New York, NY, July 19, 2000<BR>
+              <P><a href="0717.html"><STRONG>Brooktrout, Inc. Added to S&P SmallCap 
+                600 Index </strong></a><BR>
+                New York, NY, July 17, 2000<BR>
+              <P><STRONG>Hannaford Brothers (HRD), Atlas Air (CGO)</strong><BR>
+                New York, NY, July 13, 2000<br>
+                Standard & Poor’s received confirmation that Delhaize America’s 
+                (DZA—not in an S&P Index) acquisition of HRD will not close tomorrow 
+                as previously announced. Standard & Poor's will not make the <a href="0711.html">previously 
+                announced changes</a> tomorrow. Please keep posted. 
+              <P><a href="0711.html"><STRONG>Atlas Air Added to S&P MidCap 400 
+                Index </strong></a><BR>
+                New York, NY, July 11, 2000<BR>
+              <P><STRONG>Industry Group Change</strong><BR>
+                Please see <a href="0706.html#cit">previous announcement</a>. 
+				
+			 <P><a href="0706.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 Index </strong></a><BR>
+                New York, N.Y., July 6, 2000<BR>
+                Stillwell Financial, Kansas City Southern Industries, CIT Group, Inc., Union 							         Pacific Resources			
+				
+              <P><STRONG>Qwest Communications International (Q), US West (USW) 
+                </strong><br>
+                New York, NY, July 5, 2000<br>
+                USW and Qwest Communications (Q) closed their merger agreement. 
+                S&P willl make the previously announced changes after tonight's 
+                close.
+              <p> 
+              <P><a href="0630.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 Index </strong></a><BR>
+                New York, N.Y., June 30, 2000<BR>
+                Roslyn Bancorp, CCB Financial, ArvinMeritor Inc., Arvin Industries 
+              <P><STRONG>Apex Inc. (APEX), Cybex Computer Products (CBXC)</strong><br>
+                New York, NY , June 30, 2000<br>
+                Standard & Poor’s received confirmation that the name of the new 
+                company after the merger between S&P SmallCap 600 components, 
+                Apex Inc. (APEX) and Cybex Computer Products (CBXC) will change 
+                from Aegean Sea (ASEA) to Avocent Corp. (AVCT). Please see <a href="0626.html"> 
+                previous announcement </a> for more information.
+              <p> 
+              <P><STRONG>Qwest Communications International (Q), US West (USW) 
+                </strong><br>
+                New York, NY , June 30, 2000<br>
+                In the event USW's merger with Qwest Communications (Q-not in 
+                an S&P Index) closes after this announcement, S&P will use Q's 
+                stock price times the exchange ratio of 1.72932 in calculating 
+                USW's stock price on Monday, July 3rd and Wednesday, July 5th. 
+                S&P willl make the previously announced changes after Wednesday's 
+                close if the merger has closed by that time. See <a href="0626.html"> 
+                previous announcement </a> for more information.
+              <p> 
+              <P><a href="0628.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices </strong></a><BR>
+                New York, N.Y., June 28, 2000<BR>
+                Lennar Corp., Meritor Automotive, Imperial Bancorp, AMCOL International, 
+                ViaSat Inc., Sports Authority
+              <p> 
+              <P><STRONG>Bell Atlantic (BEL), GTE Corporation (GTE), Broadcom 
+                Corporation (BRCM)</strong><br>
+                New York, NY, June 26, 2000<br>
+                Standard & Poor’s received notification from the New York Stock 
+                Exchange that the merger between Bell Atlantic and GTE Corp. will 
+                become effective after the close of trading on June 30, 2000. 
+                Standard & Poor’s will make the previously announced changes after 
+                the close of trading on Friday, June 30, 2000. Please see <a href="0619.html">previous 
+                announcement</a> for more information. 
+              <P><a href="0626.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices </strong></a><BR>
+                New York, N.Y., June 26, 2000<BR>
+                Qwest Communications International, U S West, Aegean Sea Inc., 
+                Beverly Enterprises, Morrison Management Specialists, North American 
+                Vaccine, Southwest Securities Group, Avant Corp., PolyMedica Corp., 
+                Apex Inc., Cybex Computer Products, Summit Technology 
+              <P><STRONG>Bell Atlantic (BEL), GTE Corporation (GTE), Broadcom 
+                Corporation (BRCM)</strong><br>
+                New York, NY, June 26, 2000<br>
+                Standard & Poor’s received notification from the New York Stock 
+                Exchange that the merger between Bell Atlantic and GTE Corp. will 
+                become effective after the close of trading on June 30, 2000. 
+                Standard & Poor’s will make the previously announced changes after 
+                the close of trading on Friday, June 30, 2000. Please see <a href="0619.html">previous 
+                announcement</a> for more information. 
+              <P><a href="0621.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 and S&P SmallCap 600 Indices </strong></a><BR>
+                New York, N.Y., June 21, 2000<BR>
+                Visteon Corp., Mercury Interactive, IKON Office Solutions, Milacron 
+                Inc., Aware, Inc., MedQuist, Inc., Heidrick & Struggles, Visual 
+                Networks, HADCO Corp., Magellan Health Services 
+              <P><STRONG>Pfizer, Inc. (PFE), Warner-Lambert (WLA), Sanmina Corp.(SANM), 
+                Quest Diagnostics (DGX)</strong><br>
+                New York, NY, June 20, 2000<br>
+                PFE’s merger with Warner-Lambert closed last night. As a result, 
+                S&P will remove WLA from the S&P 500 Index after tonight’s close 
+                of trading. In today’s S&P 500 calculation, S&P will use PFE’s 
+                stock price times the exchange ratio of 2.75 in calculating Warner-Lambert’s 
+                stock price. PFE now has 3859.993 million shares in the Index, 
+                while WLA has 885.285 million shares. S&P will adjust the share 
+                total of PFE by 2434.534 million shares and will make the previously 
+                announced changes in the S&P 500 and S&P MidCap 400 Indices after 
+                tonight's close. Please see <a href="0525.html#warner">previous 
+                announcement</a> for more information.
+              <p> 
+              <P><a href="0619.html"><STRONG>Broadcom Corporation added to S&P 
+                500 Index </strong></a><BR>
+                New York, N.Y., June 19, 2000<BR>
+              <P><STRONG>Kranzco Realty Trust (KRT), Kramont Realty Trust (KRT)</strong><br>
+                New York, NY, June 19, 2000<br>
+                KRT’s merger with CV Reit, Inc. (CVI) closed on Friday night. 
+                In today’s index calculation, Standard & Poor’s will use the stock 
+                price of KRT times the old shares outstanding of 10.562 million 
+                shares. Standard & Poor’s will make the share adjustment and change 
+                the name to Kramont Realty Trust after tonight’s close of trading. 
+                Please see <a href="0605.html#realty">previous announcement</a> 
+                for more information. 
+              <P><a href="0615.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 and S&P MidCap 400 Indices</strong></a> <BR>
+                New York, N.Y., June 15, 2000<BR>
+                MediaOne Group Inc., Charter One Financial, Semtech Corp. 
+              <P><STRONG>AT&T (T), MediaOne Group (UMG)</strong><br>
+                New York, NY, June 15, 2000<br>
+                Standard & Poor’s received notification the acquisition of UMG 
+                by T closed this morning. Standard & Poor’s will increase AT&T's 
+                shares outstanding by 581.382 million shares after the close of 
+                trading tonight to account for the shares issued in the acquisition 
+                and will delete UMG after today's close of trading. In tomorrow's 
+                index calculation S&P will have 499 components. Please see this 
+                News section for an update at 5:15 p.m. today. 
+              <P><STRONG>American Electric Power (AEP), Central and South West 
+                (CSR), Medimmune Inc. (MEDI), IDEC Pharmaceuticals (IDPH), Roadway 
+                Express (ROAD)</strong><br>
+                New York, NY, June 15, 2000<br>
+                Standard & Poor’s received notification that the SEC gave its 
+                approval for AEP to acquire CSR. The deal will close tonight. 
+                Standard & Poor’s will make the previously announced changes after 
+                tonight’s close. Please see <a href="0511.html">previous announcement</a> 
+                for more information. 
+              <P><a href="0613.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P 100, S&P MidCap 400, S&P SmallCap 600, and S&P 
+                REIT Composite Indices </strong></a><BR>
+                New York, N.Y., June 13, 2000<BR>
+                Novellus Systems, Champion International, America Online, Valspar 
+                Corp., Tiffany & Co., Silicon Graphics, Banknorth Group Inc., 
+                Aeroflex Inc., Harbinger Corp., Rouse Co., Cornerstone Properties
+              <p> <B>NOTE:</B> The quarterly shares outstanding rebalance for 
+                the S&P 500, S&P MidCap 400 and S&P SmallCap 600 will be effective 
+                at the close of trading on Friday, June 16, 2000. Changes will 
+                be posted on Index Alert on June 14, 2000 at 7 p.m.<br>
+                For information and instant access to daily S&P index activity 
+                using <B>Index Alert</b>, contact Andre Leger at 212-438-1812 
+                or email: <A HREF="mailto:andre_leger@standardandpoors.com">andre_leger@standardandpoors.com</A>
+              <p> <strong><a href="0608mcgrawhill.html">The McGraw-Hill Companies 
+                Files Lawsuit Against The Vanguard Group:</a> Charges Breach of 
+                Contract, Trademark Infringement and Unfair Competition </strong><br>
+                New York, N.Y., June 8, 2000
+              <p> <strong>Kramont Realty Trust (KRT), Kranzco Realty Trust (KRT)</strong><br>
+                New York, N.Y., June 7, 2000<br>
+                KRT’s merger with CV Reit, Inc. (CVI) will not close tonight as 
+                previously announced. The merger still needs approval from 19 
+                states. S&P will not make the change as announced on June 5, 2000. 
+                The date is now TBA. See <a href="0605.html">previous announcement</a> 
+                for more information. 
+              <P><a href="0605.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, S&P SmallCap 600, and S&P REIT Composite 
+                Indices</strong></a><BR>
+                New York, N.Y., June 5, 2000<BR>
+                Starbucks Corp., Shared Medical Systems, Quanta Services, Convergys 
+                Corp., Times Mirror, Galileo International, Nuevo Energy, McWhorter 
+                Technologies, Kramont Realty Trust, Kranzco Realty Trust 
+              <P><a href="trmay00.html"><STRONG>Standard & Poor's Reports May 
+                Index Returns</strong><BR>
+                </a> New York, N.Y., June 1, 2000<BR>
+              <P><a href="0526.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 and S&P MidCap 400 Indices </strong><BR>
+                </a> New York, N.Y., May 26, 2000<BR>
+                American Power Conversion, Mirage Resorts, Waddell & Reed Financial 
+              <P><a href="0525.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 and S&P MidCap 400 Indices </strong><BR>
+                </a> New York, N.Y., May 25, 2000<BR>
+                Agilent Technologies, NACCO Industries, Sanmina Corp., Warner-Lambert, 
+                Quest Diagnostics 
+              <P><a href="0524.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices </strong><BR>
+                </a> New York, N.Y., May 24, 2000<BR>
+                Varco International, Alliance Semiconductor, Tuboscope Inc., Washington 
+                Federal, Inc., U.S. Trust Corp. 
+              <P><STRONG>General Motors (GM)</strong><BR>
+                New York, N.Y., May 19, 2000 <br>
+                GM’s plan to repurchase up to 14% of GM’s common stock through 
+                an exchange offer of approximately $9 billion of General Motors 
+                Class H tracking stock (GMH—not in an S&P Index) will expire at 
+                midnight tonight. GM will exchange 1.065 Class H shares for each 
+                share of GM tendered. GM will accept up to 86.397 million GM shares 
+                and will issue up to 92.013 million shares of GMH stock. GM now 
+                has 640.208 million shares in the Index, while GMH has 135.138 
+                million shares. Standard & Poor’s will not make any adjustment 
+                to GM’s share total until the company announces how may shares 
+                were exchanged in the offer. Please keep posted.
+              <p> 
+              <P><STRONG>Cordant Technologies (CDD), CommScope, Inc., ESS Technology</strong><BR>
+                New York, N.Y., May 19, 2000 <br>
+                The European Commission announced this morning that it has given 
+                antitrust clearance for Alcoa Inc. (AA—in the S&P 500) to purchase 
+                Cordant Technologies. AA’s $57.00 a share cash tender offer is 
+                scheduled to expire today at 5 p.m. Standard & Poor’s will remove 
+                CDD from the S&P MidCap 400 Index after the close of trading tonight. 
+                Please see <a href="0518.html">previous announcement</a>.
+              <p> 
+              <P><a href="0518.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices </strong><BR>
+                </a> New York, N.Y., May 18, 2000<BR>
+                CommScope, Inc., Cordant Technologies, ESS Technology 
+              <P><a href="0511.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices </strong><BR>
+                </a> New York, N.Y., May 11, 2000<BR>
+                MedImmune Inc., Central & South West, IDEC Pharmaceuticals, MedImmune 
+                Inc., Roadway Express, Penton Media, DBT Online 
+              <P><a href="0509.html"><STRONG>Davox Corp. Added to S&P SmallCap 
+                600 Index </strong><BR>
+                </a> New York, N.Y., May 9, 2000<BR>
+              <P><a href="S&P500transfers.xls"><STRONG>Industry Group Transfers 
+                in the S&P 500 </strong><BR>
+                </a> New York, N.Y., May 9, 2000<BR>
+                Corning Inc., PE Corp.-PE Biosystems 
+              <P><a href="0508.html"><STRONG>AVT Corp., On Assignment Added to 
+                S&P SmallCap 600 Index </strong><BR>
+                </a> New York, N.Y., May 8, 2000<BR>
+                AVT Corp., Banknorth Group, On Assignment, Liposome Co. 
+              <P><STRONG>Viacom Inc. (VIA.B), CBS Corp. (CBS)</strong><BR>
+                New York, N.Y., May 4, 2000<br>
+                Viacom’s merger with CBS Corp. closed this morning. As a result, 
+                S&P will remove CBS from the S&P 500 and S&P 100 after tonight’s 
+                close of trading. In today’s S&P 500 and S&P 100 calculation, 
+                S&P will use VIA.B’s price times the exchange ratio of 1.085 in 
+                calculating CBS’s price. S&P will make the previously announced 
+                changes after the close of trading tonight. Please see <a href="0501.html">previous 
+                announcement.</a> 
+              <P><a href="0503.html"><STRONG>Sapient Corp. Added to S&P 500 Index</strong><BR>
+                </a> New York, N.Y., May 3, 2000<BR>
+              <P><STRONG>Reynolds Metals (RLM), Alcoa Inc. (AA)</strong><BR>
+                New York, N.Y., May 3, 2000<br>
+                Standard & Poor’s received confirmation that Alcoa Inc's (AA) 
+                acquisition of Reynolds Metals (RLM) closed this morning. As a 
+                result, S&P will remove RLM from the S&P 500 after tomorrow’s 
+                close of trading. For tomorrow’s Index calculation, S&P will use 
+                AA’s price times the exchange ratio of 1.06 in calculating RLM’s 
+                price. Standard & Poor’s will adjust the share total of AA in 
+                the S&P 500 and S&P 100 after tomorrow’s close of trading. Please 
+                see this news section at 5:15 p.m. for announcement.<br>
+              <P><a href="0502.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices </strong><BR>
+                </a> New York, N.Y., May 2, 2000<BR>
+                Maxim Integrated, Jostens Inc., Burr-Brown Corp., UGI Corp. 
+              <P><a href="0501.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P 100, S&P MidCap 400 and S&P SmallCap 600 Indices</strong><BR>
+                </a> New York, N.Y., May 1, 2000<BR>
+                Siebel Systems, Inc., CBS Corp., Viacom Corp., MarchFirst Inc., 
+                Shaw Group, MemberWorks Inc., Inacom Corp. 
+              <P><a href="trapr00.html"><STRONG>Standard & Poor's Reports April 
+                Index Returns</strong><BR>
+                </a> New York, N.Y., May 1, 2000<BR>
+              <P><a href="0427.html"><STRONG>C-Cube Semiconductor Added to S&P 
+                SmallCap 600 Index</strong><BR>
+                </a> New York, N.Y., April 27, 2000 <BR>
+              <P><a href="0425.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P Indices</strong><BR>
+                </a> New York, N.Y., April 25, 2000<BR>
+                NVR, Inc., U.S. Home, Thornburg Mortgage Asset, Capital Automotive 
+                REIT, Dynex Capital,Prison Realty Trust 
+              <P><a href="0418.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P Indices</strong><BR>
+                </a> New York, N.Y., April 18, 2000<BR>
+                Pegasus Systems, Phoenix Technologies, Systems & Computer Technology, 
+                Eastern Utilities Associates, PictureTel Corp., Aviation Sales, 
+                UniSource Energy, WICOR Inc., Amli Residential Properties, Prime 
+                Retail <BR>
+              <P><a href="0414.html"><STRONG>Arch Chemicals Added to S&P SmallCap 
+                600 Index</strong><BR>
+                </a> New York, N.Y., April 14, 2000<BR>
+              <P><a href="0414update.html"><STRONG>Standard & Poor's Announces 
+                Date for Changes in S&P 500, S&P MidCap 400 and S&P SmallCap 600 
+                Indices</strong></a><STRONG><BR>
+                </strong>New York, N.Y., April 14, 2000<br>
+              <P><a href="0412.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P 100, S&P MidCap 400 and S&P SmallCap 600 Indices</strong><BR>
+                </a> New York, N.Y., April 12, 2000<BR>
+                Altera Corp., Atlantic Richfield, EMC Corp., Micrel Inc., SCP 
+                Pool, Banyan Systems, NFO Worldwide Inc., Administaff, Inc., TCBY 
+                Enterprises
+              <p> 
+              <P><a href="0411.html"><STRONG>Grant Prideco, Antec Corporation 
+                Added to S&P MidCap 400 Index</strong><BR>
+                </a> New York, N.Y., April 11, 2000<BR>
+              <P><a href="0405.html"><STRONG>Titan Corp. Added to S&P MidCap 400 
+                Index</strong><BR>
+                </a> New York, N.Y., April 5, 2000<BR>
+              <P><a href="0404.html"><STRONG>Oshkosh Truck Added to S&P SmallCap 
+                600 Index</strong><BR>
+                </a> New York, N.Y., April 4, 2000<BR>
+              <P><a href="trmarch.html"><STRONG>Standard & Poor's Reports March 
+                Index Returns</strong><BR>
+                </a> New York, N.Y., April 3, 2000<BR>
+              <P><a href="0330.html"><STRONG>Standard & Poor's Announces Changes 
+                in the S&P MidCap 400 and S&P SmallCap 600 Indices</strong><BR>
+                </a> New York, N.Y., March 30, 2000<BR>
+                INCYTE Pharmaceuticals, Sterling Software, Louis Dreyfus Natural 
+                Gas 
+              <p> 
+              <P><a href="veritas.html"><STRONG>S&P AFFIRMS VERITAS SOFTWARE TO 
+                BE ADDED TO S&P 500 INDEX</strong><BR>
+                </a> New York, N.Y. March 30, 2000<br>
+              <P><a href="0329.html"><STRONG>Standard & Poor's Announces Changes 
+                in the S&P 500, S&P MidCap 400 and S&P SmallCap 600 Indices</strong><BR>
+                </a> New York, N.Y., March 29, 2000<BR>
+                Veritas Software, Pep Boys, Edwards Lifesciences Corp., Rural/Metro 
+                Corp., Energizer Holdings Inc., Oregon Steel Mills 
+              <p> 
+              <P><a href="0327.html"><STRONG>Standard & Poor's Announces Changes 
+                in the S&P 500, S&P 100, S&P MidCap 400 and S&P SmallCap 600 Indices</strong><BR>
+                </a> New York, N.Y., March 27, 2000<BR>
+                Linear Technology, Pharmacia Corp, Monsanto Company, Pharmacia 
+                & Upjohn, Inc., Morgan Stanley, Dean Witter & Co., Powerwave Technologies, 
+                Linear Technology Corp., StarTek Inc., Veritas DGC, Frontier Insurance 
+                Group 
+              <p> 
+              <P><a href="0323.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices</strong></a><BR>
+                New York, N.Y., March 23, 2000<br>
+                Vectren Corporation, Indiana Energy, Circle International Group, 
+                Etec Systems 
+              <p> 
+              <P><a href="0320.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P Indices</strong></a><BR>
+                New York, N.Y., March 20, 2000<br>
+                TranSwitch Corp., New England Electric, Macromedia Inc., Sterling 
+                Commerce, Morgan Keegan Inc., RadiSys Corp., Shorewood Packaging
+              <p> The quarterly shares outstanding rebalance for the S&P 500, 
+                S&P MidCap 400 and S&P SmallCap 600 will be effective at the close 
+                of 3/17; shares will be posted on Index Alert on 3/15 by 6:30 
+                p.m. Contact Mary Callow at 212-438-3648 for information regarding 
+                Index Alert.
+              <p> 
+              <P><a href="0313.html"><STRONG>Midas Inc. Added to S&P SmallCap 
+                600 Index </strong><BR>
+                </a> New York, N.Y., March 13, 2000<BR>
+              <P><a href="0309rev.html"><STRONG>Date Change for Addition of CSG 
+                Systems International (CSGS) to S&P MidCap 400 Index </strong><BR>
+                </a> New York, N.Y., March 9, 2000<BR>
+              <P><a href="0308rev.html"><STRONG>Date Change for Addition of NVIDIA 
+                Corp. (NVDA) to S&P MidCap 400 Index </strong><BR>
+                </a> New York, N.Y., March 8, 2000<BR>
+              <P><a href="0308.html"><STRONG>Sabre Holdings Corporation Added 
+                to S&P 500 Index </strong><BR>
+                </a> New York, N.Y., March 8, 2000<BR>
+              <P><a href="0306.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P MidCap 400 and S&P SmallCap 600 Indices </strong><BR>
+                </a> New York, N.Y., March 6, 2000<BR>
+                Valassis Communication, Vlasic Foods Int'l., CUNO Inc., Laclede 
+                Gas, Gibson Greeting, NVIDIA Corp., MidAmerican Energy Hldgs., 
+                CSG Systems International, Olsten Corp. 
+              <P><a href="trfeb00.html"><STRONG>Standard & Poor's Reports February 
+                Index Returns</strong><BR>
+                </a> New York, N.Y., March 1, 2000<BR>
+              <P><a href="0228.html"><STRONG>Alexandria Real Estate Equities Added 
+                to S&P Reit Composite Index </strong><BR>
+                </a> New York, N.Y., February 28, 2000<BR>
+                Alexandria Real Estate Equities, Walden Residential Property 
+              <P><a href="0222.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P Indices</strong><BR>
+                </a> New York, N.Y., February 22, 2000<BR>
+                C.H. Robinson Worldwide, Comp USA Inc., Deltic Timber, Saga Systems, 
+                Players International, Genesis Health Ventures, Harrah's Entertainment, 
+                Southwest Bancorp, JSB Financial 
+              <P><a href="0214.html"><STRONG>eLoyalty Corporation, Cohu Inc. Added 
+                to S&P SmallCap 600 Index </strong><BR>
+                </a> New York, N.Y., February 14, 2000<BR>
+                eLoyalty Corporation, Cohu Inc., Technology Solutions, Southern 
+                Energy Homes 
+              <P><a href="0207.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P SmallCap 600 Index </strong><BR>
+                </a> New York, N.Y., February 7, 2000<BR>
+                Salton Inc., Safeskin Corp., RLI Corp., Air Express International, 
+                Windmere-Durable Holdings, Public Service of North Carolina 
+              <P><a href="0207rev.html"><STRONG>Date Announced for Hain Food Group 
+                and SCPIE Holdings to be Added to S&P SmallCap 600 Index </strong><BR>
+                </a> New York, N.Y., February 7, 2000<BR>
+              <P><a href="0201.html"><STRONG>Hain Food Group Added to S&P SmallCap 
+                600 Index</strong><BR>
+                </a> New York, N.Y., February 1, 2000<BR>
+              <P><a href="trjan00.html"><STRONG>Standard & Poor's Reports January 
+                Index Returns</strong><BR>
+                </a><a href="0131.html"></a> 
+              <P><STRONG>Standard & Poor's Announces Changes in S&P MidCap 400, 
+                S&P SmallCap 600 and S&P REIT Composite Indices </strong><BR>
+                New York, N.Y., January 31, 2000<BR>
+                Dynegy Inc. (New), Illinova Corp., SCPIE Holdings, Connecticut 
+                Energy, Pan Pacific Retail Properties, Meditrust Corp. 
+              <P><a href="0126.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500 and S&P MidCap 400 Indices</strong></a> <BR>
+                New York, N.Y., January 26, 2000<BR>
+                Conexant Systems, Consolidatd Natural Gas, L-3 Communications 
+                Holdings, Micro Warehouse, Inc. 
+              <P><a href="0124.html"><STRONG>Standard & Poor's Announces Changes 
+                in S&P 500, S&P MidCap 400, and S&P SmallCap 600 Indices</strong></a> 
+                <BR>
+                New York, N.Y., January 24, 2000<BR>
+                Biogen, Inc. Harley-Davidson, Foster Wheeler, Fleetwood Enterprises, 
+                TriQuint Semiconductor, Sybase Inc., Audiovox Cl. 'A', USA Detergents, 
+                NCS Healthcae Inc., Oak Industries (New), Mercury Computer Systems, 
+                Watkins-Johnson 
+              <P><a href="0120.html"><STRONG>Lennox International Added to S&P 
+                SmallCap 600 Index</strong></a> <BR>
+                New York, N.Y., January 20, 2000<BR>
+                Lennox International, Service Experts 
+              <P><a href="0112.html"><STRONG>Staten Island Bancorp Added to S&P 
+                SmallCap 600 Index</strong></a> <BR>
+                New York, N.Y., January 12, 2000<BR>
+                Staten Island Bancorp, Premier Bancshares 
+              <P><a href="0111.html"><STRONG>Steel Dynamics, National Discount 
+                Brokers Added to S&P SmallCap 600 Index</strong></a> <BR>
+                New York, N.Y., January 11, 2000<BR>
+                Steel Dynamics, National Discount Brokers, Pittston BAX Group, 
+                AMRESCO Inc. 
+              <P><a href="0106.html"><STRONG>Actel Corp. Added to S&P SmallCap 
+                600 Index</strong></a> <BR>
+                New York, N.Y., January 6, 2000<BR>
+                Actel Corp., Visio Corp. 
+              <P><a href="0105.html"><STRONG>JAKKS Pacific, Beringer Wine Estates 
+                Added to S&P SmallCap 600 Index</strong></a> <BR>
+                New York, N.Y., January 5, 2000<BR>
+                JAKKS Pacific, Aquarion Co., Beringer Wine Estates, UST Corp.	
+              <P><a href="0103return.html"><STRONG>Standard & Poor's Reports December 
+                Index Returns</strong></a> <BR>
+                New York, N.Y.,January 3, 2000<BR>
+              </font><!-- #EndEditable --> 
+              </td>
+                <td><img height="5" width="5" src="images/1x1_transparent.gif"></td>
+              </tr>
+            </table>
+          <!-- END 3 CELL SAMPLE CONTENT (Text changes end here)-->
+
+
+
+
+          <!-- END BCD2 CONTENT -->
+          </td>
+          <td bgcolor="#cccc99" width="1"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+        </tr>
+        <tr height="1">
+          <td height="1" bgcolor="#cccc99" colspan="5"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+        </tr>
+      </table>
+      
+  <!-- BEGIN COPYRIGHT INFORMATION --> 
+  <table border="0" cellspacing="0" cellpadding="0" width="777">
+    <tr> 
+      <td width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+      <td width="5"><img src="images/1x1_transparent.gif" width="5" height="5" border="0"></td>
+      <td width="605" valign="bottom"><a href="#" onMouseOver="return showStatus('Copyright &copy; 2001 Standard &amp; Poor\'s a Division of The McGraw-Hill Companies, Inc.&nbsp;&nbsp; All rights reserved.');" onMouseOut="return showStatus('');"><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Copyright</font></a><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> 
+        &copy; 2001 Standard &amp; Poor's, a Division of The McGraw-Hill Companies, 
+        Inc. &nbsp;&nbsp;All rights reserved.&nbsp;&nbsp;</font><a href="http://www.mcgraw-hill.com/privacy.html" onMouseOver="return showStatus('Privacy Policy');" onMouseOut="return showStatus('');"><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Privacy 
+        Policy</font></a></td>
+       
+      <td width="165" valign="bottom"><a href="http://www.mcgraw-hill.com/"><img src="images/mgh_logo.gif" alt="A Division of the McGraw-Hill Companies" width="165" height="30" border="0"></a></td>
+      <td width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+    </tr>
+    <tr> 
+      <td width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+    </tr>
+    <tr> 
+      <td colspan="5" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></td>
+    </tr>
+  </table>
+  <!-- END COPYRIGHT INFORMATION -->
+    </center>
+    <!--BEGIN MENU ITEMS-->
+    <script language="JavaScript1.2">
+    <!--
+      //write the menu items to the page only if the browser supports it
+      if (is.ver4up) document.write ("<script language ='JavaScript1.2' src='js/menuitems2.js' type = 'text/javascript'><\/script>")
+    // -->
+    </script>
+    <!--END MENU ITEMS-->
+  </body>
+<!-- #EndTemplate --></html>

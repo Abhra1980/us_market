@@ -3,3 +3,12 @@ __pycache__/
 .venv/
 *.pyc
 ~$*
+
+# Tool state
+.omc/
+
+# Large raw data files (>1 MB) — kept locally, not versioned
+sp500_history/sp500probe/*.csv
+sp500_history/research_c/page_raw/sp500_raw.json
+sp500_history/research_c/yahoo_gspc/gspc.json
+sp500_history/research_a/wayback/spglobal_old/500hist99.dat

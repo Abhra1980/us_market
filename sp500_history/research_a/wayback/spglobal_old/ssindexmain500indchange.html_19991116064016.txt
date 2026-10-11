@@ -1,0 +1,196 @@
+ 
+ Standard & Poor's Index Services 
+ S&P 500 Index Changes 1999 
+ (all changes effective after close of trading) 
+ ADDITIONS 
+ DELETIONS 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 1/12 
+ McKessson HBOC Inc. 
+ MCK 
+ HBO & Co. 
+ HBOC 
+ 2/26 
+ SouthTrust Corp. 
+ SOTR 
+ Oryx Energy 
+ ORX 
+ 3/09 
+ AmSouth Bancorporation 
+ ASO 
+ Tele-Communications 
+ TCOMA 
+ 3/24 
+ Century Telephone Enterprises 
+ CTL 
+ Rubbermaid Inc. 
+ RBD 
+ 4/01 
+ Kansas City Southern Ind. 
+ KSU 
+ AMP Inc. 
+ AMP 
+ 4/09 
+ Watson Pharmaceuticals 
+ WPI 
+ Aeroquip-Vickers Inc. 
+ ANV 
+ 4/30 
+ CMS Energy 
+ CMS 
+ Union Camp 
+ UCC 
+ 5/27 
+ Delphi Automotive Systems 
+ DPH 
+ Moore Corp. 
+ MCL 
+ 5/27 
+ AFLAC Corporation 
+ AFL 
+ Meyer (Fred) Inc. 
+ FMY 
+ 6/03 
+ PaineWebber Group 
+ PWJ 
+ Bankers Trust 
+ BT 
+ 6/08 
+ WellPoint Health Networks 
+ WLP 
+ Harnischfeger Indus. 
+ HPH 
+ 6/14 
+ Nabisco Group Holdings 
+ NGH 
+ RJR Nabisco Holdings Corp. 
+ RN 
+ 6/21 
+ Florida Progress 
+ FPC 
+ Morton International 
+ MII 
+ 6/23 
+ Office Depot 
+ ODP 
+ American Stores 
+ ASC 
+ 6/24 
+ Network Appliance 
+ NTAP 
+ Ascend Communications 
+ ASND 
+ 6/29 
+ Best Buy Co., Inc. 
+ BBY 
+ AirTouch Communications 
+ ATI 
+ 6/30 
+ Vulcan Materials 
+ VMC 
+ Provident Companies Inc. 
+ PVT 
+ 7/21 
+ QUALCOMM Inc. 
+ QCOM 
+ Transamerica Corp. 
+ TA 
+ 7/30 
+ Allied Waste Industries 
+ AW 
+ Browning-Ferris Ind. 
+ BFI 
+ 7/30 
+ ADC Telecommunications 
+ ADCT 
+ Nalco Chemical 
+ NLC 
+ 8/06 
+ Conoco Inc. 
+ COC.B 
+ Battle Mountain Gold 
+ BMG 
+ 8/12 
+ Lexmark Int'l. Group A 
+ LXK 
+ Raychem Corp. 
+ RYC 
+ 9/17 
+ Tosco Corp. 
+ TOS 
+ Mercantile Bancorp 
+ MTL 
+ 9/28 
+ Global Crossing 
+ GBLX 
+ Frontier Corp. 
+ FRO 
+ 9/30 
+ Adaptec, Inc. 
+ ADPT 
+ Fruit of the Loom 
+ FTL 
+ 9/30 
+ Bed Bath & Beyond 
+ BBBY 
+ BankBoston Corp. 
+ BKB 
+ 10/1 
+ Pinnacle West Capital 
+ PNW 
+ Pioneer Hi-Bred Intl. 
+ PHB 
+ 10/8 
+ Ameritech 
+ AIT 
+ 10/11 
+ Analog Devices 
+ ADI 
+ 10/12 
+ T. Rowe Price Associates 
+ TROW 
+ Data General 
+ DGN 
+ 10/15 
+ Leggett & Platt 
+ LEG 
+ Cyprus Amax Minerals Co. 
+ CYM 
+ 10/25 
+ El Paso Energy 
+ EPG 
+ Sonat Inc. 
+ SNT 
+ 10/26 
+ Comverse Technology 
+ CMVT 
+ ASARCO Inc. 
+ AR 
+ 11/04 
+ Tenneco Packaging 
+ PTVwi 
+ Tenneco Inc. (Old) 
+ TEN 
+ (name changed to Pactiv Corp.) 
+ 11/05 
+ Xilinx, Inc. 
+ XLNX 
+ Harris Corp. 
+ HRS 
+ 11/12 
+ Teradyne, Inc. 
+ TER 
+ Case Corp. 
+ CSE 
+ 11/15 
+ Quintiles Transnational 
+ QTRN 
+ King World Productions 
+ KWP 
+ Copyright © 1999 The McGraw-Hill Companies, Inc. All Rights Reserved.
+Send questions or comments about this site to sp_global@standardandpoors.com 
+ 

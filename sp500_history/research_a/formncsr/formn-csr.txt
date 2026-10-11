@@ -1,0 +1,851 @@
+
+=== page 1
+UNITED STATES 
+SECURITIES AND EXCHANGE COMMISSION  
+Washington, D.C. 20549 
+FORM N-C SR 
+This is a reference copy of Form N-CSR. You may not send a completed printout of this form to the SEC to 
+satisfy a filing obligation. You can only satisfy an SEC filing obligation by submitting the information required 
+by this form to the SEC in electronic format online at https://www.edgarfiling.sec.gov. 
+=== page 2
+OMB APPROVAL 
+OMB Number:           3235-0570 
+Expires:       September 30, 2026 
+Estimated average burden  
+hours per response….…7.78 
+SEC 2569 (04/24) Persons who are to respond to the collection of information contained in this form are not 
+r
+equired to respond unless the form displays a currently valid OMB control number. 
+1 
+UNITED STATES 
+SECURITIES AND EXCHANGE COMMISSION  
+Washington, D.C. 20549 
+FORM N-C SR 
+CERTIFIED SHAREHOLDER REPORT OF REGISTERED  
+MANAGEMENT INVESTMENT COMPANIES 
+Investment Company Act file number   
+  
+ 
+(Exact name of registrant as specified in charter)  
+  
+ 
+(Address of principal executive offices) (Zip code) 
+  
+ 
+(Name and address of agent for service)  
+Registrant’s telephone number, including area code:   
+Date of fiscal year end:   
+Date of reporting period:   
+Form N-CSR is to be used by management investment companies to file reports with the Commission not later 
+than 10 days after the transmission to stockholders of any report that is required to be transmitted to stockholders 
+under Rule 30e-1 under the Investment Company Act of 1940 (17 CFR 270.30e-1). The Commission may use the 
+information provided on Form N-CSR in its regulatory, disclosure review, inspection, and policymaking roles. 
+A registrant is required to disclose the information specified by Form N-CSR, and the Commission will make 
+this information public. A registrant is not required to respond to the collection of information contained in Form N-
+CSR unless the Form displays a currently valid Office of Management and Budget (“OMB”) control number. Please 
+direct comments concerning the accuracy of the information collection burden estimate and any suggestions for 
+reducing the burden to Secretary, Securities and Exchange Commission, 100 F Street, NE , Washington, DC 20549-
+1090. The OMB has reviewed this collection of information under the clearance requirements of 44 U.S.C. § 3507. 
+=== page 3
+2 
+GENERAL INSTRUCTIONS 
+A. Rule as to Use of Form N-CSR. 
+Form N-CSR is a combined reporting form that is to be used for reports of registered management investment 
+companies under Section 30(b)(2) of the Investment Company Act of 1940 (the “Act”) and Section 13(a) or 15(d) of 
+the Securities Exchange Act of 1934 (the “Exchange Act”), filed pursuant to Rule 30b2-1(a) under the Act (17 CFR 
+270.30b2-1(a)). A report on this Form shall be filed within 10 days after the transmission to stockholders of any 
+annual or semi-annual report that is required to be transmitted to stockholders pursuant to Rule 30e-1 under the Act 
+(17 CFR 270.30e-1). 
+B. Application of General Rules and Regulations. 
+The General Rules and Regulations under the Act and the Exchange Act contain certain general requirements 
+that are applicable to reporting on any form under those Acts. These general requirements should be carefully read 
+and observed in the preparation and filing of reports on this form, except that any provision in the form or in these 
+instructions shall be controlling. 
+C. Preparation of Report. 
+1. This Form is not to be used as a blank form to be filled in, but only as a guide in preparing the report in 
+accordance with Rules 8b-11 (17 CFR 270.8b-11) and 8b-12 (17 CFR 270.8b-12) under the Act and Rules 
+12b-11 (17 CFR 240.12b-11) and 12b-12 (17 CFR 240.12b-12) under the Exchange Act. The Commission 
+does not furnish blank copies of this Form to be filled in for filing. 
+2. These general instructions are not to be filed with the report. 
+3. Attention is directed to Rule 12b-20 under the Exchange Act (17 CFR 240.12b-20), which states: “In 
+addition to the information expressly required to be included in a statement or report, there shall be added 
+such further material information, if any, as may be necessary to make the required statements, in the light of 
+the circumstances under which they are made not misleading.” 
+4. Interactive Data File. An Interactive Data File as defined in Rule 11 of Regulation S-T [17 CFR 232.11] is 
+required to be submitted to the Commission in the manner provided by Rule 405 of Regulation S-T [17 CFR 
+232.405] by a management investment company registered under the Investment Company Act of 1940 (15 
+U.S.C. 80a et seq.) to the extent required by Rule 405 of Regulation S-T. 
+D. Incorporation by Reference. 
+A registrant may incorporate by reference information required by Items 4, 5, and 18(a)(1). No other Items of 
+the Form shall be answered by incorporating any information by reference. The information required by Items 4 and 
+5 may be incorporated by reference from the registrant’s definitive proxy statement (filed or required to be filed 
+pursuant to Regulation 14A (17 CFR 240.14a-1 et seq.)) or definitive information statement (filed or to be filed 
+pursuant to Regulation 14C (17 CFR 240.14c-1 et seq.)) involving the election of directors, if such definitive proxy 
+statement or information statement is filed with the Commission not later than 120 days after the end of the fiscal 
+year covered by an annual report on this Form. All incorporation by reference must comply with the requirements of 
+this Form and the following rules on incorporation by reference: Rule 303 of Regulation S-T (17 CFR 232.303) 
+(specific requirements for electronically filed documents); Rule 12b-23 under the Exchange Act (17 CFR 240.12b-
+23) (additional rules on incorporation by reference for reports filed pursuant to Sections 13 and 15(d) of the 
+Exchange Act); and Rule 0-4 (17 CFR 270.0-4) (additional rules on incorporation by reference for investment 
+companies). 
+=== page 4
+3 
+E. Definitions. 
+Unless the context clearly indicates the contrary, terms used in this Form N-CSR have meanings as defined in 
+the Act and the rules and regulations thereunder. Unless otherwise indicated, all references in the Form to statutory 
+sections or to rules are sections of the Act and the rules and regulations thereunder. 
+F. Signature and Filing of Report. 
+1. If the report is filed in paper pursuant to a hardship exemption from electronic filing (see Item 201 et seq. of 
+Regulation S-T (17 CFR 232.201 et seq.)), eight complete copies of the report shall be filed with the 
+Commission. At least one complete copy of the report shall be filed with each exchange on which any class 
+of securities of the registrant is registered. At least one complete copy of the report filed with the 
+Commission and one such copy filed with each exchange must be manually signed. Copies not manually 
+signed must bear typed or printed signatures. 
+2. (a) The report must be signed by the registrant, and on behalf of the registrant by its principal executive and 
+principal financial officers. 
+(b) The name of each person who signs the report shall be typed or printed beneath his or her signature. Any 
+person who occupies more than one of the specified positions shall indicate each capacity in which he or 
+she signs the report. Attention is directed to Rule 12b-11 under the Exchange Act (17 CFR 240.12b-11) 
+and Rule 8b-11 under the Act (17 CFR 270.8b-11) concerning manual signatures and signatures pursuant 
+to powers of attorney. 
+Item 1. Reports to Stockholders. 
+(a) Include a copy of the report transmitted to stockholders pursuant to Rule 30e-1 under the Act (17 CFR 
+270.30e-1). 
+(b) Include a copy of each notice transmitted to stockholders in reliance on Rule 30e-3 under the Act (17 CFR 
+270.30e-3) that contains disclosures specified by paragraph (c)(3) of that rule. 
+Item 2. Code of Ethics. 
+(a) Disclose whether, as of the end of the period covered by the report, the registrant has adopted a code of 
+ethics that applies to the registrant’s principal executive officer, principal financial officer, principal 
+accounting officer or controller, or persons performing similar functions, regardless of whether these 
+individuals are employed by the registrant or a third party. If the registrant has not adopted such a code of 
+ethics, explain why it has not done so. 
+Instruction to paragraph (a). 
+The information required by this Item is only required in an annual report on this Form N-CSR. 
+(b) For purposes of this Item, the term “code of ethics” means written standards that are reasonably designed to 
+deter wrongdoing and to promote: 
+(1) Honest and ethical conduct, including the ethical handling of actual or apparent conflicts of interest 
+between personal and professional relationships; 
+=== page 5
+4 
+(2) Full, fair, accurate, timely, and understandable disclosure in reports and documents that a registrant files 
+with, or submits to, the Commission and in other public communications made by the registrant; 
+(3) Compliance with applicable governmental laws, rules, and regulations; 
+(4) The prompt internal reporting of violations of the code to an appropriate person or persons identified in 
+the code; and 
+(5) Accountability for adherence to the code. 
+(c) The registrant must briefly describe the nature of any amendment, during the period covered by the report, to 
+a provision of its code of ethics that applies to the registrant’s principal executive officer, principal financial 
+officer, principal accounting officer or controller, or persons performing similar functions, regardless of 
+whether these individuals are employed by the registrant or a third party, and that relates to any element of 
+the code of ethics definition enumerated in paragraph (b) of this Item. The registrant must file a copy of any 
+such amendment as an exhibit pursuant to Item 19(a)(1), unless the registrant has elected to satisfy paragraph 
+(f) of this Item by posting its code of ethics on its website pursuant to paragraph (f)(2) of this Item, or by 
+undertaking to provide its code of ethics to any person without charge, upon request, pursuant to paragraph 
+(f)(3) of this Item.  
+(d) If the registrant has, during the period covered by the report, granted a waiver, including an implicit waiver, 
+from a provision of the code of ethics to the registrant’s principal executive officer, principal financial 
+officer, principal accounting officer or controller, or persons performing similar functions, regardless of 
+whether these individuals are employed by the registrant or a third party, that relates to one or more of the 
+items set forth in paragraph (b) of this Item, the registrant must briefly describe the nature of the waiver, the 
+name of the person to whom the waiver was granted, and the date of the waiver. 
+(e) If the registrant intends to satisfy the disclosure requirement under paragraph (c) or (d) of this Item regarding 
+an amendment to, or a waiver from, a provision of its code of ethics that applies to the registrant’s principal 
+executive officer, principal financial officer, principal accounting officer or controller, or persons performing 
+similar functions and that relates to any element of the code of ethics definition enumerated in paragraph (b) 
+of this Item by posting such information on its Internet website, disclose the registrant’s Internet address and 
+such intention. 
+(f) The registrant must: 
+(1) File with the Commission, pursuant to Item 19(a)(1), a copy of its code of ethics that applies to the 
+registrant’s principal executive officer, principal financial officer, principal accounting officer or 
+controller, or persons performing similar functions, as an exhibit to its annual report on this Form N-
+CSR;  
+(2) Post the text of such code of ethics on its Internet website and disclose, in its most recent report on this 
+Form N-CSR, its Internet address and the fact that it has posted such code of ethics on its Internet 
+website; or 
+(3) Undertake in its most recent report on this Form N-CSR to provide to any person without charge, upon 
+request, a copy of such code of ethics and explain the manner in which such request may be made. 
+=== page 6
+5 
+Instructions to Item 2. 
+1. A registrant may have separate codes of ethics for different types of officers. Furthermore, a “code of ethics” 
+within the meaning of paragraph (b) of this Item may be a portion of a broader document that addresses 
+additional topics or that applies to more persons than those specified in paragraph (a). In satisfying the 
+requirements of paragraph (f), a registrant need only file, post, or provide the portions of a broader document 
+that constitutes a “code of ethics” as defined in paragraph (b) and that apply to the persons specified in 
+paragraph (a). 
+2. If a registrant elects to satisfy paragraph (f) of this Item by posting its code of ethics on its website pursuant 
+to paragraph (f)(2), the code of ethics must remain accessible on its website for as long as the registrant 
+remains subject to the requirements of this Item and chooses to comply with this Item by posting its code on 
+its website pursuant to paragraph (f)(2). 
+3. The registrant does not need to provide any information pursuant to paragraphs (c) and (d) of this Item if it 
+discloses the required information on its Internet website within five business days following the date of the 
+amendment or waiver and the registrant has disclosed in its most recently filed report on this Form N-CSR its 
+Internet address and intention to provide disclosure in this manner. If the amendment or waiver occurs on a 
+Saturday, Sunday, or holiday on which the Commission is not open for business, then the five business day 
+period shall begin to run on and include the first business day thereafter. If the registrant elects to disclose 
+this information through its website, such information must remain available on the website for at least a 12-
+month period. The registrant must retain the information for a period of not less than six years following the 
+end of the fiscal year in which the amendment or waiver occurred. Upon request, the registrant must furnish 
+to the Commission or its staff a copy of any or all information retained pursuant to this requirement. 
+4. The registrant does not need to disclose technical, administrative, or other non-substantive amendments to its 
+code of ethics. 
+5. For purposes of this Item: 
+(a) The term “waiver” means the approval by the registrant of a material departure from a provision of the 
+code of ethics; and 
+(b) The term “implicit waiver” means the registrant’s failure to take action within a reasonable period of 
+time regarding a material departure from a provision of the code of ethics that has been made known to 
+an executive officer, as defined in Rule 3b-7 under the Exchange Act (17 CFR 240.3b-7), of the 
+registrant. 
+Item 3. Audit Committee Financial Expert. 
+(a) (1) Disclose that the registrant’s board of directors has determined that the registrant either: 
+(i) Has at least one audit committee financial expert serving on its audit committee; or 
+(ii) Does not have an audit committee financial expert serving on its audit committee. 
+(2) If the registrant provides the disclosure required by paragraph (a)(1)(i) of this Item, it must 
+disclose the name of the audit committee financial expert and whether that person is 
+“independent.” In order to be considered “independent” for purposes of this Item, a member of an 
+audit committee may not, other than in his or her capacity as a member of the audit committee, the 
+board of directors, or any other board committee: 
+=== page 7
+6 
+(i) Accept directly or indirectly any consulting, advisory, or other compensatory fee from the issuer; 
+or 
+(ii) Be an “interested person” of the investment company as defined in Section 2(a)(19) of the Act 
+(15 U.S.C. 80a-2(a)(19)). 
+(3) If the registrant provides the disclosure required by paragraph (a)(1)(ii) of this Item, it must 
+explain why it does not have an audit committee financial expert. 
+Instructions to paragraph (a). 
+1. The information required by this Item is only required in an annual report on Form N-CSR. 
+2. If the registrant’s board of directors has determined that the registrant has more than one audit committee 
+financial expert serving on its audit committee, the registrant may, but is not required to, disclose the names 
+of those additional persons. A registrant choosing to identify such persons must indicate whether they are 
+independent pursuant to paragraph (a)(2) of this Item. 
+(b) For purposes of this Item, an “audit committee financial expert” means a person who has the following 
+attributes: 
+(1) An understanding of generally accepted accounting principles and financial statements; 
+(2) The ability to assess the general application of such principles in connection with the accounting for 
+estimates, accruals, and reserves; 
+(3) Experience preparing, auditing, analyzing, or evaluating financial statements that present a breadth 
+and level of complexity of accounting issues that are generally comparable to the breadth and 
+complexity of issues that can reasonably be expected to be raised by the registrant’s financial 
+statements, or experience actively supervising one or more persons engaged in such activities; 
+(4) An understanding of internal control over financial reporting; and 
+(5) An understanding of audit committee functions. 
+(c) A person shall have acquired such attributes through: 
+(1) Education and experience as a principal financial officer, principal accounting officer, controller, 
+public accountant, or auditor or experience in one or more positions that involve the performance of 
+similar functions; 
+(2) Experience actively supervising a principal financial officer, principal accounting officer, 
+controller, public accountant, auditor, or person performing similar functions; 
+(3) Experience overseeing or assessing the performance of companies or public accountants with 
+respect to the preparation, auditing, or evaluation of financial statements; or 
+(4) Other relevant experience. 
+(d) (1) A person who is determined to be an audit committee financial expert will not be deemed an 
+“expert” for any purpose, including without limitation for purposes of Section 11 of the Securities 
+=== page 8
+7 
+Act of 1933 (15 U.S.C. 77k), as a result of being designated or identified as an audit committee 
+financial expert pursuant to this Item. 
+(2) The designation or identification of a person as an audit committee financial expert pursuant to this 
+Item does not impose on such person any duties, obligations, or liability that are greater than the 
+duties, obligations, and liability imposed on such person as a member of the audit committee and 
+board of directors in the absence of such designation or identification. 
+(3) The designation or identification of a person as an audit committee financial expert pursuant to this 
+Item does not affect the duties, obligations, or liability of any other member of the audit committee 
+or board of directors. 
+Instruction to Item 3. 
+If a person qualifies as an audit committee financial expert by means of having held a position described in paragraph 
+(c)(4) of this Item, the registrant shall provide a brief listing of that person’s relevant experience. 
+Item 4. Principal Accountant Fees and Services. 
+(a) Disclose, under the caption Audit Fees, the aggregate fees billed for each of the last two fiscal years for 
+professional services rendered by the principal accountant for the audit of the registrant’s annual 
+financial statements or services that are normally provided by the accountant in connection with statutory 
+and regulatory filings or engagements for those fiscal years. 
+(b) Disclose, under the caption Audit-Related Fees, the aggregate fees billed in each of the last two fiscal 
+years for assurance and related services by the principal accountant that are reasonably related to the 
+performance of the audit of the registrant’s financial statements and are not reported under paragraph (a) 
+of this Item. Registrants shall describe the nature of the services comprising the fees disclosed under this 
+category. 
+(c) Disclose, under the caption Tax Fees, the aggregate fees billed in each of the last two fiscal years for 
+professional services rendered by the principal accountant for tax compliance, tax advice, and tax 
+planning. Registrants shall describe the nature of the services comprising the fees disclosed under this 
+category. 
+(d) Disclose, under the caption All Other Fees, the aggregate fees billed in each of the last two fiscal years 
+for products and services provided by the principal accountant, other than the services reported in 
+paragraphs (a) through (c) of this Item. Registrants shall describe the nature of the services comprising 
+the fees disclosed under this category. 
+(e) (1) Disclose the audit committee’s pre-approval policies and procedures described in paragraph (c)(7) 
+of Rule 2-01 of Regulation S-X. 
+(2) Disclose the percentage of services described in each of paragraphs (b) through (d) of this Item that 
+were approved by the audit committee pursuant to paragraph (c)(7)(i)(C) of Rule 2-01 of Regulation 
+S-X. 
+(f) If greater than 50 percent, disclose the percentage of hours expended on the principal accountant’s 
+engagement to audit the registrant’s financial statements for the most recent fiscal year that were 
+attributed to work performed by persons other than the principal accountant’s full-time, permanent 
+employees. 
+=== page 9
+8 
+(g) Disclose the aggregate non-audit fees billed by the registrant’s accountant for services rendered to the 
+registrant, and rendered to the registrant’s investment adviser (not including any sub-adviser whose role 
+is primarily portfolio management and is subcontracted with or overseen by another investment adviser), 
+and any entity controlling, controlled by, or under common control with the adviser that provides 
+ongoing services to the registrant for each of the last two fiscal years of the registrant. 
+(h) Disclose whether the registrant’s audit committee of the board of directors has considered whether the 
+provision of non-audit services that were rendered to the registrant’s investment adviser (not including 
+any subadviser whose role is primarily portfolio management and is subcontracted with or overseen by 
+another investment adviser), and any entity controlling, controlled by, or under common control with the 
+investment adviser that provides ongoing services to the registrant that were not pre-approved pursuant 
+to paragraph (c)(7)(ii) of Rule 2-01 of Regulation S-X is compatible with maintaining the principal 
+accountant’s independence. 
+(i) A registrant identified by the Commission pursuant to Section 104(i)(2)(A) of the Sarbanes-Oxley Act of 
+2002 (15 U.S.C. 7214(i)(2)(A)), as having retained, for the preparation of the audit report on its financial 
+statements included in the Form N-CSR, a registered public accounting firm that has a branch or office 
+that is located in a foreign jurisdiction and that the Public Company Accounting Oversight Board has 
+determined it is unable to inspect or investigate completely because of a position taken by an authority in 
+the foreign jurisdiction must electronically submit to the Commission on a supplemental basis 
+documentation that establishes that the registrant is not owned or controlled by a governmental entity in 
+the foreign jurisdiction. The registrant must submit this documentation on or before the due date for this 
+form. A registrant that is owned or controlled by a foreign governmental entity is not required to submit 
+such documentation. 
+(j) A registrant that is a foreign issuer, as defined in 17 CFR 240.3b-4, identified by the Commission 
+pursuant to Section 104(i)(2)(A) of the Sarbanes-Oxley Act of 2002 (15 U.S.C. 7214(i)(2)(A)), as having 
+retained, for the preparation of the audit report on its financial statements included in the Form N-CSR, a 
+registered public accounting firm that has a branch or office that is located in a foreign jurisdiction and 
+that the Public Company Accounting Oversight Board has determined it is unable to inspect or 
+investigate completely because of a position taken by an authority in the foreign jurisdiction, for each 
+year in which the registrant is so identified, must provide the below disclosures.  Also, any such 
+identified foreign issuer that uses a variable-interest entity or any similar structure that results in 
+additional foreign entities being consolidated in the financial statements of the registrant is required to 
+provide the below disclosures for itself and its consolidated foreign operating entity or entities.  A 
+registrant must disclose: 
+(1) That, for the immediately preceding annual financial statement period, a registered public accounting 
+firm that the PCAOB was unable to inspect or investigate completely, because of a position taken by 
+an authority in the foreign jurisdiction, issued an audit report for the registrant; 
+(2) The percentage of shares of the registrant owned by governmental entities in the foreign jurisdiction 
+in which the registrant is incorporated or otherwise organized; 
+(3) Whether governmental entities in the applicable foreign jurisdiction with respect to that registered 
+public accounting firm have a controlling financial interest with respect to the registrant; 
+(4) The name of each official of the Chinese Communist Party who is a member of the board of 
+directors of the registrant or the operating entity with respect to the registrant; and 
+=== page 10
+9 
+(5) Whether the articles of incorporation of the registrant (or equivalent organizing document) contains 
+any charter of the Chinese Communist Party, including the text of any such charter. 
+Instructions. 
+1. The information required by this Item 4 is only required in an annual report on this Form N-CSR. 
+2. For purposes of paragraphs (b), (c), and (d), registrants that are investment companies must disclose fees 
+billed for services rendered to the registrant and separately, disclose fees required to be approved pursuant to 
+paragraph (c)(7)(ii) of Rule 2-01 of Regulation S-X. Registered investment companies must also disclose the 
+fee percentages as required by Item 4(e)(2) for the registrant and separately, disclose the fee percentages as 
+required by Item 4(e)(2) for the fees required to be approved by the investment company registrant’s audit 
+committee pursuant to paragraph (c)(7)(ii) of Rule 2-01 of Regulation S-X. 
+Item 5. Audit Committee of Listed Registrants 
+(a) If the registrant is a listed issuer as defined in Rule 10A-3 under the Exchange Act (17 CFR 240.10A-3), 
+state whether or not the registrant has a separately-designated standing audit committee established in 
+accordance with Section 3(a)(58)(A) of the Exchange Act (15 U.S.C. 78c(a)(58)(A)). If the registrant has 
+such a committee, however designated, identify each committee member. If the entire board of directors 
+is acting as the registrant’s audit committee as specified in Section 3(a)(58)(B) of the Exchange Act (15 
+U.S.C. 78c(a)(58)(B)), so state. 
+(b) If applicable, provide the disclosure required by Rule 10A-3(d) under the Exchange Act (17 CFR 
+240.10A-3(d)) regarding an exemption from the listing standards for audit committees. 
+Instruction. The information required by this Item is only required in an annual report on this Form N-CSR. 
+Item 6. Investments. 
+(a) File Schedule I – Investments in securities of unaffiliated issuers as of the close of the reporting period as 
+set forth in § 210.1212 of Regulation S-X [17 CFR 210.12-12], unless the schedule is included as part of 
+the report to shareholders filed under Item 1 of this Form or is included in the financial statements filed 
+under Item 7 of this Form. 
+Instruction to paragraph (a). 
+Schedule I – Investments in securities of unaffiliated issuers filed under this Item must be audited, except that in 
+the case of a report on this Form N-CSR as of the end of a fiscal half-year Schedule I– Investments in securities of 
+unaffiliated issuers need not be audited. 
+(b) If the registrant has divested itself of securities in accordance with Section 13(c) of the Investment 
+Company Act of 1940 following the filing of its last report on Form N-CSR and before filing of the 
+current report, disclose the following information for each such divested security: 
+(1) Name of the issuer; 
+(2) Exchange ticker symbol; 
+(3) Committee on Uniform Securities Identification Procedures (“CUSIP”) number; 
+=== page 11
+10 
+(4) Total number of shares or, for debt securities, principal amount divested; 
+(5) Date(s) that the securities were divested; 
+(6) If the registrant holds any securities of the issuer on the date of filing, the exchange ticker symbol; 
+CUSIP number; and the total number of shares or, for debt securities, principal amount held on the 
+date of filing; and 
+(7) Name of the statue that added the provision of Section 13(c) in accordance with which the securities 
+were divested. 
+This Item 6(b) shall terminate one year after the first date on which all statutory provisions that underlie 
+Section 13(c) of the Investment Company Act of 1940 have terminated. 
+Instructions to paragraph (b). 
+1. This Item may be used by a registrant that divested itself of securities in accordance with Section 13(c) of the 
+Investment Company Act. A registrant is not required to include disclosure under this Item; however, the 
+limitation on civil, criminal, and administrative actions under Section 13(c) of the Investment Company Act 
+does not apply with respect to a divestment that is not disclosed under this Item. 
+2. If a registrant divests itself of securities in accordance with Section 13(c) of the Act during the period that 
+begins on the fifth business day before the date of filing a Form N-CSR and ends on the date of filing, it may 
+disclose the divestment in either the Form N-CSR or an amendment thereto that is filed not later than five 
+business days after the date of filing the Form N-CSR. 
+3. For purposes of determining when a divestment should be reported under this Item, if a registrant divests its 
+holdings in a particular security in a related series of transactions, the registrant may deem the divestment to 
+occur at the time of the final transaction in the series. In that case, the registrant should report each 
+transaction in the series on a single Form N-CSR, but should separately state each date on which securities 
+were divested and the total number of shares or, for debt securities, principal amount divested, on each such 
+date. 
+Item 7. Financial Statements and Financial Highlights for Open-End Management Investment 
+Companies. 
+(a) An open-end management investment company registered on Form N-1A [17 CFR 239.15A and 17 CFR 
+274.11A] must file its most recent annual or semi-annual financial statements required, and for the 
+periods specified, by Regulation S-X. 
+(b) An open-end management investment company registered on Form N-1A [17 CFR 239.15A and 17 CFR 
+274.11A] must file the information required by Item 13 of Form N-1A.  
+Instructions to paragraph (a) and (b).  
+1. The financial statements and financial highlights filed under this Item must be audited and be accompanied 
+by any associated accountant’s report, as defined in rule 1-02(a) of Regulation S-X [17 CFR 210.1-02(a)], except that 
+in the case of a report on this Form N-CSR as of the end of a fiscal half-year, the financial statements and financial 
+highlights need not be audited. 
+=== page 12
+11 
+2. In the case of a Money Market Fund, Schedule I – Investments in securities of unaffiliated issuers [17 CFR 
+210.12-12B] may be omitted from its financial statements, provided that: (a) the Fund states in the report that the 
+Fund’s complete schedule of investments in securities of unaffiliated issuers is available (i) without charge, upon 
+request, by calling a specified toll-free telephone number; (ii) on the Fund’s website, if applicable; and (iii) on the 
+Commission’s website at http:// www.sec.gov; and (b) whenever the Fund (or financial intermediary through which 
+shares of the Fund may be purchased or sold) receives a request for the Fund’s schedule of investments in securities 
+of unaffiliated issuers, the Fund (or financial intermediary) sends a copy of Schedule I – Investments in securities of 
+unaffiliated issuers within 3 business days of receipt by first-class mail or other means designed to ensure equally 
+prompt delivery. 
+Item 8. Changes in and Disagreements with Accountants for Open-End Management Investment 
+Companies. 
+An open-end management investment company registered on Form N-1A [17 CFR 239.15A and 17 CFR 
+274.11A] must disclose the information concerning changes in and disagreements with accountants and on 
+accounting and financial disclosure required by Item 304 of Regulation S-K [17 CFR 229.304]. 
+Item 9. Proxy Disclosures for Open-End Management Investment Companies. 
+If any matter was submitted during the period covered by the report to a vote of shareholders of an open-end 
+management investment company registered on Form N-1A [17 CFR 239.15A and 17 CFR 274.11A], through the 
+solicitation of proxies or otherwise, the company must furnish the following information:  
+(1) The date of the meeting and whether it was an annual or special meeting. 
+(2) If the meeting involved the election of directors, the name of each director elected at the meeting and the 
+name of each other director whose term of office as a director continued after the meeting. 
+(3) A brief description of each matter voted upon at the meeting and the number of votes cast for, against or 
+withheld, as well as the number of abstentions and broker non-votes as to each such matter, including a separate 
+tabulation with respect to each matter or nominee for office.  
+Instruction. 
+The solicitation of any authorization or consent (other than a proxy to vote at a shareholders’ meeting) with respect to 
+any matter shall be deemed a submission of such matter to a vote of shareholders within the meaning of this Item. 
+Item 10. Remuneration Paid to Directors, Officers, and Others of Open-End Management 
+Investment Companies. 
+Unless the following information is disclosed as part of the financial statements included in Item 7, an open-end 
+management investment company registered on Form N-1A [17 CFR 239.15A and 17 CFR 274.11A] must disclose 
+the aggregate remuneration paid by the company during the period covered by the report to:  
+(1) All directors and all members of any advisory board for regular compensation;  
+(2) Each director and each member of an advisory board for special compensation;  
+(3) All officers; and 
+(4) Each person of whom any officer or director of the Fund is an affiliated person. 
+=== page 13
+12 
+Item 11. Statement Regarding Basis for Approval of Investment Advisory Contract. 
+If the board of directors approved any investment advisory contract during the Fund’s most recent fiscal half-
+year, discuss in reasonable detail the material factors and the conclusions with respect thereto that formed the basis 
+for the board’s approval. Include the following in the discussion:  
+(1) Factors relating to both the board’s selection of the investment adviser and approval of the advisory fee and 
+any other amounts to be paid by the Fund under the contract. These factors would include, but not be limited to, a 
+discussion of the nature, extent, and quality of the services to be provided by the investment adviser; the investment 
+performance of the Fund and the investment adviser; the costs of the services to be provided and profits to be realized 
+by the investment adviser and its affiliates from the relationship with the Fund; the extent to which economies of 
+scale would be realized as the Fund grows; and whether fee levels reflect these economies of scale for the benefit of 
+Fund investors. Also indicate in the discussion whether the board relied upon comparisons of the services to be 
+rendered and the amounts to be paid under the contract with those under other investment advisory contracts, such as 
+contracts of the same and other investment advisers with other registered investment companies or other types of 
+clients (e.g., pension funds and other institutional investors). If the board relied upon such comparisons, describe the 
+comparisons and how they assisted the board in concluding that the contract should be approved; and  
+(2) If applicable, any benefits derived or to be derived by the investment adviser from the relationship with the 
+Fund such as soft dollar arrangements by which brokers provide research to the Fund or its investment adviser in 
+return for allocating Fund brokerage. 
+Instructions. 
+1. Board approvals covered by this Item include both approvals of new investment advisory contracts and 
+approvals of contract renewals. Investment advisory contracts covered by this Item include subadvisory contracts. 
+2. Conclusory statements or a list of factors will not be considered sufficient disclosure. Relate the factors to the 
+specific circumstances of the Fund and the investment advisory contract and state how the board evaluated each 
+factor. For example, it is not sufficient to state that the board considered the amount of the investment advisory fee 
+without stating what the board concluded about the amount of the fee and how that conclusion affected its decision to 
+approve the contract. 
+3. If any factor enumerated in this Item is not relevant to the board’s evaluation of an investment advisory 
+contract, explain the reasons why that factor is not relevant. 
+Item 12. Disclosure of Proxy Voting Policies and Procedures for Closed-End Management 
+Investment Companies. 
+A closed-end management investment company that is filing an annual report on this Form N-CSR must, unless 
+it invests exclusively in non-voting securities, describe the policies and procedures that it uses to determine how to 
+vote proxies relating to portfolio securities, including the procedures that the company uses when a vote presents a 
+conflict between the interests of its shareholders, on the one hand, and those of the company’s investment adviser; 
+principal underwriter; or any affiliated person (as defined in Section 2(a)(3) of the Investment Company Act of 1940 
+(15 U.S.C. 80a-2(a)(3)) and the rules thereunder) of the company, its investment adviser, or its principal underwriter, 
+on the other. Include any policies and procedures of the company’s investment adviser, or any other third party, that 
+the company uses, or that are used on the company’s behalf, to determine how to vote proxies relating to portfolio 
+securities. 
+=== page 14
+13 
+Instruction. A company may satisfy the requirement to provide a description of the policies and procedures that it 
+uses to determine how to vote proxies relating to portfolio securities by including a copy of the policies and 
+procedures themselves. 
+Item 13. Portfolio Managers of Closed-End Management Investment Companies. 
+(a) If the registrant is a closed-end management investment company that is filing an annual report on this 
+Form N-CSR, provide the following information: 
+(1) State the name, title, and length of service of the person or persons employed by or associated with 
+the registrant or an investment adviser of the registrant who are primarily responsible for the day-
+to-day management of the registrant’s portfolio (“Portfolio Manager”). Also state each Portfolio 
+Manager’s business experience during the past 5 years. 
+Instructions to paragraph (a)(1). 
+1. Provide the information required by this paragraph as of the date of filing of the report. Disclose 
+the date as of which the information is provided. 
+2. If a committee, team, or other group of persons associated with the registrant or an investment 
+adviser of the registrant is jointly and primarily responsible for the day-to-day management of the 
+registrant’s portfolio, information in response to this Item is required for each member of such 
+committee, team, or other group. For each such member, provide a brief description of the 
+person’s role on the committee, team, or other group (e.g., lead member), including a description 
+of any limitations on the person’s role and the relationship between the person’s role and the roles 
+of other persons who have responsibility for the day-to-day management of the registrant’s 
+portfolio. If more than five persons are jointly and primarily responsible for the day-to-day 
+management of the registrant’s portfolio, the registrant need only provide information for the five 
+persons with the most significant responsibility for the day-to-day management of the registrant’s 
+portfolio. 
+(2) If a Portfolio Manager required to be identified in response to paragraph (a)(1) of this Item is 
+primarily responsible for the day-to-day management of the portfolio of any other account, provide 
+the following information: 
+(i) The Portfolio Manager’s name; 
+(ii) The number of other accounts managed within each of the following categories and the total 
+assets in the accounts managed within each category: 
+(A) Registered investment companies; 
+(B) Other pooled investment vehicles; and 
+(C) Other accounts. 
+(iii) For each of the categories in paragraph (a)(2)(ii) of this Item, the number of accounts and the 
+total assets in the accounts with respect to which the advisory fee is based on the performance 
+of the account; and 
+=== page 15
+14 
+(iv) A description of any material conflicts of interest that may arise in connection with the 
+Portfolio Manager’s management of the registrant’s investments, on the one hand, and the 
+investments of the other accounts included in response to paragraph (a)(2)(ii) of this Item, on 
+the other. This description would include, for example, material conflicts between the 
+investment strategy of the registrant and the investment strategy of other accounts managed by 
+the Portfolio Manager and material conflicts in allocation of investment opportunities between 
+the registrant and other accounts managed by the Portfolio Manager. 
+Instructions to paragraph (a)(2). 
+1. Provide the information required by this paragraph as of the end of the registrant’s most 
+recently completed fiscal year, except that, in the case of any newly identified Portfolio 
+Manager, information must be provided as of the most recent practicable date.  Disclose the 
+date as of which the information is provided. 
+2. If a committee, team, or other group of persons that includes the Portfolio Manager is jointly 
+and primarily responsible for the day-to-day management of the portfolio of an account, 
+include the account in responding to paragraph (a)(2) of this Item. 
+(3) Describe the structure of, and the method used to determine, the compensation of each Portfolio 
+Manager required to be identified in response to paragraph (a)(1) of this Item. For each type of 
+compensation (e.g., salary, bonus, deferred compensation, retirement plans and arrangements), 
+describe with specificity the criteria on which that type of compensation is based, for example, 
+whether compensation is fixed, whether (and, if so, how) compensation is based on the registrant’s 
+pre- or after-tax performance over a certain time period, and whether (and, if so, how) 
+compensation is based on the value of assets held in the registrant’s portfolio. For example, if 
+compensation is based solely or in part on performance, identify any benchmark used to measure 
+performance and state the length of the period over which performance is measured. 
+Instructions to paragraph (a)(3). 
+1. Provide the information required by this paragraph as of the end of the registrant’s most 
+recently completed fiscal year, except that, in the case of any newly identified Portfolio 
+Manager, information must be provided as of the most recent practicable date.  Disclose the 
+date as of which the information is provided. 
+2. Compensation includes, without limitation, salary, bonus, deferred compensation, and 
+pension and retirement plans and arrangements, whether the compensation is cash or non-
+cash. Group life, health, hospitalization, medical reimbursement, relocation, and pension and 
+retirement plans and arrangements may be omitted, provided that they do not discriminate in 
+scope, terms, or operation in favor of the Portfolio Manager or a group of employees that 
+includes the Portfolio Manager and are available generally to all salaried employees. The 
+value of compensation is not required to be disclosed under this Item. 
+3. Include a description of the structure of, and the method used to determine, any compensation 
+received by the Portfolio Manager from the registrant, the registrant’s investment adviser, or 
+any other source with respect to management of the registrant and any other accounts 
+included in the response to paragraph (a)(2)(ii) of this Item. This description must clearly 
+disclose any differences between the method used to determine the Portfolio Manager’s 
+compensation with respect to the registrant and other accounts, e.g., if the Portfolio Manager 
+=== page 16
+15 
+receives part of an advisory fee that is based on performance with respect to some accounts 
+but not the registrant, this must be disclosed. 
+(4) For each Portfolio Manager required to be identified in response to paragraph (a)(1) of this Item, 
+state the dollar range of equity securities in the registrant beneficially owned by the Portfolio 
+Manager using the following ranges: none, $1-$10,000, $10,001-$50,000, $50,001-$100,000, 
+$100,001-$500,000, $500,001-$1,000,000, or over $1,000,000. 
+Instructions to paragraph (a)(4). 
+1. Provide the information required by this paragraph as of the end of the registrant’s most 
+recently completed fiscal year, except that, in the case of any newly identified Portfolio 
+Manager, information must be provided as of the most recent practicable date. Specify the 
+valuation date. 
+2. Determine “beneficial ownership” in accordance with rule 16a-1(a)(2) under the Exchange 
+Act (17 CFR 240.16a-1(a)(2)). 
+(b) If the registrant is a closed-end management investment company that is filing a report on this Form N-
+CSR other than an annual report, disclose any change, as of the date of filing, in any of the Portfolio 
+Managers identified in response to paragraph (a)(1) of this Item in the registrant’s most recent annual 
+report on Form N-CSR. In addition, for any newly identified Portfolio Manager, provide the information 
+required by paragraph (a)(1) of this Item as of the date of filing of the report and the information required 
+by paragraphs (a)(2), (a)(3), and (a)(4) of this Item as of the most recent practicable date. 
+Item 14.  Purchases of Equity Securities by Closed-End Management Investment Company and 
+Affiliated Purchasers. 
+(a) If the registrant is a closed-end management investment company, in the following tabular format, 
+provide the information specified in paragraph (b) of this Item with respect to any purchase made by or 
+on behalf of the registrant or any “affiliated purchaser,” as defined in Rule 10b-18(a)(3) under the 
+Exchange Act (17 CFR 240.10b-18(a)(3)), of shares or other units of any class of the registrant’s equity 
+securities that is registered by the registrant pursuant to Section 12 of the Exchange Act (15 U.S.C. 
+781). 
+Instruction to paragraph (a). 
+Disclose all purchases covered by this Item, including purchases that do not satisfy the conditions of the 
+safe harbor of Rule 10b-18 under the Exchange Act (17 CFR 240.10b-18), made in the period covered by 
+the report. Provide disclosures covering repurchases made on a monthly basis. For example, if the reporting 
+period began on January 16 and ended on July 15, the chart would show repurchases for the months from 
+January 16 through February 15, February 16 through March 15, March 16 through April 15, April 16 
+through May 15, May 16 through June 15, and June 16 through July 15. 
+=== page 17
+16 
+REGISTRANT PURCHASES OF EQUITY SECURITIES 
+Period (a) Total Number of 
+Shares (or Units) 
+Purchased 
+(b) Average 
+Price Paid per 
+Share (or Unit) 
+(c) Total Number of 
+Shares (or Units) 
+Purchased as Part of 
+Publicly Announced 
+Plans or Programs 
+(d) Maximum Number (or 
+Approximate Dollar Value) of 
+Shares (or Units) that May Yet 
+Be Purchased Under the Plans or 
+Programs 
+Month #1(identify 
+beginning and 
+ending dates) 
+    
+Month #2 (identify 
+beginning and 
+ending dates) 
+    
+Month #3 (identify 
+beginning and 
+ending dates) 
+    
+Month #4 (identify 
+beginning and 
+ending dates) 
+    
+Month #5 (identify 
+beginning and 
+ending dates) 
+    
+Month #6 (identify 
+beginning and 
+ending dates) 
+    
+Total     
+(b) The table shall include the following information for each class or series of securities for each month 
+included in the period covered by the report: 
+(1) The total number of shares (or units) purchased (column (a)); 
+Instruction to paragraph (b)(1). 
+Include in this column all repurchases by the registrant, including those made pursuant to publicly 
+announced plans or programs and those not made pursuant to publicly announced plans or programs. 
+Briefly disclose, by footnote to the table, the number of shares purchased other than through a publicly 
+announced plan or program and the nature of the transaction (e.g., whether the purchases were made in 
+open-market transactions, tender offers, in satisfaction of the registrant’s obligations upon exercise of 
+outstanding put options issued by the registrant, or other transactions). 
+(2) The average price paid per share (or unit) (column (b)); 
+=== page 18
+17 
+(3) The number of shares (or units) purchased as part of publicly announced repurchase plans or 
+programs (column (c)); and 
+(4) The maximum number (or approximate dollar value) of shares (or units) that may yet be purchased 
+under the plans or programs (column (d)). 
+Instructions to paragraphs (b)(3) and (b)(4). 
+1. In the table, disclose this information in the aggregate for all plans or programs publicly announced. 
+2. By footnote to the table, indicate: 
+a. The date each plan or program was announced; 
+b. The dollar amount (or share or unit amount) approved; 
+c. The expiration date (if any) of each plan or program; 
+d. Each plan or program that has expired during the period covered by the table; and 
+e. Each plan or program the registrant has determined to terminate prior to expiration, or under 
+which the registrant does not intend to make further purchases. 
+Item 15.  Submission of Matters to a Vote of Security Holders. 
+Describe any material changes to the procedures by which shareholders may recommend nominees to the 
+registrant’s board of directors, where those changes were implemented after the registrant last provided disclosure in 
+response to the requirements of Item 407(c)(2)(iv) of Regulation S-K (17 CFR 229.407) (as required by Item 
+22(b)(15) of Schedule 14A (17 CFR 240.14a-101)), or this Item. 
+Instruction: For purposes of this Item, adoption of procedures by which shareholders may recommend nominees to 
+the registrant’s board of directors, where the registrant’s most recent disclosure in response to the requirements of 
+Item 407(c)(2)(iv) of Regulation S-K (17 CFR 229.407) (as required by Item 22(b)(15) of Schedule 14A (17 CFR 
+240.14a-101)), or this Item, indicated that the registrant did not have in place such procedures, will constitute a 
+material change. 
+Item 16.  Controls and Procedures. 
+(a) Disclose the conclusions of the registrant’s principal executive and principal financial officers, or 
+persons performing similar functions, regarding the effectiveness of the registrant’s disclosure controls 
+and procedures (as defined in Rule 30a-3(c) under the Act (17 CFR 270.30a-3(c))) as of a date within 
+90 days of the filing date of the report that includes the disclosure required by this paragraph, based on 
+the evaluation of these controls and procedures required by Rule 30a-3(b) under the Act (17 CFR 
+270.30a-3(b)) and Rules 13a-15(b) or 15d-15(b) under the Exchange Act (17 CFR 240.13a-15(b) or 
+240.15d-15(b)). 
+(b) Disclose any change in the registrant’s internal control over financial reporting (as defined in Rule 30a-
+3(d) under the Act (17 CFR 270.30a-3(d)) that occurred during the period covered by this report that 
+has materially affected, or is reasonably likely to materially affect, the registrant’s internal control over 
+financial reporting. 
+=== page 19
+18 
+Item 17. Disclosure of Securities Lending Activities for Closed-End Management Investment 
+Companies. 
+(a) If the registrant is a closed-end management investment company, provide the following dollar amounts 
+of income and fees/compensation related to the securities lending activities of the registrant during its 
+most recent fiscal year: 
+(1) Gross income from securities lending activities; 
+(2) All fees and/or compensation for each of the following securities lending activities and related 
+services: any share of revenue generated by the securities lending program paid to the securities 
+lending agent(s) (“revenue split”); fees paid for cash collateral management services (including 
+fees deducted from a pooled cash collateral reinvestment vehicle) that are not included in the 
+revenue split; administrative fees that are not included in the revenue split; fees for 
+indemnification that are not included in the revenue split; rebates paid to borrowers; and any other 
+fees relating to the securities lending program that are not included in the revenue split, including a 
+description of those other fees; 
+(3) The aggregate fees/compensation disclosed pursuant to paragraph (2); and 
+(4) Net income from securities lending activities (i.e., the dollar amount in paragraph (1) minus the 
+dollar amount in paragraph (3)). 
+Instruction to paragraph (a). 
+If a fee for a service is included in the revenue split, state that the fee is “included in the revenue split.” 
+(b) If the registrant is a closed-end management investment company, describe the services provided to the 
+registrant by the securities lending agent in the registrant’s most recent fiscal year. 
+Item 18. Recovery of Erroneously Awarded Compensation. 
+(a) If at any time during or after the last completed fiscal year the registrant was required to prepare an 
+accounting restatement that required recovery of erroneously awarded compensation pursuant to the 
+registrant’s compensation recovery policy required by the listing standards adopted pursuant to 17 CFR 
+240.10D-1, or there was an outstanding balance as of the end of the last completed fiscal year of 
+erroneously awarded compensation to be recovered from the application of the policy to a prior 
+restatement, the registrant must provide the following information: 
+(1) For each restatement: 
+(i) The date on which the registrant was required to prepare an accounting restatement;  
+(ii) The aggregate dollar amount of erroneously awarded compensation attributable to such 
+accounting restatement, including an analysis of how the amount was calculated; 
+(iii) If the financial reporting measure defined in 17 CFR 10D-1(d) related to a stock price or total 
+shareholder return metric, the estimates that were used in determining the erroneously awarded 
+compensation attributable to such accounting restatement and an explanation of the 
+methodology used for such estimates;  
+=== page 20
+19 
+(iv) The aggregate dollar amount of erroneously awarded compensation that remains outstanding at 
+the end of the last completed fiscal year; and 
+(v) If the aggregate dollar amount of erroneously awarded compensation has not yet been 
+determined, disclose this fact, explain the reason(s) and disclose the information required in 
+(ii) through (iv) in the next annual report that the registrant files on this Form N-CSR;  
+(2) If recovery would be impracticable pursuant to 17 CFR 10D-1(b)(1)(iv), for each named executive 
+officer and for all other executive officers as a group, disclose the amount of recovery forgone and 
+a brief description of the reason the registrant decided in each case not to pursue recovery; and  
+(3) For each named executive officer from whom, as of the end of the last completed fiscal year, 
+erroneously awarded compensation had been outstanding for 180 days or longer since the date the 
+registrant determined the amount the individual owed, disclose the dollar amount of outstanding 
+erroneously awarded compensation due from each such individual. 
+(b) If at any time during or after its last completed fiscal year the registrant was required to prepare an 
+accounting restatement, and the registrant concluded that recovery of erroneously awarded compensation 
+was not required pursuant to the registrant’s compensation recovery policy required by the listing 
+standards adopted pursuant to 17 CFR 240.10D-1, briefly explain why application of the recovery policy 
+resulted in this conclusion. 
+Item 19. Exhibits. 
+(a) File the exhibits listed below as part of this Form. 
+(1) Any code of ethics, or amendment thereto, that is the subject of the disclosure required by Item 2, 
+to the extent that the registrant intends to satisfy the Item 2 requirements through filing of an 
+exhibit. 
+(2) Any policy required by the listing standards adopted pursuant to Rule 10D-1 under the Exchange 
+Act (17 CFR 240.10D-1) by the registered national securities exchange or registered national 
+securities association upon which the registrant’s securities are listed.  
+Instruction to paragraph (a)(2).  
+The exhibit required by this paragraph (a)(2) is only required in an annual report on Form N-CSR. 
+(3) A separate certification for each principal executive and principal financial officer of the registrant 
+as required by Rule 30a-2(a) under the Act (17 CFR 270.30a-2(a)), exactly as set forth below: 
+CERTIFICATIONS 
+I, [identify the certifying individual], certify that: 
+1. I have reviewed this report on Form N-CSR of [identify registrant]; 
+2. Based on my knowledge, this report does not contain any untrue statement of a material fact or omit to state a 
+material fact necessary to make the statements made, in light of the circumstances under which such 
+statements were made, not misleading with respect to the period covered by this report; 
+=== page 21
+20 
+3. Based on my knowledge, the financial statements, and other financial information included in this report, 
+fairly present in all material respects the financial condition, results of operations, changes in net assets, and 
+cash flows (if the financial statements are required to include a statement of cash flows) of the registrant as 
+of, and for, the periods presented in this report; 
+4. The registrant’s other certifying officer(s) and I are responsible for establishing and maintaining disclosure 
+controls and procedures (as defined in Rule 30a-3(c) under the Investment Company Act of 1940) and 
+internal control over financial reporting (as defined in Rule 30a-3(d) under the Investment Company Act of 
+1940) for the registrant and have: 
+(a) Designed such disclosure controls and procedures, or caused such disclosure controls and procedures to 
+be designed under our supervision, to ensure that material information relating to the registrant, including 
+its consolidated subsidiaries, is made known to us by others within those entities, particularly during the 
+period in which this report is being prepared; 
+(b) Designed such internal control over financial reporting, or caused such internal control over financial 
+reporting to be designed under our supervision, to provide reasonable assurance regarding the reliability 
+of financial reporting and the preparation of financial statements for external purposes in accordance 
+with generally accepted accounting principles; 
+(c) Evaluated the effectiveness of the registrant’s disclosure controls and procedures and presented in this 
+report our conclusions about the effectiveness of the disclosure controls and procedures, as of a date 
+within 90 days prior to the filing date of this report based on such evaluation; and 
+(d) Disclosed in this report any change in the registrant’s internal control over financial reporting that 
+occurred during the period covered by this report that has materially affected, or is reasonably likely to 
+materially affect, the registrant’s internal control over financial reporting; and 
+5. The registrant’s other certifying officer(s) and I have disclosed to the registrant’s auditors and the audit 
+committee of the registrant’s board of directors (or persons performing the equivalent functions): 
+(a) All significant deficiencies and material weaknesses in the design or operation of internal control over 
+financial reporting which are reasonably likely to adversely affect the registrant’s ability to record, 
+process, summarize, and report financial information; and 
+(b) Any fraud, whether or not material, that involves management or other employees who have a significant 
+role in the registrant’s internal control over financial reporting. 
+Date:     
+[Signature] 
+[Title] 
+(4)  Any written solicitation to purchase securities under Rule 23c-1 under the Act (17 CFR 270.23c-1) 
+sent or given during the period covered by the report by or on behalf of the registrant to 10 or more 
+persons. 
+(5)  Change in the registrant’s independent public accountant. Provide the information called for by 
+Item 4 of Form 8-K under the Exchange Act (17 CFR 249.308). Unless otherwise specified by 
+Item 4, or related to and necessary for a complete understanding of information not previously 
+disclosed, the information should relate to events occurring during the reporting period. 
+=== page 22
+21 
+(b) If the report is filed under Section 13(a) or 15(d) of the Exchange Act, provide the certifications required 
+by Rule 30a-2(b) under the Act (17 CFR 270.30a-2(b)), Rule 13a-14(b) or Rule 15d-14(b) under the 
+Exchange Act (17 CFR 240.13a-14(b) or 240.15d-14(b)), and Section 1350 of Chapter 63 of Title 18 of 
+the United States Code (18 U.S.C. 1350) as an exhibit. A certification furnished pursuant to this 
+paragraph will not be deemed “filed” for purposes of Section 18 of the Exchange Act (15 U.S.C. 78r), or 
+otherwise subject to the liability of that section. Such certification will not be deemed to be incorporated 
+by reference into any filing under the Securities Act of 1933 or the Exchange Act, except to the extent 
+that the registrant specifically incorporates it by reference. 
+Instructions to Item 19.  
+1. Letter or number the exhibits in the sequence that they appear in this item. Each exhibit identified in the 
+exhibit index (other than an exhibit filed in eXtensible Business Reporting Language) must include an active 
+link to an exhibit that is filed with the registration statement or, if the exhibit is incorporated by reference, an 
+active hyperlink to the exhibit separately filed on EDGAR. If the registration statement is amended, each 
+amendment must include active hyperlinks to the exhibits required with the amendment. 
+2. Schedules (or similar attachments) to the exhibits required by this Item are not required to be filed provided 
+that they do not contain information material to an investment or voting decision and that information is not 
+otherwise disclosed in the exhibit or the disclosure document. Each exhibit filed must contain a list briefly 
+identifying the contents of all omitted schedules. Registrants need not prepare a separate list of omitted 
+information if such information is already included within the exhibit in a manner that conveys the subject 
+matter of the omitted schedules and attachments. In addition, the registrant must provide a copy of any 
+omitted schedule to the Commission or its staff upon request. 
+3. The registrant may redact information from exhibits required to be filed by this Item if disclosure of such 
+information would constitute a clearly unwarranted invasion of personal privacy (e.g., disclosure of bank 
+account numbers, social security numbers, home addresses and similar information). 
+=== page 23
+22 
+SIGNATURES 
+[See General Instruction F] 
+Pursuant to the requirements of the Securities Exchange Act of 1934 and the Investment Company Act of 1940, 
+the registrant has duly caused this report to be signed on its behalf by the undersigned, thereunto duly authorized. 
+(Registrant)   
+By (Signature and Title)*   
+Date   
+Pursuant to the requirements of the Securities Exchange Act of 1934 and the Investment Company Act of 1940, 
+this report has been signed below by the following persons on behalf of the registrant and in the capacities and on the 
+dates indicated. 
+By (Signature and Title)*   
+Date   
+By (Signature and Title)*   
+Date   
+*Print the name and title of each signing officer under his or her signature. 

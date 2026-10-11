@@ -1,0 +1,222 @@
+ 
+ Standard & Poor's 
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSX 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P ADR
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+ Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Index Changes 2001 
+ S&P 500 Index Changes 2002 
+(all changes effective after close of trading) 
+ ADDITIONS 
+ DELETIONS 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 11/18 
+ Comcast Corp. 
+ CMCSA 
+ Comcast Class A Special 
+ CMCSK 
+ 09/03 
+ RJ Reynolds Tobacco 
+ RJR 
+ ------ 
+ ------- 
+ 08/30 
+ ------- 
+ ------- 
+ Conoco Inc. 
+ COC 
+ 08/20 
+ Travelers Property Casualty Corp. 
+ TAP.B 
+ Vitesse Semiconductor 
+ VTSS 
+ 08/13 
+ Monsanto Co. 
+ MON 
+ Palm Inc. 
+ PALM 
+ 07/24 
+ Anthem Inc. 
+ ATH 
+ Conseco Inc. 
+ CNC 
+ 07/19 
+ United Parcel Service 
+ UPS 
+ Royal Dutch Petroleum 
+ RD 
+ 07/19 
+ Goldman Sachs Group 
+ GS 
+ Unilever N.V. 
+ UN 
+ 07/19 
+ Prudential Financial 
+ PRU 
+ Nortel Networks 
+ NT 
+ 07/19 
+ eBay Inc. 
+ EBAY 
+ Alcan Inc. 
+ AL 
+ 07/19 
+ Principal Financial Group 
+ PFG 
+ Barrick Gold Corp. 
+ ABX 
+ 07/19 
+ Electronic Arts 
+ ERTS 
+ Placer Dome Inc. 
+ PDG 
+ 07/19 
+ SunGrd Data Systems 
+ SDS 
+ Inco, Ltd. 
+ N 
+ 07/16 
+ North Fork Bancorporation 
+ NFB 
+ Immunex Corp. 
+ IMNX 
+ 06/25 
+ Simon Property Group 
+ SPG 
+ Conexant Systems 
+ CNXT 
+ 05/14 
+ Apollo Group 
+ APOL 
+ WorldCom Inc.-WorldCom Group 
+ WCOM 
+ 05/14 
+ BJ Services 
+ BJS 
+ USAirways Group Inc. 
+ U 
+ 05/10 
+ American Standard 
+ ASD 
+ Sapient Corp. 
+ SAPE 
+ 05/03 
+ First Tennessee National 
+ FTN 
+ COMPAQ Computer 
+ CPQ 
+ 02/08 
+ Marshall & Ilsley Corp. 
+ MI 
+ Willamette Industries 
+ WLL 
+ 01/31 
+ Rational Software 
+ RATL 
+ Niagara Mohawk Hldgs. Inc. 
+ NMK 
+ 01/29 
+ ACE Limited 
+ ACE 
+ Westvaco Corp. 
+ W 
+ 01/29 
+ MeadWestvaco Corp. 
+ MWV 
+ Mead Corp. 
+ MEA 
+ 01/16 
+ Plum Creek Timber Co. 
+ PCL 
+ K mart 
+ KM 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved. Privacy Policy 
+

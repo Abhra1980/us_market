@@ -1,0 +1,262 @@
+ 
+ Standard & Poor's 
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSE 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+ Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Index Changes 2000 
+ S&P 500 Index Changes 2001 
+(all changes effective after close of trading) 
+ ADDITIONS 
+ DELETIONS 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 12/31 
+ Waters Corporation 
+ WAT 
+ FMC Corp. 
+ FMC 
+ 12/14 
+ Jones Apparel Group 
+ JNY 
+ Homestake Mining 
+ HM 
+ 12/13 
+ Genzyme Corp. 
+ GENZ 
+ ------ 
+ ------ 
+ 12/12 
+ ------ 
+ ------ 
+ Ralston-Ralston Purina Gp 
+ RAL 
+ 11/30 
+ Equity Res.Properties 
+ EQR 
+ National Service Ind. 
+ NSI 
+ 11/29 
+ NVIDIA Corp. 
+ NVDA 
+ Enron Corp. 
+ ENE 
+ 11/06 
+ Health Management Assoc. 
+ HMA 
+ GPU Inc. 
+ GPU 
+ 10/09 
+ TECO Energy 
+ TE 
+ Global Crossing Ltd. 
+ GX 
+ 10/09 
+ Equity Office Properties 
+ EOP 
+ Texaco Inc. 
+ TX 
+ 09/20 
+ Immunex Corp. 
+ IMNX 
+ ------ 
+ ------ 
+ 09/17 
+ ------ 
+ ------ 
+ Tosco Corp. 
+ TOS 
+ 08/31 
+ XL Capital 
+ XL 
+ Wachovia Corp. 
+ WB 
+ 08/31 
+ Int'l. Game Technology 
+ IGT 
+ BroadVision Inc. 
+ BVSN 
+ 08/29 
+ CIENA Corp. 
+ CIEN 
+ American General 
+ AGC 
+ 08/29 
+ AmerisourceBergen 
+ ABC 
+ ONEOK Inc. 
+ OKE 
+ 08/06 
+ Zimmer Holdings 
+ ZMH 
+ Timken Co. 
+ TKR 
+ 08/03 
+ Family Dollar Stores
+ FDO 
+ Cabletron Systems 
+ CS 
+ 08/02 
+ PMC-Sierra, Inc.
+ PMCS 
+ Quaker Oats 
+ OAT 
+ 07/06 
+ AT&T Wireless Group
+ AWE 
+ Potlatch Corp. 
+ PCH 
+ 06/29 
+ Rockwell Collins 
+ COL 
+ Longs Drug Stores 
+ LDG 
+ 06/27 
+ John Hancock Financial 
+ JHF 
+ Harcourt General Inc. 
+ H 
+ 06/22 
+ Zions Bancorp 
+ ZION 
+ ALZA Corp. Cl. A 
+ AZA 
+ 06/01 
+ TMP Worldwide 
+ TMPW 
+ CIT Group Inc. 
+ CIT 
+ 05/11 
+ Pepsi Bottling Group 
+ PBG 
+ Adaptec, Inc. 
+ ADPT 
+ 04/02 
+ Mirant Corp. 
+ MIR 
+ Briggs & Stratton 
+ BGG 
+ 03/30 
+ Concord EFS Inc. 
+ CEFT 
+ Ceridian Corp (Old) 
+ CEN 
+ 03/30 
+ FIserv Inc. 
+ FISV 
+ Old Kent Financial 
+ OK 
+ 02/28 
+ Cintas Corporation 
+ CTAS 
+ Summit Bancorp 
+ SUB 
+ 02/26 
+ Citizens Communications 
+ CZN 
+ U.S. Bancorp* 
+ USB* 
+ 02/06 
+ Univision Communications 
+ UVN 
+ Union Carbide 
+ UK 
+ 01/29 
+ Jabil Circuit 
+ JBL 
+ Coastal Corp. 
+ CGP 
+ 01/12 
+ Noble Drilling Corp. 
+ NE 
+ Time Warner Inc. 
+ TWX 
+ *Firstar Corporation changed its name to U.S. Bancorp (USB) on 2/26/01. 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved. Privacy Policy 
+

@@ -1,0 +1,505 @@
+,S&P 500 Old Industry Group Classifications,,
+,,,
+,Ticker,Company,Industry
+,ABT,Abbott Labs,Health Care (Diversified)
+,ADCT,ADC Telecommunications,Communications Equipment
+,ADBE,Adobe Systems,Computers (Software & Services)
+,AMD,Advanced Micro Devices,Electronics (Semiconductors)
+1,AES,AES Corp.,Power Producers (Independent)
+,AET,Aetna Inc. (New),Health Care (Managed Care)
+,AFL,AFLAC Inc.,Insurance (Life/Health)
+,A,Agilent Technologies,Electronics (Instrumentation)
+,APD,Air Products & Chemicals,Chemicals
+,ACV,Alberto-Culver,Personal Care
+,ABS,Albertson's,Retail (Food Chains)
+,AL,Alcan Inc.,Aluminum
+1,AA,Alcoa Inc.,Aluminum
+1,ATI,Allegheny Technologies Inc.,Iron & Steel
+,AGN,"Allergan, Inc.",Health Care (Drugs-Major Pharmaceuticals)
+,AW,Allied Waste Industries,Waste Management
+,AYE,Alllegheny Energy Inc.,Electric Companies
+,ALL,Allstate Corp.,Insurance (Property-Casualty)
+,AT,ALLTEL Corp.,Telephone
+,ALTR,Altera Corp.,Electronics (Semiconductors)
+,AZA,ALZA Corp. Cl. A,Health Care (Drugs-Generic & Other)
+,ABK,Ambac Financial Group,Financial (Diversified)
+,AHC,Amerada Hess,Oil (Domestic Integrated)
+,AEE,Ameren Corp.,Electric Companies
+1,AOL,AOL Time Warner Inc.,Entertainment
+1,AEP,American Electric Power,Electric Companies
+1,AXP,American Express,Financial (Diversified)
+1,AGC,American General,Insurance (Life/Health)
+,AM,American Greetings Cl A,"Consumer (Jewelry, Novelties & Gifts)"
+,AHP,American Home Products,Health Care (Diversified)
+1,AIG,American Int'l. Group,Insurance (Multi-Line)
+,APCC,American Power Conversion,Electrical Equipment
+1,AMGN,Amgen,Biotechnology
+,AMR,AMR Corp.,Airlines
+,ASO,AmSouth Bancorporation,Banks (Major Regional)
+,APC,Anadarko Petroleum,Oil & Gas (Exploration & Production)
+,ADI,Analog Devices,Electronics (Semiconductors)
+,ANDW,Andrew Corp.,Communications Equipment
+,BUD,Anheuser-Busch,Beverages (Alcoholic)
+,AOC,Aon Corp.,Insurance Brokers
+,APA,Apache Corp.,Oil & Gas (Exploration & Production)
+,AAPL,Apple Computer,Computers (Hardware)
+,ABI,Applera Corp.-PE Biosystems Group,Health Care (Medical Products & Supplies)
+,AMAT,Applied Materials,Equipment (Semiconductor)
+,AMCC,Applied Micro Circuits,Electronics (Semiconductors)
+,ADM,Archer-Daniels-Midland,Agricultural Products
+,ASH,Ashland Inc.,Oil & Gas (Refining & Marketing)
+1,T,AT&T Corp.,Telecommunications (Long Distance)
+,ADSK,"Autodesk, Inc.",Computers (Software & Services)
+,ADP,Automatic Data Processing Inc.,Services (Data Processing)
+,AZO,AutoZone Inc.,Retail (Specialty)
+,AV,Avaya Inc.,Computers (Networking)
+,AVY,Avery Dennison Corp.,Manufacturing (Specialized)
+1,AVP,Avon Products,Personal Care
+1,BHI,Baker Hughes,Oil & Gas (Drilling & Equipment)
+,BLL,Ball Corp.,Containers (Metal & Glass)
+1,BAC,Bank of America Corp.,Banks (Money Center)
+,BK,Bank of New York,Banks (Major Regional)
+1,ONE,Bank One Corp.,Banks (Major Regional)
+,BCR,Bard (C.R.) Inc.,Health Care (Medical Products & Supplies)
+,ABX,Barrick Gold Corp.,Gold & Precious Metals Mining
+,BOL,Bausch & Lomb,Health Care (Medical Products & Supplies)
+1,BAX,Baxter International Inc.,Health Care (Medical Products & Supplies)
+,BBT,BB&T Corporation,Banks (Major Regional)
+,BSC,Bear Stearns Cos.,Investment Banking/Brokerage
+,BDX,"Becton, Dickinson",Health Care (Medical Products & Supplies)
+,BBBY,Bed Bath & Beyond,Retail (Specialty)
+,BLS,BellSouth,Telephone
+,BMS,Bemis Company,Containers & Packaging (Paper)
+,BBY,"Best Buy Co., Inc.",Retail (Computers & Electronics)
+,BGEN,"Biogen, Inc.",Biotechnology
+,BMET,"Biomet, Inc.",Health Care (Medical Products & Supplies)
+1,BDK,Black & Decker Corp.,Hardware & Tools
+,HRB,Block H&R,Services (Commercial & Consumer)
+,BMC,BMC Software,Computers (Software & Services)
+1,BA,Boeing Company,Aerospace/Defense
+1,BCC,Boise Cascade,Paper & Forest Products
+,BSX,Boston Scientific,Health Care (Medical Products & Supplies)
+1,BMY,Bristol-Myers Squibb,Health Care (Diversified)
+,BRCM,Broadcom Corporation,Electronics (Semiconductors)
+,BVSN,BroadVision Inc.,Computers (Software & Services)
+,BF.B,Brown-Forman Corp.,Beverages (Alcoholic)
+,BC,Brunswick Corp.,Leisure Time (Products)
+1,BNI,Burlington Northern Santa Fe Corp.,Railroads
+,BR,Burlington Resources,Oil & Gas (Exploration & Production)
+,CS,Cabletron Systems,Computers (Networking)
+,CPN,Calpine Corp.,Power Producers (Independent)
+1,CPB,Campbell Soup,Foods
+,COF,Capital One Financial,Consumer Finance
+,CAH,"Cardinal Health, Inc.",Distributors (Food & Health)
+,CCL,Carnival Corp.,Lodging-Hotels
+,CAT,Caterpillar Inc.,Machinery (Diversified)
+,CD,Cendant Corporation,Services (Commercial & Consumer)
+,CTX,Centex Corp.,Homebuilding
+,CTL,"CenturyTel, Inc.",Telephone
+,SCH,Charles Schwab,Investment Banking/Brokerage
+,CF,Charter One Financial,Savings & Loan Companies
+,CHV,Chevron Corp.,Oil (International Integrated)
+,CHIR,Chiron Corp.,Biotechnology
+,CB,Chubb Corp.,Insurance (Property-Casualty)
+1,CI,CIGNA Corp.,Health Care (Managed Care)
+,CINF,Cincinnati Financial,Insurance (Property-Casualty)
+,CIN,CINergy Corp.,Electric Companies
+,CTAS,Cintas Corporation,Services (Commercial & Consumer)
+,CC,Circuit City Group,Retail (Computers & Electronics)
+1,CSCO,Cisco Systems,Computers (Networking)
+1,C,Citigroup Inc.,Financial (Diversified)
+,CZN,Citizens Communications,Telephone
+,CTXS,Citrix Systems,Computers (Software & Services)
+1,CCU,Clear Channel Communications,"Broadcasting (Television, Radio & Cable)"
+,CLX,Clorox Co.,Household Products (Non-Durables)
+,CMS,CMS Energy,Electric Companies
+1,KO,Coca Cola Co.,Beverages (Non-Alcoholic)
+,CCE,Coca-Cola Enterprises,Beverages (Non-Alcoholic)
+1,CL,Colgate-Palmolive,Household Products (Non-Durables)
+,CMCSK,Comcast Class A Special,"Broadcasting (Television, Radio & Cable)"
+,CMA,Comerica Inc.,Banks (Major Regional)
+,CPQ,COMPAQ Computer,Computers (Hardware)
+,CA,Computer Associates Intl.,Computers (Software & Services)
+1,CSC,Computer Sciences Corp.,Services (Computer Systems)
+,CPWR,Compuware Corp.,Computers (Software & Services)
+,CMVT,Comverse Technology,Communications Equipment
+,CAG,ConAgra Foods Inc.,Foods
+,CEFT,Concord EFS Inc.,Services (Data Processing)
+,CNXT,Conexant Systems,Electronics (Semiconductors)
+,COC.B,Conoco Inc.,Oil (Domestic Integrated)
+,CNC,Conseco Inc.,Insurance (Life/Health)
+,ED,Consolidated Edison Hldgs.,Electric Companies
+,BLI,"Big Lots, Inc.",Retail (Discounters)
+,CEG,Constellation Energy Group,Electric Companies
+,CVG,Convergys Corp.,Services (Commercial & Consumer)
+,CBE,Cooper Industries,Electrical Equipment
+,CTB,Cooper Tire & Rubber,Auto Parts & Equipment
+,RKY,Coors (Adolph),Beverages (Alcoholic)
+,GLW,Corning Inc.,Communications Equipment
+,COST,Costco Wholesale Corp.,Retail (General Merchandise)
+,CCR,Countrywide Credit Industries,Consumer Finance
+,CR,Crane Company,Manufacturing (Diversified)
+,CSX,CSX Corp.,Railroads
+,CUM,Cummins Inc.,Trucks & Parts
+,CVS,CVS Corp.,Retail (Drug Stores)
+,DCN,Dana Corp.,Auto Parts & Equipment
+,DHR,Danaher Corp.,Manufacturing (Diversified)
+,DRI,Darden Restaurants,Restaurants
+,DE,Deere & Co.,Machinery (Diversified)
+,DELL,Dell Computer,Computers (Hardware)
+,DPH,Delphi Automotive Systems,Auto Parts & Equipment
+1,DAL,Delta Air Lines,Airlines
+,DLX,Deluxe Corp.,Specialty Printing
+,DVN,Devon Energy Corp.,Oil & Gas (Exploration & Production)
+,DDS,Dillard Inc.,Retail (Department Stores)
+,DG,Dollar General,Retail (Discounters)
+,D,Dominion Resources,Electric Companies
+,DNY,Donnelley (R.R.) & Sons,Specialty Printing
+,DOV,Dover Corp.,Machinery (Diversified)
+1,DOW,Dow Chemical,Chemicals
+,DJ,Dow Jones & Co.,Publishing (Newspapers)
+,DTE,DTE Energy Co.,Electric Companies
+,DUK,Duke Energy,Electric Companies
+1,DD,DuPont (E.I.),Chemicals
+,DYN,Dynegy Inc.,Natural Gas
+,EMN,Eastman Chemical,Chemicals
+1,EK,Eastman Kodak,Photography/Imaging
+,ETN,Eaton Corp.,Manufacturing (Diversified)
+,ECL,Ecolab Inc.,Chemicals (Specialty)
+,EIX,Edison Int'l,Electric Companies
+1,EPG,El Paso Corp.,Natural Gas
+,EDS,Electronic Data Systems,Services (Computer Systems)
+1,EMC,EMC Corp.,Computers (Peripherals)
+,EMR,Emerson Electric,Electrical Equipment
+,EC,Engelhard Corp.,Chemicals (Diversified)
+1,ENE,Enron Corp.,Natural Gas
+1,ETR,Entergy Corp.,Electric Companies
+,EOG,EOG Resources,Oil & Gas (Exploration & Production)
+,EFX,Equifax Inc.,Services (Data Processing)
+1,EXC,Exelon Corp.,Electric Companies
+1,XOM,Exxon Mobil Corp.,Oil (International Integrated)
+,FNM,Fannie Mae,Financial (Diversified)
+,FRE,Federal Home Loan Mtg.,Financial (Diversified)
+,FD,Federated Dept. Stores,Retail (Department Stores)
+1,FDX,FedEx Corporation,Air Freight
+,FITB,Fifth Third Bancorp,Banks (Major Regional)
+,FDC,First Data,Services (Data Processing)
+,FTU,First Union Corp.,Banks (Money Center)
+,FE,FirstEnergy Corp.,Electric Companies
+,FISV,FIserve Inc.,Services (Data Processing)
+,FBF,FleetBoston Financial Corp.,Banks (Major Regional)
+,FLR,Fluor Corp. (New),Engineering & Construction
+,FMC,FMC Corp.,Chemicals (Diversified)
+1,F,Ford Motor (New),Automobiles
+,FRX,Forest Laboratories,Healt Care (Drugs-Major Pharmaceuticals)
+,FO,"Fortune Brands, Inc.",Housewares
+,FPL,FPL Group,Electric Companies
+,BEN,Franklin Resources Inc.,Investment Management
+,FCX,Freeport-McMoran Copper & Gold,Metals Mining
+,GCI,Gannett Co.,Publishing (Newspapers)
+,GPS,Gap (The),Retail (Specialty-Apparel)
+,GTW,"Gateway, Inc.",Computers (Hardware)
+1,GD,General Dynamics,Aerospace/Defense
+1,GE,General Electric,Electrical Equipment
+,GIS,General Mills,Foods
+1,GM,General Motors,Automobiles
+,GPC,Genuine Parts,Auto Parts & Equipment
+,GP,Georgia-Pacific Group,Paper & Forest Products
+1,G,Gillette Co.,Personal Care
+1,GX,Global Crossing,Telecommunications (Long Distance)
+,GDW,Golden West Financial,Savings & Loan Companies
+,GR,Goodrich Corporation,Aerospace/Defense
+,GT,Goodyear Tire & Rubber,Auto Parts & Equipment
+,GPU,GPU Inc.,Electric Companies
+,GWW,Grainger (W.W.) Inc.,Electronics (Component Distributors)
+,GLK,Great Lakes Chemical,Chemicals (Specialty)
+,GDT,Guidant Corp.,Health Care (Medical Products & Supplies)
+1,HAL,Halliburton Co.,Oil & Gas (Drilling & Equipment)
+,H,Harcourt General Inc.,Publishing
+,HDI,Harley-Davidson,Leisure Time (Products)
+1,HET,Harrah's Entertainment,"Gaming, Lottery & Parimutuel Companies"
+1,HIG,Hartford Financial Svc.Gp.,Insurance (Multi-Line)
+,HAS,Hasbro Inc.,Leisure Time (Products)
+1,HCA,HCA-The Healthcare Co.,Health Care (Hospital Management)
+,HCR,HCR Manor Care,Health Care (Long Term Care)
+,HRC,HEALTHSOUTH Corp.,Health Care (Specialized Services)
+1,HNZ,Heinz (H.J.),Foods
+,HPC,"Hercules, Inc.",Chemicals (Specialty)
+,HSY,Hershey Foods,Foods
+1,HWP,Hewlett-Packard,Computers (Hardware)
+,HLT,Hilton Hotels,Lodging-Hotels
+1,HD,Home Depot,Retail (Building Supplies)
+,HM,Homestake Mining,Gold & Precious Metals Mining
+1,HON,Honeywell International Inc.,Manufacturing (Diversified)
+,HI,Household International,Consumer Finance
+,HUM,Humana Inc.,Health Care (Managed Care)
+,HBAN,Huntington Bancshares,Banks (Major Regional)
+,ITW,Illinois Tool Works,Manufacturing (Diversified)
+,RX,IMS Health Inc.,Services (Commercial & Consumer)
+,N,"Inco, Ltd.",Metals Mining
+,IR,Ingersoll-Rand,Machinery (Diversified)
+1,INTC,Intel Corp.,Electronics (Semiconductors)
+1,IBM,International Bus. Machines,Computers (Hardware)
+,IFF,International Flav/Frag,Chemicals (Specialty)
+1,IP,International Paper,Paper & Forest Products
+,IPG,Interpublic Group,Services (Advertising/Marketing)
+,INTU,Intuit Inc.,Computers (Software & Services)
+,ITT,"ITT Industries, Inc.",Manufacturing (Diversified)
+1,JPM,J.P. Morgan Chase & Co.,Financial (Diversified)
+,JBL,Jabil Circuit,Manufacturing (Specialized)
+,JDSU,JDS Uniphase Corp.,Communications Equipment
+,JP,Jefferson-Pilot,Insurance (Life/Health)
+1,JNJ,Johnson & Johnson,Health Care (Diversified)
+,JCI,Johnson Controls,Manufacturing (Diversified)
+,KM,K mart,Retail (General Merchandise)
+,KBH,KB Home ,Homebuilding
+,K,Kellogg Co.,Foods
+,KMG,Kerr-McGee,Oil & Gas (Exploration & Production)
+,KEY,KeyCorp,Banks (Major Regional)
+,KSE,KeySpan Corp.,Natural Gas
+,KMB,Kimberly-Clark,Household Products (Non-Durables)
+,KMI,"Kinder Morgan, Inc.",Natural Gas
+,KG,King Pharmaceuticals,Health Care (Drugs - Generic & Other)
+,KLAC,KLA-Tencor Corp.,Equipment (Semiconductor)
+,KRI,Knight-Ridder Inc.,Publishing (Newspapers)
+,KSS,Kohl's Corp.,Retail (Department Stores)
+,KR,Kroger Co.,Retail (Food Chains)
+,LEG,Leggett & Platt,Household Furnishings & Appliances
+1,LEH,Lehman Bros. Hldgs.,Investment Banking/Brokerage
+,LXK,Lexmark Int'l. Inc.,Computers (Peripherals)
+,LLY,Lilly (Eli) & Co.,Health Care (Drugs-Major Pharmaceuticals)
+1,LTD,"Limited, Inc.",Retail (Specialty-Apparel)
+,LNC,Lincoln National,Insurance (Life/Health)
+,LLTC,Linear Technology Corp.,Electronics (Semiconductors)
+,LIZ,"Liz Claiborne, Inc.",Textiles (Apparel)
+,LMT,Lockheed Martin Corp.,Aerospace/Defense
+,LTR,Loews Corp.,Insurance (Multi-Line)
+,LDG,Longs Drug Stores,Retail (Drug Stores)
+,LPX,Louisiana Pacific,Paper & Forest Products
+,LOW,Lowe's Cos.,Retail (Building Supplies)
+,LSI,LSI Logic,Electronics (Semiconductors)
+1,LU,Lucent Technologies,Communications Equipment
+,MAR,Marriott Int'l. (New),Lodging-Hotels
+,MMC,Marsh & McLennan,Insurance Brokers
+,MAS,Masco Corp.,Building Materials
+,MAT,"Mattel, Inc.",Leisure Time (Products)
+,MXIM,Maxim Integrated Products,Electronics (Semiconductors)
+1,MAY,May Dept. Stores,Retail (Department Stores)
+,MYG,Maytag Corp.,Household Furn. & Appliances
+,MBI,MBIA Inc.,Insurance (Property-Casualty)
+,KRB,MBNA Corp.,Consumer Finance
+,MDR,McDermott International,Engineering & Construction
+1,MCD,McDonald's Corp.,Restaurants
+,MHP,McGraw-Hill,Publishing
+,MCK,McKesson HBOC Inc.,Distributors (Food & Health)
+,MEA,Mead Corp.,Paper & Forest Products
+1,MEDI,MedImmune Inc.,Biotechnology
+,MDT,Medtronic Inc.,Health Care (Medical Products & Supplies)
+,MEL,Mellon Financial Corp.,Banks (Major Regional)
+1,MRK,Merck & Co.,Health Care (Drugs-Major Pharmaceuticals)
+,MERQ,Mercury Interactive,Computers (Software & Services)
+,MDP,Meredith Corp.,Publishing
+1,MER,Merrill Lynch,Investment Banking/Brokerage
+,MET,MetLife Inc.,Insurance (Life/Health)
+,MTG,MGIC Investment,Insurance (Property-Casualty)
+,MU,Micron Technology,Electronics (Semiconductors)
+1,MSFT,Microsoft Corp.,Computers (Software & Services)
+,MIL,Millipore Corp.,Manufacturing (Specialized)
+1,MMM,Minn. Mining & Mfg.,Manufacturing (Diversified)
+,MIR,Mirant Corporation,Electric Companies
+,MOLX,Molex Inc.,Electrical Equipment
+,MCO,Moody's Corp.,Financial (Diversified)
+1,MWD,"Morgan Stanley, Dean Witter & Co.",Financial (Diversified)
+,MOT,Motorola Inc.,Communications Equipment
+,NBR,Nabors Industries,Oil & Gas (Drilling & Equipment)
+,NCC,National City Corp.,Banks (Major Regional)
+1,NSM,National Semiconductor,Electronics (Semiconductors)
+,NSI,National Service Ind.,Manufacturing (Diversified)
+,NAV,Navistar International Corp.,Trucks & Parts
+,NCR,NCR Corp.,Computers (Hardware)
+,NTAP,Network Appliance,Computers (Networking)
+,NYT,New York Times Cl. A,Publishing (Newspapers)
+,NWL,Newell Rubbermaid Inc.,Housewares
+,NEM,Newmont Mining,Gold & Precious Metals Mining
+1,NXTL,NEXTEL Communications,Telecommunications (Cellular/Wireless)
+,NMK,Niagara Mohawk Hldgs Inc.,Electric Companies
+,GAS,NICOR Inc.,Natural Gas
+,NKE,NIKE Inc.,Footwear
+,NI,NiSource Inc.,Natural Gas
+,NE,Noble Drilling Corp.,Oil & Gas (Drilling & Equipment)
+,JWN,Nordstrom,Retail (Department Stores)
+1,NSC,Norfolk Southern Corp.,Railroads
+1,NT,Nortel Networks Corp. Hldg. Co.,Communications Equipment
+,NTRS,Northern Trust Corp.,Banks (Major Regional)
+,NOC,Northrop Grumman Corp.,Aerospace/Defense
+,NOVL,Novell Inc.,Computers (Software & Services)
+,NVLS,Novellus Systems,Equipment (Semiconductor)
+,NUE,Nucor Corp.,Iron & Steel
+,OXY,Occidental Petroleum,Oil (Domestic Integrated)
+,ODP,Office Depot,Retail (Specialty)
+,OMC,Omnicom Group,Services (Advertising/Marketing)
+,OKE,ONEOK Inc.,Natural Gas
+1,ORCL,Oracle Corp.,Computers (Software & Services)
+,PCAR,PACCAR Inc.,Trucks & Parts
+,PTV,Pactiv Corporation,Containers & Packaging (Paper)
+,PLL,Pall Corp.,Manufacturing (Specialized)
+,PALM,Palm Inc.,Computers (Hardware)
+,PMTC,Parametric Technology,Computers (Software & Services)
+,PH,Parker-Hannifin,Manufacturing (Diversified)
+,PAYX,Paychex Inc.,Services (Data Processing)
+,JCP,Penney (J.C.),Retail (Department Stores)
+,PGL,Peoples Energy,Natural Gas
+,PSFT,PeopleSoft Inc.,Computers (Software & Services)
+,PBG,Pepsi Bottling Group,Beverages (Non-Alcoholic)
+1,PEP,PepsiCo Inc.,Beverages (Non-Alcoholic)
+,PKI,"PerkinElmer, Inc.",Electronics (Instrumentation)
+1,PFE,"Pfizer, Inc.",Health Care (Drugs-Major Pharmaceuticals)
+,PCG,PG&E Corp.,Electric Companies
+1,PHA,Pharmacia Corp.,Health Care (Drugs-Major Pharmaceuticals)
+,PD,Phelps Dodge,Metals Mining
+,MO,Philip Morris,Tobacco
+,P,Phillips Petroleum,Oil (Domestic Integrated)
+,PNW,Pinnacle West Capital,Electric Companies
+,PBI,Pitney-Bowes,Office Equipment & Supplies
+,PDG,Placer Dome Inc.,Gold & Precious Metals Mining
+,PNC,PNC Financial Services Group,Banks (Major Regional)
+,PCH,Potlatch Corp.,Paper & Forest Products
+,PWER,Power-One Inc.,Electrical Equipment
+,PPG,PPG Industries,Chemicals (Diversified)
+,PPL,PPL Corporation,Electric Companies
+,PX,"Praxair, Inc.",Chemicals
+1,PG,Procter & Gamble,Household Products (Non-Durables)
+,PGN,"Progress Energy, Inc.",Electric Companies
+,PGR,Progressive Corp.,Insurance (Property-Casualty)
+,PVN,Providian Financial Corp.,Consumer Finance
+,PEG,Public Serv. Enterprise Inc.,Electric Companies
+,PHM,Pulte Corp.,Homebuilding
+,QLGC,QLogic Corp.,Electronics (Semiconductors)
+,OAT,Quaker Oats,Foods
+,QCOM,QUALCOMM Inc.,Communications Equipment
+,QTRN,Quintiles Transnational,Health Care (Specialized Services)
+,Q,Qwest Communication International,Telephone
+1,RSH,RadioShack Corp.,Retail (Computers & Electronics)
+1,RAL,Ralston-Ralston Purina Gp,Foods
+1,RTN,Raytheon Co. (New),Electronics (Defense)
+,RBK,Reebok International,Footwear
+,RGBK,Regions Financial Corp.,Banks (Major Regional)
+,REI,Reliant Energy,Electric Companies
+,RHI,Robert Half International,Services (Employment)
+1,ROK,Rockwell International,Electrical Equipment
+,ROH,Rohm & Haas,Chemicals
+,RDC,Rowan Cos.,Oil & Gas (Drilling & Equipment)
+,RD,Royal Dutch Petroleum,Oil (International Integrated)
+,R,Ryder System,Truckers
+,TSG,Sabre Holdings Corporation,Services (Computer Systems)
+,SAFC,SAFECO Corp.,Insurance (Property-Casualty)
+,SWY,Safeway Inc.,Retail (Food Chains)
+,SANM,Sanmina Corp.,Electrical Equipment
+,SAPE,Sapient Corp.,Services (Computer Systems)
+1,SLE,Sara Lee Corp.,Foods
+,SBC,SBC Communications Inc.,Telephone
+,SGP,Schering-Plough,Health Care (Drugs-Major Pharmaceuticals)
+1,SLB,Schlumberger Ltd.,Oil & Gas (Drilling & Equipment)
+,SFA,Scientific-Atlanta,Communications Equipment
+,SEE,Sealed Air Corp.(New),Manufacturing (Specialized)
+1,S,"Sears, Roebuck & Co.",Retail (General Merchandise)
+,SRE,Sempra Energy,Natural Gas
+,SHW,Sherwin-Williams,Retail (Building Supplies)
+,SEBL,"Siebel Systems, Inc.",Computers (Software & Services)
+,SIAL,Sigma-Aldrich,Chemicals (Specialty)
+,SNA,Snap-On Inc.,Auto Parts & Equipment
+,SLR,Solectron Corp.,Electrical Equipment
+1,SO,Southern Co.,Electric Companies
+,SOTR,SouthTrust Corp.,Banks (Major Regional)
+,LUV,Southwest Airlines,Airlines
+,FON,Sprint Corp. FON Group,Telecommunications (Long Distance)
+,PCS,Sprint Corp. PCS Group,Telecommunications (Cellular/Wireless)
+,STJ,St Jude Medical,Health Care (Medical Products & Supplies)
+,SPC,St. Paul Cos.,Insurance (Property-Casualty)
+,SWK,Stanley Works,Hardware & Tools
+,SPLS,Staples Inc.,Retail (Specialty)
+,SBUX,Starbucks Corp.,Restaurants
+,HOT,Starwood Hotels & Resorts,Lodging-Hotels
+,STT,State Street Corp.,Financials (Diversified)
+,SV,Stilwell Financial,Investment Management
+,SYK,Stryker Corp.,Health Care (Medical Products & Supplies)
+,SUNW,Sun Microsystems,Computers (Hardware)
+,SUN,Sunoco Inc.,Oil & Gas (Refining & Marketing)
+,STI,SunTrust Banks,Banks (Major Regional)
+,SVU,Supervalu Inc.,Distributors (Food & Health)
+,SBL,Symbol Technologies,Electrical Equipmen t
+,SNV,Synovus Financial,Banks (Major Regional)
+,SYY,Sysco Corp.,Distributors (Food & Health)
+,TROW,T. Rowe Price Associates,Investment Management
+,TGT,Target Corp.,Retail (General Merchandise)
+,TEK,Tektronix Inc.,Electronics (Instrumentation)
+,TLAB,"Tellabs, Inc.",Communications Equipment
+,TIN,Temple-Inland,Containers & Packaging (Paper)
+,THC,Tenet Healthcare Corp.,Health Care (Hospital Management)
+,TER,"Teradyne, Inc.",Equipment (Semiconductor)
+,TX,Texaco Inc.,Oil (International Integrated)
+1,TXN,Texas Instruments,Electronics (Semiconductors)
+,TXT,Textron Inc.,Manufacturing (Diversified)
+,TMO,Thermo Electron,Manufacturing (Diversified)
+,TNB,Thomas & Betts,Electrical Equipment
+,TIF,Tiffany & Co.,Retail (Specialty)
+,TKR,Timken Co.,Machinery (Diversified)
+,TJX,TJX Companies Inc.,Retail (Specialty-Apparel)
+,TMPW,TMP Worldwide,Services (Advertising / Marketing)
+,TMK,Torchmark Corp.,Insurance (Life/Health)
+,TOS,Tosco Corp.,Oil & Gas (Refining & Marketing)
+1,TOY,Toys R Us Hldg. Cos.,Retail (Specialty)
+,RIG,Transocean Sedco Forex Inc.,Oil & Gas (Drilling & Equipment)
+,TRB,Tribune Co.,Publishing (Newspapers)
+,YUM,TRICON Global Restaurants,Restaurants
+,TRW,TRW Inc.,Auto Parts & Equipment
+,TUP,Tupperware Corp.,Housewares
+,TXU,TXU Corp.,Electric Companies
+1,TYC,Tyco International,Manufacturing (Diversified)
+1,USB,U.S. Bancorp,Banks (Major Regional)
+,UN,Unilever N.V.,Foods
+,UNP,Union Pacific,Railroads
+,UPC,Union Planters,Banks (Major Regional)
+1,UIS,Unisys Corp.,Computers (Software & Services)
+,UNH,United Health Group Inc.,Health Care (Managed Care)
+1,UTX,United Technologies,Manufacturing (Diversified)
+,UVN,Univision Communications,"Broadcasting (Television, Radio & Cable)"
+,UCL,Unocal Corp.,Oil & Gas (Exploration & Production)
+,UNM,UNUMProvident Corp.,Insurance (Life/Health)
+,SLM,USA Education Inc.,Financial (Diversified)
+,U,USAirways Group Inc.,Airlines
+,UST,UST Inc.,Tobacco
+,MRO,USX-Marathon Group,Oil (Domestic Integrated)
+,X,USX-U.S. Steel Group,Iron & Steel
+,VFC,V.F. Corp.,Textiles (Apparel)
+,VRTS,Veritas Software,Computers (Software & Services)
+1,VZ,Verizon Communications,Telephone
+1,VIA.B,Viacom Inc.,Entertainment
+,VC,Visteon Corp.,Auto Parts & Equipment
+,VTSS,Vitesse Semiconductor,Electronics (Semiconductors)
+,VMC,Vulcan Materials,Construction (Cement & Aggregates)
+,WB,Wachovia Corp.,Banks (Major Regional)
+,WAG,Walgreen Co.,Retail (Drug Stores)
+1,WMT,Wal-Mart Stores,Retail (General Merchandise)
+1,DIS,Walt Disney Co.,Entertainment
+,WM,"Washington Mutual, Inc.",Savings & Loan Companies
+,WMI,Waste Management (New),Waste Management
+,WPI,Watson Pharmaceuticals,Health Care (Drugs-Generic & Other)
+,WLP,WellPoint Health Networks,Health Care (Managed Care)
+1,WFC,Wells Fargo & Co. (New),Banks (Major Regional)
+,WEN,Wendy's International,Restaurants
+,W,Westvaco Corp.,Paper & Forest Products
+1,WY,Weyerhaeuser Corp.,Paper & Forest Products
+,WHR,Whirlpool Corp.,Household Furn. & Appliances
+,WLL,Willamette Industries,Paper & Forest Products
+1,WMB,Williams Cos.,Natural Gas
+,WIN,Winn-Dixie,Retail (Food Chains)
+,WCOM,WorldCom Inc.,Telecommunications (Long Distance)
+,WOR,Worthington Ind.,Iron & Steel
+,WWY,Wrigley (Wm) Jr.,Foods
+,XEL,Xcel Energy Inc.,Electric Companies
+1,XRX,Xerox Corp.,Photography/Imaging
+,XLNX,"Xilinx, Inc.",Electronics (Semiconductors)
+,YHOO,Yahoo! Inc.,Computers (Software & Services)
+
+,1=Companies in S&P 100,,
