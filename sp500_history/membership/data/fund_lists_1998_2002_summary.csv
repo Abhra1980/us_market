@@ -1,0 +1,83 @@
+fund,period_end,form,accession,url,stock_lines,total_value_usd,complete,reason
+FUSEX,1999-02-28,N-30D,0000819118-99-000013,https://www.sec.gov/Archives/edgar/data/819118/000081911899000013/0000819118-99-000013.txt,502,15408488000,true,
+FUSEX,1999-05-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,1999-08-31,N-30D,0000718891-99-000027,https://www.sec.gov/Archives/edgar/data/819118/000071889199000027/0000718891-99-000027.txt,500,17862151000,true,
+FUSEX,1999-11-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2000-02-29,N-30D,0000819118-00-000001,https://www.sec.gov/Archives/edgar/data/819118/000081911800000001/0000819118-00-000001.txt,500,18523210000,true,
+FUSEX,2000-05-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2000-08-31,N-30D,0000819118-00-500002,https://www.sec.gov/Archives/edgar/data/819118/000081911800500002/conc1019.htm,502,20928496000,true,
+FUSEX,2000-11-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2001-02-28,N-30D,0000819118-01-500007,https://www.sec.gov/Archives/edgar/data/819118/000081911801500007/conann.htm,503,16735026000,true,
+FUSEX,2001-05-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2001-08-31,N-30D,0000819118-01-500042,https://www.sec.gov/Archives/edgar/data/819118/000081911801500042/main.htm,505,15784177000,true,
+FUSEX,2001-11-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2002-02-28,N-30D,0000819118-02-000001,https://www.sec.gov/Archives/edgar/data/819118/000081911802000001/main.htm,502,15817489000,true,
+FUSEX,2002-05-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+FUSEX,2002-08-31,N-30D,0000819118-02-000026,https://www.sec.gov/Archives/edgar/data/819118/000081911802000026/main.htm,500,13167576000,true,
+IVV,1998-12-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,1999-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,1999-06-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,1999-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,1999-12-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2000-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2000-06-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2000-09-30,N-30D,0000950109-00-004778,https://www.sec.gov/Archives/edgar/data/1100663/000095010900004778/0001.txt,0,0,false,"no schedule of investments found in the filing; 2 filings with this period-end, none had the schedule"
+IVV,2000-12-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2001-03-31,N-30D,0000927016-01-501302,https://www.sec.gov/Archives/edgar/data/1100663/000092701601501302/dn30d.txt,501,2873716908,true,
+IVV,2001-06-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2001-09-30,N-30D,0000927016-01-504100,https://www.sec.gov/Archives/edgar/data/1100663/000092701601504100/dn30d.txt,500,2620482806,true,
+IVV,2001-12-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+IVV,2002-03-31,N-30D,0001021408-02-007948,https://www.sec.gov/Archives/edgar/data/1100663/000102140802007948/dn30d.txt,500,4204475242,true,
+IVV,2002-06-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SPY,1999-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SPY,1999-09-30,N-30D,0000950135-99-005434,https://www.sec.gov/Archives/edgar/data/884394/000095013599005434/0000950135-99-005434.txt,500,13163739469,true,
+SPY,2000-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SPY,2000-09-30,N-30D,0000950135-00-005227,https://www.sec.gov/Archives/edgar/data/884394/000095013500005227/b37488ssn-30d.txt,499,24277778819,true,
+SPY,2001-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SPY,2001-09-30,N-30D,0000950135-01-503664,https://www.sec.gov/Archives/edgar/data/884394/000095013501503664/b41052ssn-30d.txt,500,24864592052,true,
+SPY,2002-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,1999-01-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,1999-04-30,N-30D,0000935069-99-000122,https://www.sec.gov/Archives/edgar/data/904333/000093506999000122/0000935069-99-000122.txt,501,6358992000,true,
+SWPPX,1999-07-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,1999-10-31,N-30D,0000935069-00-000019,https://www.sec.gov/Archives/edgar/data/904333/000093506900000019/0000935069-00-000019.txt,501,7368959000,true,
+SWPPX,2000-01-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,2000-04-30,N-30D,0000912057-00-031149,https://www.sec.gov/Archives/edgar/data/904333/000091205700031149/n-30d.txt,500,8013796000,true,
+SWPPX,2000-07-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,2000-10-31,N-30D,0000950149-01-000010,https://www.sec.gov/Archives/edgar/data/904333/000095014901000010/f67452n-30d.txt,935,7587508000,false,"935 stock lines; 6 filings with this period-end, none had the schedule"
+SWPPX,2001-01-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,2001-04-30,N-30D,0000950149-01-501005,https://www.sec.gov/Archives/edgar/data/904333/000095014901501005/f72354n-30d.txt,0,0,false,"no schedule for this fund found in the filing; 6 filings with this period-end, none had the schedule"
+SWPPX,2001-07-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,2001-10-31,N-30D,0000950149-02-000020,https://www.sec.gov/Archives/edgar/data/904333/000095014902000020/f77352bn-30d.txt,501,6923735000,true,
+SWPPX,2002-01-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+SWPPX,2002-04-30,N-30D,0000950149-02-001383,https://www.sec.gov/Archives/edgar/data/904333/000095014902001383/f82257nv30d.txt,500,7521338000,true,
+SWPPX,2002-07-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,1998-12-31,N-30D,0000893220-99-000267,https://www.sec.gov/Archives/edgar/data/36405/000089322099000267/0000893220-99-000267.txt,513,73813849000,true,
+VFINX,1999-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,1999-06-30,N-30D,0000893220-99-001016,https://www.sec.gov/Archives/edgar/data/36405/000089322099001016/0000893220-99-001016.txt,512,92404893000,true,
+VFINX,1999-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,1999-12-31,N-30D,0000893220-00-000244,https://www.sec.gov/Archives/edgar/data/36405/000089322000000244/0000893220-00-000244.txt,506,104544391000,true,
+VFINX,2000-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,2000-06-30,N-30D,0000893220-00-001034,https://www.sec.gov/Archives/edgar/data/36405/000089322000001034/n-30d.txt,515,105344547000,true,
+VFINX,2000-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,2000-12-31,N-30D,0000893220-01-000239,https://www.sec.gov/Archives/edgar/data/36405/000089322001000239/w44584n-30d.txt,507,96399585000,true,
+VFINX,2001-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,2001-06-30,N-30D,0000932471-01-500324,https://www.sec.gov/Archives/edgar/data/36405/000093247101500324/usstockindex.txt,506,90984074000,true,
+VFINX,2001-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,2001-12-31,N-30D,0000932471-02-000460,https://www.sec.gov/Archives/edgar/data/36405/000093247102000460/indexfunds.txt,506,86517229000,true,
+VFINX,2002-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VFINX,2002-06-30,N-30D,0000932471-02-000769,https://www.sec.gov/Archives/edgar/data/36405/000093247102000769/usstockindex02.txt,504,76672159000,true,
+VINIX,1998-12-31,N-30D,0000893220-99-000252,https://www.sec.gov/Archives/edgar/data/862084/000089322099000252/0000893220-99-000252.txt,512,27197154000,false,"lines sum to 27,197,154,000 vs stated total 27,187,154,000; the filing prints National Service Industries as '112,65' shares, $14,281,000; the list is in order of value and puts it between $4,333,000 and $4,043,000, and 112,65x shares at its $38.00 price in Vanguard 500 Index's list of the same date are $4.28 million: the value is $10,000,000 too high, exactly the difference"
+VINIX,1999-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,1999-06-30,N-30D,0000932471-99-000437,https://www.sec.gov/Archives/edgar/data/862084/000093247199000437/0000932471-99-000437.txt,511,32790756000,true,
+VINIX,1999-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,1999-12-31,N-30D,0000932471-00-000293,https://www.sec.gov/Archives/edgar/data/862084/000093247100000293/0000932471-00-000293.txt,504,35668173000,true,"the filing prints Lowe's shares as ',104,216'; read as 1,104,216 (its $65,977,000 at Lowe's $59.75 price in Vanguard 500 Index's list of the same date)"
+VINIX,2000-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,2000-06-30,N-30D,0000932471-00-000702,https://www.sec.gov/Archives/edgar/data/862084/000093247100000702/0001.txt,0,0,false,no schedule of investments found in the filing
+VINIX,2000-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,2000-12-31,N-30D,0000893220-01-000204,https://www.sec.gov/Archives/edgar/data/862084/000089322001000204/w45644n-30d.txt,506,37124199000,true,
+VINIX,2001-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,2001-06-30,N-30D,0000932471-01-500325,https://www.sec.gov/Archives/edgar/data/862084/000093247101500325/institutionalindex.txt,505,35716707000,true,
+VINIX,2001-09-30,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,2001-12-31,N-30D,0000932471-02-000433,https://www.sec.gov/Archives/edgar/data/862084/000093247102000433/institutionalusstockindex.txt,504,35010817000,true,
+VINIX,2002-03-31,,,,0,,false,no filing with this period-end on EDGAR for this registrant
+VINIX,2002-06-30,N-30D,0000932471-02-000772,https://www.sec.gov/Archives/edgar/data/862084/000093247102000772/instusstock02.txt,502,32539397000,true,

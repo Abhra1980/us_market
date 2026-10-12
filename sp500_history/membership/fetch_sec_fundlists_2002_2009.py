@@ -30,6 +30,8 @@ corrected in REPORT_DATE_FIX after reading the filing.
 
 Only filings whose report date is a period-end month of the fund are fetched (an iShares N-CSR for a
 July year-end carries other funds). Text documents only: no images, certifications or codes of ethics.
+Filings of 1999 and earlier list their one document with no name; for those the complete submission
+(``<accession>.txt``) is read instead, with EDGAR's escaping of lines that start with '-' ('- -') undone.
 
 THE METHOD
 ----------
@@ -44,8 +46,9 @@ THE METHOD
    "Foreign Common Stock" list printed right after "Total Common Stock" (Schwab: Invesco Ltd., 2008-09)
    is part of the stock list and its total is added to the stated one.
 3. A holding line is a name followed by shares and value. A name wrapped over two lines is joined
-   (plain text: the second line is indented or reads as a continuation; HTML: a text-only row right
-   above a holding row). Industry headings give ``section``. Subtotals, page headers and dates are
+   (plain text: the second line is indented or reads as a continuation, or, in Fidelity's 1999-2000
+   reports, sits right below the holding row before a blank line; HTML: a text-only row right above a
+   holding row). Industry headings give ``section``. Subtotals, page headers and dates are
    skipped. Values are scaled to dollars when the column header says (000) or x 1,000.
 4. The fund's schedule is the one under its own name (nearest fund heading above the list; (R) and TM
    marks ignored). A "Common Stock" line that is a row of a valuation table, followed by another
@@ -133,6 +136,17 @@ REPORT_DATE_FIX: dict[str, str] = {
 }
 
 
+# Numbers a filing misprints, corrected before parsing: (exact printed text, corrected text), evidence above.
+# Only where the right figure follows from the filing itself; the summary's reason says so (NOTES).
+PRINT_FIX: dict[str, list[tuple[str, str]]] = {
+    # VINIX 1999-12-31: Lowe's shares printed ',104,216' (leading digit lost). Value $65,977,000 at
+    # Lowe's price in Vanguard 500 Index's list of the same date ($193,842,000 / 3,244,212 = $59.75)
+    # is 1,104,216 shares
+    "0000932471-00-000293": [("Lowe's Cos., Inc.                   ,104,216",
+                              "Lowe's Cos., Inc.                  1,104,216")],
+}
+
+
 # Findings from reading a filing by eye, added to that list's reason in the summary.
 NOTES = {
     ("VFINX", "0000932471-11-003264"): "the filing leaves Salesforce.com out of the list: the Information Technology "
@@ -144,6 +158,14 @@ NOTES = {
     ("VFINX", "0000932471-05-000480"): "the filing prints one row with no name and no shares (value $24,416,000, "
                                       "after Navistar under Auto & Transportation); Vanguard Institutional "
                                       "Index's list for the same date has Dana Corp. there",
+    ("VINIX", "0000932471-00-000293"): "the filing prints Lowe's shares as ',104,216'; read as 1,104,216 (its "
+                                      "$65,977,000 at Lowe's $59.75 price in Vanguard 500 Index's list of the "
+                                      "same date)",
+    ("VINIX", "0000893220-99-000252"): "the filing prints National Service Industries as '112,65' shares, "
+                                      "$14,281,000; the list is in order of value and puts it between $4,333,000 "
+                                      "and $4,043,000, and 112,65x shares at its $38.00 price in Vanguard 500 "
+                                      "Index's list of the same date are $4.28 million: the value is "
+                                      "$10,000,000 too high, exactly the difference",
 }
 
 
@@ -274,12 +296,19 @@ def fetch_docs(sec: Sec, f: Filing) -> list[Path]:
     if body is None:
         return []
     paths = []
-    for it in json.loads(body)["directory"]["item"]:
+    items = json.loads(body)["directory"]["item"]
+    for it in items:
         name = it["name"]
         if not re.search(r"\.(htm|html|txt)$", name, re.I) or name.startswith(f.accession):
             continue
         if SKIP_DOC.search(name) and name != f.primary:
             continue
+        if sec.cached(f"{rel}/{name}", f"{base}/{name}") is not None:
+            paths.append(CACHE / rel / name)
+    if not any(it["name"] and not it["name"].startswith(f.accession) for it in items):
+        # filings of 1999 and earlier list their document with no name: only the complete submission
+        # ('<accession>.txt', every document of the filing in SGML wrappers) holds the report
+        name = f"{f.accession}.txt"
         if sec.cached(f"{rel}/{name}", f"{base}/{name}") is not None:
             paths.append(CACHE / rel / name)
     return paths
@@ -420,6 +449,8 @@ def split_line(s: str) -> tuple[str, list[float]]:
     flat = re.sub(r"\.{3,}", "  ", flat)
     # a name cell glued to the share count ('Stanley Black & Decker Inc.1,567,864 | 115,975')
     flat = re.sub(r"(?<=[A-Za-z.])(?=\d{1,3}(?:,\d{3})+\s{2,}\S)", " ", flat)
+    # a dollar sign glued to the share count instead of the value (Schwab, Apr 1999: '93,026$   5,320')
+    flat = re.sub(r"(?<=,\d{3})\$(?=\s)", " ", flat)
     m = TRAIL.match(flat)
     if not m:
         return flat.strip(), []
@@ -521,6 +552,7 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool, owner: s
     foreign = False                          # inside a 'Foreign Common Stock' list after the main one
     held_at_total = -1                       # holdings read when 'Total Common Stocks' was passed
     owner_at = -1                            # last fund-name line read
+    last_name = ""                           # the last holding's name as printed (before clean_name)
     i = start + 1
     end = stop
     while i < stop:
@@ -590,6 +622,19 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool, owner: s
             in_stocks, section, pending = False, NON_STOCK, []
             i += 1
             continue
+        if not is_html and not pending and hold and hold[-1].line_no == i - 1 and hold[-1].shares is not None \
+                and (i + 1 >= stop or not lines[i + 1].strip()) and re.match(r"[A-Za-z(]", s) \
+                and (last_name.count("(") > last_name.count(")") and ")" in s           # '(NY' / 'Shares)'
+                     or not nums and not (NOISE.match(name_c) or HEADERISH.search(name_c) or OWNER.search(name_c)
+                                          or is_heading(name_c) or re.match(r"(?i)total\b", name_c))):
+            # Fidelity's text reports (1999-2000) wrap a long name below its own holding row, then leave a
+            # blank line: 'Air Products & Chemicals,  371,266  12,623' / 'Inc.' / '' (also '(special)', and
+            # 'Royal Dutch Petroleum Co. (NY' / 'Registry Gilder 1.25)')
+            last_name = f"{last_name} {s}"
+            hold[-1].name = clean_name(last_name)
+            hold[-1].raw = f"{hold[-1].raw} / {s}"
+            i += 1
+            continue
         if not nums:
             if not re.search(r"[A-Za-z]", name_c) or NOISE.match(name_c) or HEADERISH.search(name_c) \
                     or OWNER.search(name_c):
@@ -617,6 +662,7 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool, owner: s
                 sub_from = len(hold)
             if len(nums) >= 2 and pending:
                 nm = clean_name(" ".join(p[0] for p in pending))
+                last_name = " ".join(p[0] for p in pending)
                 hold.append(Holding(i, section, nm, nums[-2], nums[-1],
                                     " / ".join(lines[i - len(pending):i + 1]).strip()))
             pending = []
@@ -657,6 +703,7 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool, owner: s
             odd.append(f"joined unindented wrap: {' / '.join(p[0].strip() for p in pending)[:60]!r} + {name_c[:40]!r}")
         nm = clean_name(" ".join([p[0] for p in pending] + [name])) if cont else name_c
         rl = " / ".join(lines[i - len(pending):i + 1]).strip() if cont else s
+        last_name = " ".join([p[0] for p in pending] + [name]) if cont else name
         hold.append(Holding(i, section, nm, nums[-2], nums[-1], rl))
         pending = []
         i += 1
@@ -780,7 +827,15 @@ def analyse_filing(f: Filing) -> tuple[list[Block], list[Block]]:
     for path in sorted(rel.iterdir()):
         if path.suffix.lower() not in (".htm", ".html", ".txt"):
             continue
-        lines, is_html = to_lines(path.read_bytes())
+        raw = path.read_bytes()
+        if path.name == f"{f.accession}.txt":
+            # the complete submission (filings of 1999 and earlier) escapes every line that starts with
+            # '-' as '- -' ('- - Microsoft Corp.', '- ------'): undo it, as the filed document reads
+            raw = re.sub(rb"(?m)^- ", b"", raw)
+        for bad, good in PRINT_FIX.get(f.accession, []):
+            if raw.count(bad.encode("latin-1")) == 1:
+                raw = raw.replace(bad.encode("latin-1"), good.encode("latin-1"))
+        lines, is_html = to_lines(raw)
         blocks.extend(find_blocks(path.name, lines, is_html))
     if f.fund.by_size:
         mine = [b for b in blocks if 470 <= len(stocks_of(b)) <= 530 and not re.search(f.fund.exclude, b.owner, re.I)]

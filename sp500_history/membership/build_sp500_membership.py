@@ -177,6 +177,21 @@ def parse_change_list(source: str, path: Path) -> list[Event]:
     return out
 
 
+# Names the funds printed in 1999 for members that S&P's 1999-2002 files list only under a later
+# name (S&P's 1999 name and ticker page was not captured). General knowledge, used only to name
+# fund holdings for the month-end checks to the end of 2000; membership does not depend on them.
+FORMER_NAMES = {
+    "AA": ["Aluminum Co. of America"], "ALT": ["Allegheny Teledyne Inc."], "U": ["US Air Group Inc."],
+    "ALD": ["AlliedSignal Inc."], "CEG": ["Baltimore Gas & Electric Co."], "MEL": ["Mellon Bank Corp."],
+    "NT": ["Northern Telecom Ltd."], "PEB": ["Perkin-Elmer Corp."], "REI": ["Houston Industries Inc."],
+    "CG": ["Columbia Gas System Inc."], "PKI": ["EG&G Inc."], "DUK": ["Duke Power Co."],
+    "FBF": ["Fleet Financial Group", "Fleet Boston Corp."], "PTVwi": ["Tenneco Packaging"],
+}
+
+# A former name another member took over ends earlier: Perkin-Elmer became PE Corp. (PEB) in May
+# 1999 and EG&G took the PerkinElmer name in Oct 1999.
+FORMER_NAMES_UNTIL = {"PEB": date(1999, 6, 30), "PKI": date(2000, 6, 30)}
+
 # Rows of S&P's ticker pages that its other files already carry another way.
 SKIP_TICKER_CHANGES = {
     ("IRG", "IR"): "500alpha.csv (June 2001) and S&P's change lists already carry Ingersoll-Rand as IR; "
@@ -426,7 +441,9 @@ def main() -> int:
         for o, oco, n, nco in NAME_ROWS:             # name-only rows too: Kaufman & Broad became KB Home as KBH
             known[k(o)] |= {oco, nco}
             known[k(n)] |= {oco, nco}
-        namer = names_check.Namer(ids, known, (), ren)
+        dated = [(k(t), n, date(1998, 1, 1), FORMER_NAMES_UNTIL.get(t, date(2000, 12, 31)))
+                 for t, ns in FORMER_NAMES.items() for n in ns]
+        namer = names_check.Namer(ids, known, dated, ren)
         ksteps = {d: [(a, k(x), None) for a, x in st] for d, st in steps.items()}
 
         def state(d: date) -> frozenset:

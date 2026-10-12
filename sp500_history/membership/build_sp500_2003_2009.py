@@ -173,7 +173,10 @@ def similarity(a: list[str], b: list[str]) -> float:
             return 0.86 if short[0] == lead or (len(short[0]) >= 3 and (lead.startswith(short[0])
                                                                        or short[0].startswith(lead))) else 0.8
         return 0.85 + 0.15 * len(sa & sb) / len(sa | sb)
-    if difflib.SequenceMatcher(None, "".join(a), "".join(b)).ratio() >= 0.92:
+    ja0, jb0 = "".join(a), "".join(b)
+    if min(len(ja0), len(jb0)) >= 8 and (ja0.startswith(jb0) or jb0.startswith(ja0)):
+        return 0.86                     # "Fleet Boston" against "FleetBoston Financial"
+    if difflib.SequenceMatcher(None, ja0, jb0).ratio() >= 0.92:
         return 0.9                      # "USAirways" against "US Airways"
     ja, jb = "".join(sorted(a)), "".join(sorted(b))
     return difflib.SequenceMatcher(None, " ".join(a), " ".join(b)).ratio() * 0.8 + \
@@ -381,7 +384,7 @@ class Namer:
                    if self.rows[i][2] <= d + timedelta(days=5 * 365)]
         # A renamed member also answers to the names of the ticker it came from (Fidelity printed
         # "McGraw Hill Financial" for S&P Global, SPGI, and "Quintiles Transnational" for IQVIA).
-        older = [x for rd, o in self.came_from.get(sym, []) if rd <= d + timedelta(days=FTD_WINDOW) and depth < 3
+        older = [x for rd, o in self.came_from.get(sym, []) if rd <= d + timedelta(days=5) and depth < 3   # once renamed
                  for x in self.names_of(o, rd - timedelta(days=1), depth + 1)]
         return out + older + [(w, "S&P") for w in self.known.get(sym, [])] + \
             [(w, "S&P, before a ticker change") for w, a, b in self.dated.get(sym, []) if a <= d <= b]
@@ -439,7 +442,8 @@ def check_list(namer: Namer, lines: list, roll: frozenset, d: date):
     for ln, name, _ in lines:
         w = norm_words(name)
         for sym in {s for x in w + ["".join(w)] for s in near.get(x[:4], ())} | near.get("=" + "".join(w)[:1], set()):
-            best = max((similarity(w, rw) + class_bonus(name, desc) for rw, desc in names[sym]), default=0.0)
+            best = max((similarity(w, rw) + class_bonus(name, desc) + (0.02 if desc.startswith("S&P, before") else 0)
+                        for rw, desc in names[sym]), default=0.0)
             if best >= MATCH:
                 scores.append((best, ln, sym))
     named, used = {}, set()
@@ -520,6 +524,11 @@ def ftd_renames(ftd: dict) -> list[tuple[date, str, str, str]]:
     return out
 
 
+def family(fund: str) -> str:
+    """Fund manager: Vanguard's 500 and Institutional funds are one family."""
+    return "Vanguard" if fund in ("VFINX", "VINIX", "VFIAX") else fund
+
+
 def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, list, set]:
     """Label every difference between the fund lists and the roll (appended to each result's
     notes); return the confirmed month-ends and the cross-fund suspects. Shared with
@@ -584,7 +593,8 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
             else:
                 suspects.append((r[0], f"member {t} held by no fund list within 45 days of {r[0]}"))
         for t in r[4].values():
-            if why(t, "fund", r[0]).startswith("not an index") and near and all(t in h for _, _, h in near):
+            if why(t, "fund", r[0]).startswith("not an index") and near and all(t in h for _, _, h in near) \
+                    and len({family(f) for _, f, _ in near} | {family(r[1])}) >= 2:
                 suspects.append((r[0], f"non-member {t} held by every fund list within 45 days of {r[0]}"))
     log(f"cross-fund suspects (a change the roll may be missing): {suspects}")
 
@@ -595,7 +605,7 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
         by_p[r[0]].append(r)
 
     def clean(r) -> bool:
-        if r[6]:
+        if r[6] and any(not why(t, "roll", r[0]).startswith("timing") for t in r[5]):
             return False
         diffs = [x for x in r[7] if x.startswith(("fund-only", "roll-only"))]
         return all(": timing:" in x.replace("only timing", "only: timing") or "timing:" in x for x in diffs)
@@ -607,7 +617,10 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
         lagged = {x.split(":")[0].split()[-1] for x in r[7] if "(a lag at" in x}
         out = [f"member {t} not held" for t in r[5]
                if not why(t, "roll", r[0]).startswith(("timing", "fund had already sold")) and t not in lagged]
-        out += [f"unnamed line {u[1]!r}" for u in r[6]]
+        # A line naming no ticker matters only while a member is unaccounted for: with every member
+        # matched, it is a stock outside the index (Amoco after BP took it, a spin-off's shares).
+        if out:
+            out += [f"unnamed line {u[1]!r}" for u in r[6]]
         out += [m for d, m in suspects if d == r[0] and any(t in m for t in r[4].values())]
         return out
     explained = {p for p, rs in by_p.items() if p not in confirmed and any(not open_items(r) for r in rs)}
@@ -914,6 +927,23 @@ def write(dsn, changes, snaps, results, contradictions, applied_renames, renames
         execute_values(cur, """insert into usmarket.index_membership_reconciliation
             (index_type, check_name, check_date, reconciled, expected, actual, missing, extra, note) values %s""",
             recon)
+    # The hand-off: the lists between build_sp500_membership.py's last fund month-end (Oct 2002) and
+    # this build's first (Dec 2002) are verified when both month-ends agree with their rolls.
+    with psycopg2.connect(dsn) as conn, conn.cursor() as cur:
+        cur.execute("""select max(check_date) from usmarket.index_membership_reconciliation
+                       where index_type = %s and check_name = 'month_end_status' and check_date < %s""", (INDEX, lo))
+        last_old = cur.fetchone()[0]
+        cur.execute("""select bool_and(reconciled) from usmarket.index_membership_reconciliation
+                       where index_type = %s and check_name = 'month_end_status' and check_date = %s""",
+                    (INDEX, last_old))
+        old_ok = bool(cur.fetchone()[0])
+        first_new = min(r[0] for r in results)
+        if last_old and old_ok and first_new in agree and not suspects:
+            cur.execute("""update usmarket.index_membership set is_verified = true
+                           where index_type = %s and effective_date > %s and effective_date <= %s""",
+                        (INDEX, next_trading_day(last_old), next_trading_day(first_new)))
+            log(f"hand-off: lists after {last_old} to {first_new} verified ({cur.rowcount} rows): fund month-ends "
+                f"{last_old} and {first_new} both agree")
     log(f"wrote {len(mrows)} membership rows ({sum(r[4] for r in mrows)} verified), {len(ev)} change rows, "
         f"{len(sc)} ticker changes, {len(rows)} fund-list rows, {len(recon)} checks")
     return 0
