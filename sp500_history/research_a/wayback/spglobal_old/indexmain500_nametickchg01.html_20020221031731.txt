@@ -1,0 +1,240 @@
+ 
+ Standard & Poor's 
+ = 4)); 
+ this.navonly = (this.nav && ((agt.indexOf(";nav") != -1) || 
+ (agt.indexOf("; nav") != -1)) ); 
+ this.nav5 = (this.nav && (this.major == 5)); 
+ this.nav5up = (this.nav && (this.major >= 5)); 
+ this.ie = (agt.indexOf("msie") != -1); 
+ this.ie3 = (this.ie && (this.major = 4)); 
+ this.ie5 = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")!=-1) ); 
+ this.ie5up = (this.ie && !this.ie3 && !this.ie4); 
+ this.ver4up = (this.ie4up || this.nav4up); 
+ //platform
+ this.mac = (agt.indexOf("mac")!=-1); 
+ } 
+ //create the is.user agent object
+ var is = new Is();
+ //create an array object supported in js 1.0
+ //start at 1 so the date functions make sense
+ function makeArray(i){
+ this.length = i;
+ for(index=1;index 
+ ")
+ else document.write(" function activateMenu(){}\nfunction resetLayout(){} ")
+ // -->
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSE 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+   Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Name and Ticker Changes 2000 
+ S&P 500 Name and Ticker Changes 2001 
+ (all changes effective after close of trading) 
+                FROM 
+                 TO 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 12/31 
+ Ingersoll-Rand 
+ IRG 
+ Ingersoll-Rand Co. Ltd.
+ IR 
+ 12/31 
+ USX-Marahthon Group 
+ MRO 
+ Marathon Oil Corp.
+ MRO 
+ 12/31 
+ USX-Marahthon U.S. Steel Group 
+ X 
+ United States Steel Corp.
+ X 
+ 12/28 
+ El Paso Corp. 
+ EPG 
+ El Paso Corp.
+ EP 
+ 12/07 
+ Sanmina Corp. 
+ SANM 
+ Sanmina - SCI Corp.
+ SANM 
+ 10/09 
+ Chevron Corp. 
+ CHV 
+ ChevronTexaco Corp.
+ CVX 
+ 10/05 
+ Conoco Inc. 
+ COC.B 
+ Conoco Inc.
+ COC 
+ 08/31 
+ First Union Corp. 
+ FTU 
+ Wachovia Corp. (New)
+ WB 
+ 08/14 
+ McKesson HBOC Inc. 
+ MCK 
+ McKesson Corp.
+ MCK 
+ 07/10 
+ AT&T Wireless Group 
+ AWE 
+ AT&T Wireless Services
+ AWE 
+ 06/29 
+ HCA-HealthCare 
+ HCA 
+ HCA Inc.
+ HCA 
+ 06/14 
+ Pulte Corporation 
+ PHM 
+ Pulte Homes, Inc
+ PHM 
+ 06/07 
+ WorldCom Inc. 
+ WCOM 
+ WorldCom Inc.-WorldCom Group
+ WCOM 
+ 05/31 
+ Goodrich (B.F.) 
+ GR 
+ Goodrich Corporation 
+ GR 
+ 05/15 
+ Consolidated Stores 
+ CNS 
+ Big Lots, Inc. 
+ BLI 
+ 05/14 
+ Raytheon Co. 
+ RTN.B 
+ Raytheon Co. (New) 
+ RTN 
+ 04/24 
+ Cummins Engine Co. Inc. 
+ CUM 
+ Cummins Inc. 
+ CUM 
+ 03/12 
+ BMC Software 
+ BMCS 
+ BMC Software 
+ BMC 
+ 02/28 
+ Alcan Aluminum Ltd. 
+ AL 
+ Alcan Inc. 
+ AL 
+ 02/26 
+ Firstar Corp. 
+ FSR 
+ U.S. Bancorp 
+ USB 
+ 02/06 
+ El Paso Energy Corp. 
+ EPG 
+ El Paso Corp. 
+ EPG 
+ 01/17 
+ Kaufman And Broad Home 
+ KBH 
+ KB Home 
+ KBH 
+ 01/12 
+ America Online 
+ AOL 
+ AOL Time Warner Inc. 
+ AOL 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved.   Privacy Policy 
+ ")
+ // -->

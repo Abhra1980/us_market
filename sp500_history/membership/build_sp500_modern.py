@@ -664,7 +664,7 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         cur.execute((HERE / "schema.sql").read_text())
         for t, where in (("index_membership", "effective_date >= '2010-01-01'"),
                          ("index_membership_coverage", "covered_from >= '2010-01-01'"),
-                         ("index_membership_reconciliation", "check_date >= '2009-12-01'"),
+                         ("index_membership_reconciliation", "check_date >= '2010-01-01'"),
                          ("index_change_event", "source = any(%(own)s)"),
                          ("index_symbol_change", "source = any(%(own)s)"),
                          ("index_constituent_list", "source = any(%(own)s)")):
@@ -747,7 +747,18 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         execute_values(cur, """insert into usmarket.index_membership_reconciliation
             (index_type, check_name, check_date, reconciled, expected, actual, missing, extra, note) values %s""", recon)
 
-        pairs = list(csv.DictReader((SEC / "ftd_cusip_symbol.csv").open()))
+        # 2009-07 onward, plus Mar 2004 - Jun 2009 when fetched (fetch_sec_holdings.py --ftd-from 2004-03);
+        # a pair seen in both keeps its first and last sighting across them.
+        merged: dict[tuple[str, str], dict] = {}
+        for f in ("ftd_cusip_symbol_2004_2009.csv", "ftd_cusip_symbol.csv"):
+            if (SEC / f).exists():
+                for r in csv.DictReader((SEC / f).open()):
+                    k = (r["cusip"], r["symbol"])
+                    if k in merged:
+                        r = {**r, "first_seen": min(r["first_seen"], merged[k]["first_seen"]),
+                             "last_seen": max(r["last_seen"], merged[k]["last_seen"])}
+                    merged[k] = r
+        pairs = list(merged.values())
         execute_values(cur, """insert into usmarket.sec_cusip_symbol
             (cusip, symbol, description, first_seen, last_seen, placeholder) values %s on conflict do nothing""",
             [(r["cusip"].replace("\x00", ""), r["symbol"].replace("\x00", ""),

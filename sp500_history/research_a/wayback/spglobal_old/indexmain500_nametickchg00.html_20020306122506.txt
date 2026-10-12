@@ -1,0 +1,254 @@
+ 
+ Standard & Poor's 
+ = 4)); 
+ this.navonly = (this.nav && ((agt.indexOf(";nav") != -1) || 
+ (agt.indexOf("; nav") != -1)) ); 
+ this.nav5 = (this.nav && (this.major == 5)); 
+ this.nav5up = (this.nav && (this.major >= 5)); 
+ this.ie = (agt.indexOf("msie") != -1); 
+ this.ie3 = (this.ie && (this.major = 4)); 
+ this.ie5 = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")!=-1) ); 
+ this.ie5up = (this.ie && !this.ie3 && !this.ie4); 
+ this.ver4up = (this.ie4up || this.nav4up); 
+ //platform
+ this.mac = (agt.indexOf("mac")!=-1); 
+ } 
+ //create the is.user agent object
+ var is = new Is();
+ //create an array object supported in js 1.0
+ //start at 1 so the date functions make sense
+ function makeArray(i){
+ this.length = i;
+ for(index=1;index 
+ ")
+ else document.write(" function activateMenu(){}\nfunction resetLayout(){} ")
+ // -->
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSE 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+   Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Name and Ticker Changes 2000 
+ (all changes effective after close of trading) 
+                FROM 
+                 TO 
+ Date 
+   Company 
+ Ticker 
+ Company 
+ Ticker 
+ 01/20 
+   FDX Holding Corp. 
+ FDX 
+ FedEx Corporation 
+ FDX 
+ 01/28 
+   Dayton Hudson 
+ DH 
+ Target Corp. 
+ TGT 
+ 02/14 
+   PP&L Resources 
+ PPL 
+ PPL Corporation 
+ PPL 
+ 03/14 
+   PNC Bank Corp. 
+ PNC 
+ PNC Financial Services Group 
+ PNC 
+ 04/18 
+   Worthington Ind. 
+ WTHG 
+ Worthington Ind. 
+ WOR 
+ 04/26 
+   United Healthcare Corp. 
+ UNH 
+ United Health Group Inc. 
+ UNH 
+ 04/28 
+   Nortel Networks Corp. 
+ NT 
+ Nortel Networks Corp. Hldg. Co. 
+ NT 
+ 05/03 
+   MCI WorldCom 
+ WCOM 
+ WorldCom Inc. 
+ WCOM 
+ 05/18 
+   Texas Utilities Hldg. Cos. 
+ TXU 
+ TXU Corp. 
+ TXU 
+ 05/26 
+   Columbia/HCA Healthcare 
+ COL 
+ HCA-The Healthcare Co. 
+ HCA 
+ 05/30 
+   Tandy Corp. 
+ TAN 
+ RadioShack Corp. 
+ RSH 
+ 06/19 
+   Carolina Power & Light 
+ CPL 
+ CP&L Energy Inc. (HLDG.Co.) 
+ CPL 
+ 06/30 
+   Bell Atlantic 
+ BEL 
+ Verizon Communications 
+ VZ 
+ 06/30 
+   Lexmark Int'l. Group A 
+ LXK 
+ Lexmark Int'l. Inc. 
+ LXK 
+ 08/02 
+   SLM Holding Corp. 
+ SLM 
+ USA Education Inc. 
+ SLM 
+ 08/02 
+   Ford Motor (Old) 
+ F 
+ Ford Motor (New) 
+ F 
+ 08/18 
+   Northern States Power Co. 
+ NSP 
+ Xcel Energy Inc. 
+ XEL 
+ 09/01 
+   ITT Industries Inc. 
+ IIN 
+ ITT Industries Inc. 
+ ITT 
+ 09/28 
+   Conagra Inc. 
+ CAG 
+ Conagra Foods Inc. 
+ CAG 
+ 10/20 
+   PECO Energy 
+ PE 
+ Exelon Corp. 
+ EXC 
+ 11/03 
+   Global Crossing 
+ GBLX 
+ Global Crossing 
+ GX 
+ 11/30 
+   Automatic Data Processing 
+ AUD 
+ Automatic Data Processing 
+ ADP 
+ 11/30 
+   Fluor Corp. 
+ FLR 
+ Massey Energy Co. 
+ MEE 
+ 12/01 
+   PE Corp.-PE Biosystems Group 
+ PEB 
+ Applera Corp.-Applied Biosystems Group 
+ ABI 
+ 12/08 
+   CP&L Energy, Inc. 
+ CPL 
+ Progress Energy, Inc. 
+ PGN 
+ 12/29 
+   Chase Manhattan Corp. 
+ CMB 
+ J.P. Morgan Chase & Co. 
+ JPM 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved.   Privacy Policy 
+ ")
+ // -->

@@ -75,6 +75,15 @@ SOURCES = [
      f"{OLD}/indexmain500_changes.html_20021201121110.txt",
      "https://web.archive.org/web/20021201121110/http://www.spglobal.com/indexmain500_changes.html",
      "2002-12-01", "2002 to 18 Nov; December not captured"),
+    ("sp_tickchg_2000", "S&P", "change_list", f"{OLD}/indexmain500_nametickchg00.html_20020306122506.txt",
+     "https://web.archive.org/web/20020306122506/http://www.spglobal.com/indexmain500_nametickchg00.html",
+     "2002-03-06", "S&P 500 Name and Ticker Changes 2000"),
+    ("sp_tickchg_2001", "S&P", "change_list", f"{OLD}/indexmain500_nametickchg01.html_20020221031731.txt",
+     "https://web.archive.org/web/20020221031731/http://www.spglobal.com/indexmain500_nametickchg01.html",
+     "2002-02-21", "S&P 500 Name and Ticker Changes 2001"),
+    ("sp_tickchg_2002", "S&P", "change_list", f"{OLD}/indexmain500_nametickchg.html_20030202023227.txt",
+     "https://web.archive.org/web/20030202023227/http://www.spglobal.com/indexmain500_nametickchg.html",
+     "2003-02-02", "S&P 500 Name and Ticker Changes 2002 (and Jan 2003, used by build_sp500_2003_2009.py)"),
     ("sp_500alpha", "S&P", "constituent_list", f"{OLD}/500alpha.csv",
      "http://www.spglobal.com/500alpha.csv", "2002-02-01",
      "Byte-identical Feb 2002 to Jan 2003 captures; as-of date inferred from the change lists"),
@@ -83,16 +92,17 @@ SOURCES = [
      "Annual report, holdings at 30 Sep 2001; names only"),
 ]
 YEAR_OF = {"sp_changes_1999": 1999, "sp_changes_2000": 2000, "sp_changes_2001": 2001, "sp_changes_2002": 2002}
+TICKCHG_YEAR = {"sp_tickchg_2000": 2000, "sp_tickchg_2001": 2001, "sp_tickchg_2002": 2002}
+LAST_DAY = date(2002, 11, 29)          # build_sp500_2003_2009.py takes over after this
 
 # Ticker changes for continuing members. Without them a reused ticker (JPM, HON, USB,
-# ATI) reads as a member deleted and re-added. S&P dates three of them; the others are
-# placed at the earliest change date the files allow, which moves only the label.
-# Old tickers marked "(general knowledge)" are not printed in these files.
+# ATI) reads as a member deleted and re-added. S&P's "Name and Ticker Changes" pages for
+# 2000-2002 date most of them (parse_ticker_changes); these are the 1999 ones those pages
+# do not cover, placed at the earliest change date the files allow, which moves only the
+# label. Old tickers marked "(general knowledge)" are not printed in these files.
 UNDATED = "Date not in S&P's text: placed at the earliest change date the files allow; membership unaffected. "
 RENAMES = [
     # after_close_date, old, new, company, source, note
-    (date(1999, 9, 28), "GBLX", "GX", "Global Crossing", "sp_500alpha",
-     UNDATED + "Added as GBLX (S&P 1999 list); 500alpha.csv lists GX; deleted as GX 9 Oct 2001."),
     (date(1999, 6, 29), "ALT", "ATI", "Allegheny Technologies Inc.", "sp_500alpha",
      UNDATED + "ATI freed by AirTouch's deletion 29 Jun 1999; 500alpha.csv lists Allegheny Technologies "
      "as ATI. Old ticker ALT (Allegheny Teledyne) from general knowledge."),
@@ -102,18 +112,6 @@ RENAMES = [
     (date(1999, 12, 1), "ALD", "HON", "Honeywell International Inc.", "sp_changes_1999",
      "S&P 1999 note: \"AlliedSignal name change to Honeywell International Inc. (HON) after acquiring "
      "Honeywell\"; placed with Honeywell's deletion. Old ticker ALD from general knowledge."),
-    (date(2000, 12, 29), "CMB", "JPM", "J.P. Morgan Chase & Co.", "sp_500alpha",
-     "Not in S&P's change text: J.P. Morgan (JPM) deleted 29 Dec 2000, 500alpha.csv lists J.P. Morgan "
-     "Chase as JPM; placed with the deletion. Old ticker CMB (Chase Manhattan) from general knowledge."),
-    (date(2001, 2, 26), "FSR", "USB", "U.S. Bancorp", "sp_changes_2001",
-     "S&P 2001 note: \"Firstar Corporation changed its name to U.S. Bancorp (USB) on 2/26/01\"; "
-     "old U.S. Bancorp deleted the same day. Old ticker FSR from general knowledge."),
-    (date(2001, 8, 31), "FTU", "WB", "Wachovia Corp. (was First Union)", "spdr_n30d_20010930",
-     "Not in S&P's change text: old Wachovia (WB) deleted 31 Aug 2001; 500alpha.csv lists First Union "
-     "as FTU and SPDR's 30 Sep 2001 list names it Wachovia Corp; placed with the deletion. "
-     "New ticker WB from general knowledge."),
-    (date(2001, 6, 22), "COC.B", "COC", "Conoco Inc.", "sp_500alpha",
-     UNDATED + "Added as COC.B 6 Aug 1999 and listed so in 500alpha.csv; deleted as COC 30 Aug 2002."),
 ]
 
 
@@ -174,6 +172,40 @@ def parse_change_list(source: str, path: Path) -> list[Event]:
             out.append(Event(when, "include", add_sym, add_co, source, note))
         if not blank(del_sym):
             out.append(Event(when, "exclude", del_sym, del_co, source, note))
+    return out
+
+
+# Rows of S&P's ticker pages that its other files already carry another way.
+SKIP_TICKER_CHANGES = {
+    ("IRG", "IR"): "500alpha.csv (June 2001) and S&P's change lists already carry Ingersoll-Rand as IR; "
+                   "the Dec 2001 row is its reincorporation in Bermuda",
+    ("COMCV", "CMCSA"): "S&P's 2002 change list adds the new Comcast as CMCSA directly on 18 Nov 2002 (and "
+                        "deletes CMCSK); COMCV, its when-issued ticker, was never in the index",
+}
+
+
+def parse_ticker_changes(source: str, path: Path) -> list[tuple]:
+    """S&P's "Name and Ticker Changes" page: rows of date, old company, old ticker, new company,
+    new ticker. Only ticker changes up to LAST_DAY, in the RENAMES tuple shape."""
+    t = path.read_text(errors="replace")
+    t = t[t.index("Ticker"):]
+    lines = [x.strip() for x in t.split("\n") if x.strip()]
+    out, i, year = [], 0, TICKCHG_YEAR[source]
+    while i < len(lines):
+        if re.fullmatch(r"(19|20)\d\d", lines[i]):        # the 2002 page groups rows under year lines
+            year, i = int(lines[i]), i + 1
+            continue
+        m = re.fullmatch(r"(\d\d)/(\d\d)", lines[i])
+        if m and i + 4 < len(lines):
+            ac = date(year, int(m[1]), int(m[2]))
+            old_co, old, new_co, new = lines[i + 1:i + 5]
+            if old != new and ac <= LAST_DAY and (old, new) not in SKIP_TICKER_CHANGES:
+                out.append((ac, old, new, new_co, source,
+                            f"S&P {year} name and ticker changes, effective after the close of {ac}: "
+                            f"{old_co} ({old}) -> {new_co} ({new})"))
+            i += 5
+            continue
+        i += 1
     return out
 
 
@@ -263,17 +295,32 @@ def main() -> int:
             got = parse_change_list(src, REPO / dict((s[0], s[3]) for s in SOURCES)[src])
             log(f"{src}: {len(got)} add/delete rows")
             events += got
+    renames = list(RENAMES)
+    for src, *_ in SOURCES:
+        if src in TICKCHG_YEAR:
+            got = parse_ticker_changes(src, REPO / dict((s[0], s[3]) for s in SOURCES)[src])
+            log(f"{src}: {len(got)} ticker changes")
+            renames += got
     alpha = parse_500alpha(REPO / f"{OLD}/500alpha.csv")
     spdr = parse_spdr(REPO / "sp500_history/sp500probe/spy2001.txt")
     log(f"500alpha.csv: {len(alpha)} members; SPDR 30 Sep 2001: {len(spdr)} holdings")
 
-    # One step per effective date; renames ride in the same step.
+    # One step per effective date: deletions free tickers, renames move them, additions take them
+    # (Fluor's old line became Massey Energy, MEE, the day S&P added the new Fluor as FLR).
     steps: dict[date, list[tuple[str, str]]] = defaultdict(list)
     for e in sorted(events, key=lambda e: (e.after_close, e.action != "exclude")):
-        steps[e.effective].append((e.action, e.symbol))
-    for ac, old, new, *_ in RENAMES:
-        eff = next_trading_day(ac)
-        steps[eff] += [("exclude", old), ("include", new)]
+        if e.action == "exclude":
+            steps[e.effective].append((e.action, e.symbol))
+    added_on = {(e.effective, e.symbol) for e in events if e.action == "include"}
+    late = defaultdict(list)            # a when-issued ticker S&P adds and renames the same day
+    for ac, old, new, *_ in renames:
+        d = next_trading_day(ac)
+        (late[d] if (d, old) in added_on else steps[d]).extend([("exclude", old), ("include", new)])
+    for e in sorted(events, key=lambda e: e.after_close):
+        if e.action == "include":
+            steps[e.effective].append((e.action, e.symbol))
+    for d, st in late.items():
+        steps[d] += st
     dates = sorted(steps)
 
     # 1. Where does 500alpha.csv sit? Try every cut; keep the one with fewest contradictions.
@@ -363,11 +410,12 @@ def main() -> int:
 
     with psycopg2.connect(args.dsn) as conn, conn.cursor() as cur:
         cur.execute((HERE / "schema.sql").read_text())
-        # Replace only this build's rows (1999-2002); build_sp500_modern.py owns 2010 onward.
+        # Replace only this build's rows (to Nov 2002); build_sp500_2003_2009.py owns Dec 2002-2009,
+        # build_sp500_modern.py 2010 onward.
         own = [s[0] for s in SOURCES]
-        for t, where in (("index_membership", "effective_date < '2003-01-01'"),
-                         ("index_membership_coverage", "covered_from < '2003-01-01'"),
-                         ("index_membership_reconciliation", "check_date < '2003-01-01'"),
+        for t, where in (("index_membership", "effective_date < '2002-12-01'"),
+                         ("index_membership_coverage", "covered_from <= '2002-11-29'"),
+                         ("index_membership_reconciliation", "check_date < '2002-12-01'"),
                          ("index_change_event", "source = any(%(own)s)"),
                          ("index_symbol_change", "source = any(%(own)s)"),
                          ("index_constituent_list", "source = any(%(own)s)")):
@@ -382,10 +430,10 @@ def main() -> int:
             (index_type, after_close_date, effective_date, action, symbol, company, source, note) values %s""",
             [(INDEX, e.after_close, e.effective, e.action, e.symbol, e.company, e.source, e.note)
              for e in events])
-        if RENAMES:
+        if renames:
             execute_values(cur, """insert into usmarket.index_symbol_change
                 (index_type, effective_date, old_symbol, new_symbol, company, source, note) values %s""",
-                [(INDEX, next_trading_day(ac), o, n, co, s, nt) for ac, o, n, co, s, nt in RENAMES])
+                [(INDEX, next_trading_day(ac), o, n, co, s, nt) for ac, o, n, co, s, nt in renames])
         execute_values(cur, """insert into usmarket.index_constituent_list
             (source, line_no, index_type, as_of_date, as_of_basis, symbol, company, industry) values %s""",
             [("sp_500alpha", ln, INDEX, anchor, as_of_basis, sym, co, ind) for ln, sym, co, ind in alpha]

@@ -31,6 +31,13 @@ THE SOURCES (all www.sec.gov / data.sec.gov, fetched with a declared User-Agent)
   ``SETTLEMENT DATE|CUSIP|SYMBOL|QUANTITY (FAILS)|DESCRIPTION|PRICE``. They are the SEC's
   only free file pairing CUSIPs with trading symbols over time. A security appears only
   in a half-month in which it had fails, so a pairing is seen, not guaranteed.
+  Before July 2009 the SEC publishes quarterly files instead, ``cnsp_sec_fails_YYYYqN.zip``
+  (one text file per month inside, same columns), linked from the same page under
+  ``/files/data/frequently-requested-foia-document-fails-deliver-data/`` (2004q1 under
+  ``/files/data/fails-deliver-data/``). The first settlement date is 2004-03-22. Data before
+  16 Sep 2008 only list securities with total fails of at least 10,000 shares on that day, so
+  thinly-failed securities are missing then. ``--ftd-from YYYY-MM`` reads these instead
+  (see Usage); the default run never touches them.
 
 THE METHOD
 ----------
@@ -51,17 +58,21 @@ THE METHOD
    coverage combined; the latest common quarter-end's equity CUSIP sets compared across
    funds; share of equity CUSIPs that get a symbol seen within +-60 days of the report date.
 
-SEC fair access: User-Agent with a name and email, at most 5 requests a second here
-(0.21 s apart), backoff on 429/503. Downloads are cached and never fetched twice; only the
+SEC fair access: User-Agent with a name and email, at most 4 requests a second here
+(0.25 s apart), backoff on 429/503. Downloads are cached and never fetched twice; only the
 five series feeds and the not-yet-published fails files are asked for again on a rerun.
 
 Outputs (git-ignored, under sp500_history/downloads/sec/):
     nport/<fund>/<accession>.xml, feeds/<fund>.atom, ftd/cnsfailsYYYYMMx.zip
     nport_holdings.csv, ftd_cusip_symbol.csv, selfcheck.txt
+    with --ftd-from: ftd/cnsp_sec_fails_YYYYqN.zip, ftd_cusip_symbol_<from year>_2009.csv
 
 Usage:
     python3 sp500_history/membership/fetch_sec_holdings.py            # fetch what is missing, parse
     python3 sp500_history/membership/fetch_sec_holdings.py --offline  # parse cached files only
+    python3 sp500_history/membership/fetch_sec_holdings.py --ftd-from 2004-01
+        # only the pre-July-2009 quarterly fails files from that month (no NPORT-P, no 2009+
+        # fails) -> ftd_cusip_symbol_2004_2009.csv, same columns as ftd_cusip_symbol.csv
 """
 from __future__ import annotations
 
@@ -86,7 +97,7 @@ from pathlib import Path
 # The SEC wants a name and email in the User-Agent. Set it per person, never in git:
 #   export SEC_USER_AGENT="Your Name you@example.com"
 USER_AGENT = os.environ.get("SEC_USER_AGENT", "").strip()
-MIN_INTERVAL = 0.21                               # seconds between requests (< 5/s)
+MIN_INTERVAL = 0.25                               # seconds between requests (<= 4/s)
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 OUT = REPO / "sp500_history/downloads/sec"
@@ -329,6 +340,77 @@ def fetch_nport(sec: Sec) -> tuple[list[dict], list[str]]:
 PLACEHOLDER = re.compile(r"(XXXX|ZZZZ)$")
 
 
+def add_ftd_zip(body: bytes, pairs: dict[tuple[str, str], dict]) -> int:
+    """Fold one fails zip (any number of pipe-delimited members) into pairs; returns data lines."""
+    n = 0
+    with zipfile.ZipFile(io.BytesIO(body)) as z:
+        for member in z.namelist():
+            text = z.read(member).decode("latin-1")
+            for line in text.splitlines():
+                p = line.split("|")
+                if len(p) < 5 or not p[0].strip().isdigit():
+                    continue          # header, trailer, blank
+                d = p[0].strip()
+                d = f"{d[:4]}-{d[4:6]}-{d[6:8]}"
+                cusip, sym = p[1].strip().upper(), p[2].strip().upper()
+                if not cusip or not sym:
+                    continue
+                n += 1
+                rec = pairs.get((cusip, sym))
+                if rec is None:
+                    pairs[(cusip, sym)] = {"cusip": cusip, "symbol": sym, "description": p[4].strip(),
+                                           "first_seen": d, "last_seen": d,
+                                           "placeholder": "Y" if PLACEHOLDER.search(sym) else ""}
+                else:
+                    if d < rec["first_seen"]:
+                        rec["first_seen"] = d
+                    if d >= rec["last_seen"]:
+                        rec["last_seen"] = d
+                        rec["description"] = p[4].strip()
+    return n
+
+
+def ftd_page_links(sec: Sec) -> dict[str, str]:
+    """Zip links on the SEC fails page keyed by YYYYMMa/b (half-month) or YYYYqN (quarterly)."""
+    page = sec.cached("feeds/fails_deliver_page.html",
+                      "https://www.sec.gov/data-research/sec-markets-data/fails-deliver-data", refresh=True)
+    text = (page or b"").decode("utf-8", "replace")
+    links = {}
+    for href, ym, half in re.findall(r'href="(/files/[^"]*?cnsfails(\d{6})([ab])[^"/]*\.zip)"', text):
+        links[f"{ym}{half}"] = "https://www.sec.gov" + href
+    for href, yq in re.findall(r'href="(/files/[^"]*?cnsp_sec_fails_(\d{4}q[1-4])[^"/]*\.zip)"', text):
+        links[yq] = "https://www.sec.gov" + href
+    return links
+
+
+def fetch_ftd_early(sec: Sec, start: tuple[int, int]) -> tuple[list[dict], list[str], dict[str, int]]:
+    """Quarterly fails files (cnsp_sec_fails_YYYYqN.zip) from start's quarter up to 2009q2,
+    the last quarter before the half-month files begin (FTD_START)."""
+    links = ftd_page_links(sec)
+    pairs: dict[tuple[str, str], dict] = {}
+    missing: list[str] = []
+    lines: dict[str, int] = {}
+    y, q = start[0], (start[1] - 1) // 3 + 1
+    last = (FTD_START[0], (FTD_START[1] - 2) // 3 + 1)       # quarter holding the month before FTD_START
+    while (y, q) <= last:
+        key = f"{y:04d}q{q}"
+        name = f"cnsp_sec_fails_{key}.zip"
+        urls = [links[key]] if key in links else [
+            f"https://www.sec.gov/files/data/frequently-requested-foia-document-fails-deliver-data/{name}",
+            f"https://www.sec.gov/files/data/fails-deliver-data/{name}"]
+        body = None
+        for url in urls:
+            body = sec.cached(f"ftd/{name}", url)
+            if body is not None:
+                break
+        if body is None:
+            missing.append(name)
+        else:
+            lines[key] = add_ftd_zip(body, pairs)
+        y, q = (y + 1, 1) if q == 4 else (y, q + 1)
+    return sorted(pairs.values(), key=lambda r: (r["cusip"], r["first_seen"])), missing, lines
+
+
 def fetch_ftd(sec: Sec) -> tuple[list[dict], list[str]]:
     today = date.today()
     y, m = FTD_START
@@ -336,12 +418,7 @@ def fetch_ftd(sec: Sec) -> tuple[list[dict], list[str]]:
     pairs: dict[tuple[str, str], dict] = {}
     # The SEC's page links some files under other paths/names (cnsfails201910a_0.zip,
     # files/node/add/data_distribution/... for Feb-Apr 2020); take links from it first.
-    page = sec.cached("feeds/fails_deliver_page.html",
-                      "https://www.sec.gov/data-research/sec-markets-data/fails-deliver-data", refresh=True)
-    links = {}
-    for href, ym, half in re.findall(r'href="(/files/[^"]*?cnsfails(\d{6})([ab])[^"/]*\.zip)"',
-                                     (page or b"").decode("utf-8", "replace")):
-        links[f"{ym}{half}"] = "https://www.sec.gov" + href
+    links = ftd_page_links(sec)
     while (y, m) <= (today.year, today.month):
         for half in "ab":
             name = f"cnsfails{y:04d}{m:02d}{half}.zip"
@@ -351,29 +428,7 @@ def fetch_ftd(sec: Sec) -> tuple[list[dict], list[str]]:
             if body is None:
                 missing.append(name)
                 continue
-            with zipfile.ZipFile(io.BytesIO(body)) as z:
-                for member in z.namelist():
-                    text = z.read(member).decode("latin-1")
-                    for line in text.splitlines():
-                        p = line.split("|")
-                        if len(p) < 5 or not p[0].strip().isdigit():
-                            continue          # header, trailer, blank
-                        d = p[0].strip()
-                        d = f"{d[:4]}-{d[4:6]}-{d[6:8]}"
-                        cusip, sym = p[1].strip().upper(), p[2].strip().upper()
-                        if not cusip or not sym:
-                            continue
-                        rec = pairs.get((cusip, sym))
-                        if rec is None:
-                            pairs[(cusip, sym)] = {"cusip": cusip, "symbol": sym, "description": p[4].strip(),
-                                                   "first_seen": d, "last_seen": d,
-                                                   "placeholder": "Y" if PLACEHOLDER.search(sym) else ""}
-                        else:
-                            if d < rec["first_seen"]:
-                                rec["first_seen"] = d
-                            if d >= rec["last_seen"]:
-                                rec["last_seen"] = d
-                                rec["description"] = p[4].strip()
+            add_ftd_zip(body, pairs)
         m += 1
         if m == 13:
             y, m = y + 1, 1
@@ -565,9 +620,33 @@ def write_csv(path: Path, cols: list[str], rows: list[dict]) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--offline", action="store_true", help="use cached files only, no requests")
+    ap.add_argument("--ftd-from", metavar="YYYY-MM",
+                    help="only fetch/parse the quarterly fails files from this month up to June 2009 "
+                         "(before the half-month files) into ftd_cusip_symbol_<YYYY>_2009.csv; "
+                         "no NPORT-P, no 2009+ fails")
     args = ap.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     sec = Sec(args.offline)
+
+    if args.ftd_from:
+        m = re.fullmatch(r"(\d{4})-(\d{2})", args.ftd_from)
+        if not m or not 1 <= int(m[2]) <= 12:
+            raise SystemExit("--ftd-from wants YYYY-MM")
+        start = (int(m[1]), int(m[2]))
+        if start >= FTD_START:
+            raise SystemExit(f"--ftd-from must be before {FTD_START[0]}-{FTD_START[1]:02d}; "
+                             "later months come from the default run")
+        ftd, missing, lines = fetch_ftd_early(sec, start)
+        out = OUT / f"ftd_cusip_symbol_{start[0]}_{FTD_START[0]}.csv"
+        write_csv(out, ["cusip", "symbol", "description", "first_seen", "last_seen", "placeholder"], ftd)
+        for k, n in lines.items():
+            log(f"  {k}: {n} data lines")
+        dates = sorted({r["first_seen"] for r in ftd} | {r["last_seen"] for r in ftd})
+        log(f"{out.name}: {len(ftd)} (cusip, symbol) rows, {len({r['cusip'] for r in ftd})} CUSIPs, "
+            f"settlement dates {dates[0] if dates else '-'} .. {dates[-1] if dates else '-'}; "
+            f"files missing: {missing or 'none'}")
+        log(f"{sec.requests} requests to sec.gov")
+        return 0
 
     holdings, notes = fetch_nport(sec)
     ftd, missing = fetch_ftd(sec)

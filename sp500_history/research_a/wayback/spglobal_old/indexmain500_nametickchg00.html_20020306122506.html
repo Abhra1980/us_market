@@ -1,0 +1,606 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" HTML 4.0 Transitional//EN" 
+      "http://www.w3.org/TR/REC-html40/loose.dTD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=iso-8859-1">
+    <title>Standard &amp; Poor's</title>
+    <script language="JavaScript">
+    <!--
+      //prototype for the Is containing user agent information
+      function Is ()
+      {   // convert all characters to lowercase to simplify testing 
+        var agt=navigator.userAgent.toLowerCase(); 
+
+        // browser version
+        // Note: On IE5, these return 4, so use is.ie5up to detect IE5. 
+        this.major = parseInt(navigator.appVersion); 
+        this.minor = parseFloat(navigator.appVersion); 
+
+        this.nav  = ((agt.indexOf('mozilla')!=-1) && (agt.indexOf('spoofer')==-1) 
+                && (agt.indexOf('compatible') == -1) && (agt.indexOf('opera')==-1) 
+                && (agt.indexOf('webtv')==-1)); 
+        this.nav2 = (this.nav && (this.major == 2)); 
+        this.nav3 = (this.nav && (this.major == 3)); 
+        this.nav4 = (this.nav && (this.major == 4)); 
+        this.nav4up = (this.nav && (this.major >= 4)); 
+        this.navonly      = (this.nav && ((agt.indexOf(";nav") != -1) || 
+                          (agt.indexOf("; nav") != -1)) ); 
+        this.nav5 = (this.nav && (this.major == 5)); 
+        this.nav5up = (this.nav && (this.major >= 5)); 
+  
+        this.ie   = (agt.indexOf("msie") != -1); 
+        this.ie3  = (this.ie && (this.major < 4)); 
+        this.ie4  = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")==-1) ); 
+        this.ie4up  = (this.ie  && (this.major >= 4)); 
+        this.ie5  = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")!=-1) ); 
+        this.ie5up  = (this.ie  && !this.ie3 && !this.ie4); 
+
+        this.ver4up  = (this.ie4up || this.nav4up); 
+
+        //platform
+        this.mac    = (agt.indexOf("mac")!=-1); 
+      } 
+
+      //create the is.user agent object
+      var is = new Is();
+
+      //create an array object supported in js 1.0
+      //start at 1 so the date functions make sense
+      function makeArray(i){
+        this.length = i;
+        for(index=1;index<(i+1);index++)
+        {
+          this[index] = null;
+        }
+        return this;
+      }
+
+      //open multiple windows
+      //define an array so only one open window function is necessary
+      windowContainer = new makeArray(3);
+
+      /*parameters are the window number (index in the array) starting with 1,
+        url, name of the window, width, height, x position, y position, turn scrollbars on/off */
+      function makeRemote(indx,url,winName,x,y,sX,sY,scroll)
+      {
+        if (!windowContainer[indx] || windowContainer[indx].closed)
+        {
+          if (is.ver4up) windowContainer[indx]=window.open(url,winName,"width=" + x + ",height=" + y + ",screenX=" + sX + ",screenY=" + sY + ",left=" + sX + ",top=" + sY + ",scrollbars=" + scroll );
+          else windowContainer[indx]=window.open(url,winName,"width=" + x + ",height=" + y + ",scrollbars=" + scroll );
+        }
+        else
+        {   //check if a new url is to loaded
+            if ( windowContainer[indx].document.location.href.indexOf(url) == -1 ) windowContainer[indx].document.location.href = url;
+        }
+        if (window.focus) windowContainer[indx].focus();
+      return;
+      }
+
+      function showStatus(msg)
+      {
+        window.status = msg;
+        return true;
+      }
+    // -->
+    </script>
+    <script language="JavaScript">
+    <!--
+      if (is.ver4up) document.write ("<script language ='JavaScript1.2' src='js/menu2.js' type = 'text/javascript'><\/script>")
+      else document.write("<script language ='JavaScript'>function activateMenu(){}\nfunction resetLayout(){}<\/script>")
+    // -->
+    </script>
+    <script language="JavaScript1.2">
+    <!--
+      function init ()
+      {
+        if (is.ver4up)
+        {
+          menuInit ();
+          isLoaded = true;
+        }
+      }
+      onload = init;
+      onresize = resetLayout;
+     // -->
+    </script>
+    <link rel="stylesheet" href="sp_index.css" type="text/css" media="screen">
+  </head>
+  <body bgcolor="white" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0" text="black" link="#003366" vlink="#333333" alink="#003366">
+    <script language="JavaScript">
+    <!--
+      if (is.ver4up)
+      {
+        clientWidth = (is.nav) ? window.innerWidth-16 : document.body.offsetWidth-20;
+        clientHeight = (is.nav) ? window.innerHeight : document.body.offsetHeight;
+        menuWrite()
+      }
+    // -->
+    </script>
+    <!-- MASTHEAD -->
+    <center>
+      <table border="0" width="777" cellspacing="0" cellpadding="0">
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" rowspan="4"><a href="http://www.standardandpoors.com"><img src="images/m_sp_logo_.gif" alt="Standard &amp; Poor's" width="195" height="80" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" rowspan="4"><img src="images/head/indices_us_194.gif" alt=" " width="194" height="80" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" colspan="2"><a href="index.html"><img src="images/is.m_head_006699.gif" alt="Index Services" width="388" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <!-- UTILITIES/SERVICES NAVIGATION-->
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="index.html"><img src="images/nav/m_home_6699CC.gif" alt="Home" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="faq.html"><img src="images/nav/m_faq_6699CC.gif" alt="FAQ" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="contacts.html"><img src="images/nav/m_contacts_6699CC.gif" alt="Contacts" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="licensing.html"><img src="images/nav/m_licensing_6699CC.gif" alt="Licensing" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="research.html"><img src="images/nav/m_research_6699CC.gif" alt="Research" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><a href="http://www.spglobaldata.com"><img src="images/nav/m_dataquery_6699CC.gif" alt="Data Query" width="194" height="20" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <!-- QUICK LINK -->
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" bgcolor="#cccc99"><a href="javascript:makeRemote(1,'quicklink.html','nav',220,168,20,20,1);" onmouseover="activateMenu('1'); return showStatus('S&amp;P QuickLink');" onclick="if (is.ver4up) return false;" onmouseout="return showStatus('');"><img height="20" width="146" src="images/m_quicklink.gif" border="0" alt="S&amp;P QuickLink"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <!-- SECTIONAL NAVIGATION -->
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" colspan="3" bgcolor="#cccc99">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" bgcolor="#cccc99" width="100"><img src="images/select.gif" width="100" height="20" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+<script language="JavaScript">
+<!-- Hide from old browsers
+ function surfto(form) {
+        var myindex=form.select1.selectedIndex
+        if (form.select1.options[myindex].value != "0") {
+         location=form.select1.options[myindex].value;}
+}
+//-->
+</script>
+<FORM NAME="form1">
+                
+                <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">Index Values
+                    <option value="nolink">__________
+                    <option value="dataframe.html">Real Time 
+                    <option value="closes_us.html">Closing Values</option>
+                          </select></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+                </form>
+              <FORM NAME="form1">
+                <td bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">News
+                    <option value="nolink">__________
+                    <option value="news.html">Index News
+                    <option value="conf.html">Conferences
+                  </select></td>
+                </form>
+                  <FORM NAME="form1">
+                <td bgcolor="#cccc99" width="135"><SELECT NAME="select1" onChange="surfto(this.form)" SIZE=1>
+                    <option selected value="nolink">Index Coverage
+                    <option value="nolink">___________
+                    <option value="indexmain1200.html"><i>S&P Global 1200 Index </i>
+                    <option value="indexmain500.html">S&P 500                             
+                    <option value="indexmaincanada.html">S&P/TSE 60
+                    <option value="indexmainlatin.html">S&P Latin America 40
+                    <option value="indexmaintopix.html">S&P/TOPIX 150
+					<option value="indexmainasia.html">S&P Asia Pacific 100
+                    <option value="indexmaineuro350.html">S&P Europe 350
+					<option value="indexmain1200.html
+">S&P Global 100
+					
+					
+                    <option value="indexmainasx.html">S&P Australian Indices
+                    <option value="indexmaincanada.html">S&P Canadian Indices
+                    <option value="indexmainemdb.html">S&P Emerging Markets 	
+					<option value="indexmaineuro350.html">S&P European Indices
+					<option value="indexmainitaly.html">S&P Italian Indices
+                  <option value="indexmaintopix.html">S&P Japanese Indices 
+					
+                   <option value="indexmain500.html">S&P US Indices
+				   
+				   <option value="nolink">___________
+				 <option value="indexmaincommodity.html">S&P Commodity Index
+				   <option value="indexmaincredit.html">S&P Credit Indices
+				   <option value="indexmainperform.html">S&P JJ Kenny/PERFORM 
+				  </select></td>
+                </form>			
+
+              </tr>
+            </table>
+          </TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          
+        </tr>
+      </table>
+      <!-- MAIN CONTENT AREA -->
+	  
+	        <!-- BEGIN MAIN CONTENT AREA -->
+      <table border="0" width="777" cellspacing="0" cellpadding="0">
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="1" rowspan="4" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" valign="top">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="193" align="center" valign="top">
+                  <!-- BEGIN A1 CONTENT -->
+          <!-- BEGIN 1 CELL SAMPLE CONTENT -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td><img height="5" width="5" src="images/1x1_transparent.gif"></td>
+                <td colspan="1">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr height="33">
+                      <td height="33">
+					
+					<a href="sitemap.html"><img src="images/sitemap.gif" alt="Sitemap" width="15" height="15" border="0"></a><font size="1" class="text2" face="arial,geneva,sans serif" align="left" color="#003366">&nbsp;&nbsp;Sitemap</font></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr height="1">
+                <td bgcolor="#cccc99" colspan="4" height="1"><img height="1" width="1" src="images/1x1_transparent.gif"></td>
+              </tr>
+
+                   
+                      
+<tr>
+                   
+                      <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" colspan="3"><IMG alt=" " border =0 height=150 src="images/indices_us_193.gif" width=193 ></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"></tr>
+         
+</table>
+
+                  <table border="0" cellspacing="0" cellpadding="0">
+                    
+                    
+                      <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="33"><img src="images/1x1_transparent.gif" width="5" height="5" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+                      <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="183">
+                        <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P 500</strong></font><br>
+                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500_description.html">Description</a></strong></font><br>	
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500_method.html">Methodology</a></strong></font><br>	
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500_data.html">Constituents and Data</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>					
+                       <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500_changes.html">Index Changes</a></font><br>		
+<font class="text1" size="1" face="arial,helvetica,sans serif" color="#CC0000"><strong><u>Name and Ticker Changes</u></strong></font><br>					
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500growth_description.html">Growth and Value Indices</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain500sector_description.html">Sector Indices</a></strong></font><br><br><br></p>		
+
+                        <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P MidCap 400</strong></font><br>
+                        
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400_data.html">Constituents and Data</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400_changes.html">Index Changes</a></strong></font><br>		
+ <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400_nametickchg.html">Name and Ticker Changes</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400growth_description.html">Growth and Value Indices</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain400sector_description.html">Sector Indices</a></strong></font><br><br><br></p>	
+
+                        <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P SmallCap 600</strong></font><br>
+                        
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600_data.html">Constituents and Data</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600_changes.html">Index Changes</a></strong></font><br>	
+ <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600_nametickchg.html">Name and Ticker Changes</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600growth_description.html">Growth and Value Indices</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain600sector_description.html">Sector Indices</a></strong></font><br><br><br></p>	
+
+       <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P 1000</strong></font><br>                        
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1000_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1000_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1000_data.html">Constituents and Data</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1000_changes.html">Index Changes</a></strong></font><br><br><br></p>	                
+					   
+					    <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P SuperComposite 1500</strong></font><br>
+                         <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1500_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1500_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1500_data.html">Constituents and Data</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain1500_changes.html">Index Changes</a></strong></font><br><br><br></p>		
+
+                        <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P 100</strong></font><br>
+                        
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain100_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain100_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain100_data.html">Constituents</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain100_changes.html">Index Changes</a></strong></font><br>
+ <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmain100_nametickchg.html">Name and Ticker Changes</a></strong></font><br>	<br><br></p>
+
+                        <p class="head1"><font class="text2" size="2" color="#CC0000" face="arial,helvetica,sans serif"><strong>S&amp;P REIT Index</strong></font><br>
+                        
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmainreit_description.html">Description</a></strong></font><br>
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmainreit_method.html">Methodology</a></strong></font><br>
+                        <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmainreit_data.html">Constituents</a></strong></font><br>                        
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="usnews02.html">News</a></strong></font><br>						
+						<font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmainreit_changes.html">Index Changes</a></strong></font><br>
+ <font class="text1" size="1" face="arial,helvetica,sans serif"><strong><a href="indexmainreit_nametickchg.html">Name and Ticker Changes</a></strong></font><br>	<br><br></p>						
+
+                    
+</TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+                    </tr>
+					<tr>
+                   
+                      <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" colspan="3"><IMG alt=" " border =0 height=193 src="images/indices_us_193b.gif" width=193 ></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"></tr>
+                  </table>
+
+
+
+                  <!-- END 1 CELL SAMPLE CONTENT -->
+                  <!-- END 1 CELL SAMPLE CONTENT -->
+                  <!-- END A1 CONTENT -->
+
+                </TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+              </tr>
+              <tr>
+                <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="193" valign="top">
+                  <!-- BEGIN A2 CONTENT -->
+                  <!-- BEGIN 1 CELL SAMPLE CONTENT -->
+                                
+                  <!-- END 1 CELL SAMPLE CONTENT -->
+                  <!-- END A2 CONTENT -->
+                </TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+              </tr>
+            </table>
+          </TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="581" valign="top">
+            <!-- BEGIN BCD1 CONTENT -->
+          <!-- BEGIN 3 CELL SAMPLE CONTENT -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td><img height="5" width="5" src="images/1x1_transparent.gif"></td>
+                <td colspan="3">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr height="20">
+                      <td height="33">
+					
+                      <td height="33" align="left"><a href="index.html"><img src="images/button.gif" alt="All S&P Indices" width="15" height="15" border="0"></a><font size="1" class="text1" face="arial,geneva,sans serif" color="#003399">All S&amp;P Indices</font></td>
+                      <td height="33" align="left"><a href="exchange.html"><img src="images/button.gif" alt="Exchange Links" width="15" height="15" border="0"></a><font size="1" class="text1" face="arial,geneva,sans serif" color="#003399">Exchange Links</font></td>
+                      <td height="33" align="left"><a href="gics.html"><img src="images/button.gif" alt="Global Industry Classification Standard" width="15" height="15" border="0"></a><font size="1" class="text1" face="arial,geneva,sans serif" color="#003399">Global Industry Classification Standard (GICS)</font></td>
+<td height="33" align="left"><a href="specialdata.html"><img src="images/button.gif" alt="Special Data" width="15" height="15" border="0"></a><font size="1" class="text1" face="arial,geneva,sans serif" color="#003399">Special Data</font></td>
+                        </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr height="1">
+                <td bgcolor="#cccc99" colspan="4" height="1"><img height="1" width="1" src="images/1x1_transparent.gif"></td>
+              </tr>
+			  
+		                <tr height="22">
+                <td bgcolor="#ffffff" colspan="4" height="1"><img height="22" width="22" src="images/1x1_transparent.gif"></td>
+              </tr>
+             <tr>
+                <td rowspan="3"><img height="5" width="10" src="images/1x1_transparent.gif"></td>
+
+
+			
+			</tr>
+<tr><td>&nbsp;</td></tr>
+              
+			  <tr>
+			  <td align="left">
+<font class="head2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+<CENTER><b>S&amp;P 500 Name and Ticker Changes 2000</b></CENTER>
+<center>(all changes effective after close of trading)</CENTER><br>
+
+
+<P><P>
+<TABLE border="0" WIDTH="477" cellpadding="0" cellspacing="0">
+
+<tr><td></td><th colspan="2" align="left"><font class="text2" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM</font></th> 
+<th colspan="2"><font class="text2" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TO</font></th>
+</tr>
+<font class="text2" size="2"><tr><TH align="left"><font class="text2" size="2">Date</font></th>
+<TH align="left">&nbsp;<font class="text2" size="2">Company</font></th>
+<TH align="left"><font class="text2" size="2">Ticker</font></th>
+<td></td>
+<TH align="left"><font class="text2" size="2">Company</font></th>
+<TH align="left"><font class="text2" size="2">Ticker</font></th></tr>
+
+<font class="text2" size="2"><tr><Td align="left"><font class="text2" size="2">01/20</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">FDX Holding Corp.</font></td>
+<td align="left"><font class="text2" size="2">FDX</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">FedEx Corporation</font></td>
+<Td align="left"><font class="text2" size="2">FDX</font></td></tr>
+<font class="text2" size="2"><tr><Td align="left"><font class="text2" size="2">01/28</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Dayton Hudson</font></td>
+<td align="left"><font class="text2" size="2">DH</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Target Corp.</font></td>
+<Td align="left"><font class="text2" size="2">TGT</font></td></tr>
+<font class="text2" size="2">
+<tr><Td align="left"><font class="text2" size="2">02/14</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">PP&L Resources</font></td>
+<td align="left"><font class="text2" size="2">PPL</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">PPL Corporation</font></td>
+<Td align="left"><font class="text2" size="2">PPL</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">03/14</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">PNC Bank Corp.</font></td>
+<td align="left"><font class="text2" size="2">PNC</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">PNC Financial Services Group</font></td>
+<Td align="left"><font class="text2" size="2">PNC</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">04/18</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Worthington Ind.</font></td>
+<td align="left"><font class="text2" size="2">WTHG</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Worthington Ind.</font></td>
+<Td align="left"><font class="text2" size="2">WOR</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">04/26</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">United Healthcare Corp.</font></td>
+<td align="left"><font class="text2" size="2">UNH</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">United Health Group Inc.</font></td>
+<Td align="left"><font class="text2" size="2">UNH</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">04/28</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Nortel Networks Corp.</font></td>
+<td align="left"><font class="text2" size="2">NT</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Nortel Networks Corp. Hldg. Co.</font></td>
+<Td align="left"><font class="text2" size="2">NT</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">05/03</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">MCI WorldCom</font></td>
+<td align="left"><font class="text2" size="2">WCOM</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">WorldCom Inc.</font></td>
+<Td align="left"><font class="text2" size="2">WCOM</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">05/18</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Texas Utilities Hldg. Cos.</font></td>
+<td align="left"><font class="text2" size="2">TXU</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">TXU Corp.</font></td>
+<Td align="left"><font class="text2" size="2">TXU</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">05/26</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Columbia/HCA Healthcare</font></td>
+<td align="left"><font class="text2" size="2">COL</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">HCA-The Healthcare Co.</font></td>
+<Td align="left"><font class="text2" size="2">HCA</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">05/30</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Tandy Corp.</font></td>
+<td align="left"><font class="text2" size="2">TAN</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">RadioShack Corp.</font></td>
+<Td align="left"><font class="text2" size="2">RSH</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">06/19</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Carolina Power & Light </font></td>
+<td align="left"><font class="text2" size="2">CPL</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">CP&L Energy Inc. (HLDG.Co.)</font></td>
+<Td align="left"><font class="text2" size="2">CPL</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">06/30</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Bell Atlantic </font></td>
+<td align="left"><font class="text2" size="2">BEL</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Verizon Communications</font></td>
+<Td align="left"><font class="text2" size="2">VZ</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">06/30</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Lexmark Int'l. Group A </font></td>
+<td align="left"><font class="text2" size="2">LXK</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Lexmark Int'l. Inc.</font></td>
+<Td align="left"><font class="text2" size="2">LXK</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">08/02</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">SLM Holding Corp. </font></td>
+<td align="left"><font class="text2" size="2">SLM</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">USA Education Inc.</font></td>
+<Td align="left"><font class="text2" size="2">SLM</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">08/02</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Ford Motor (Old) </font></td>
+<td align="left"><font class="text2" size="2">F</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Ford Motor (New)</font></td>
+<Td align="left"><font class="text2" size="2">F</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">08/18</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Northern States Power Co.</font></td>
+<td align="left"><font class="text2" size="2">NSP</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Xcel Energy Inc.</font></td>
+<Td align="left"><font class="text2" size="2">XEL</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">09/01</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">ITT Industries Inc.</font></td>
+<td align="left"><font class="text2" size="2">IIN</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">ITT Industries Inc.</font></td>
+<Td align="left"><font class="text2" size="2">ITT</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">09/28</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Conagra Inc.</font></td>
+<td align="left"><font class="text2" size="2">CAG</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Conagra Foods Inc.</font></td>
+<Td align="left"><font class="text2" size="2">CAG</font></td></tr>
+<tr><Td align="left"><font class="text2" size="2">10/20</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">PECO Energy</font></td>
+<td align="left"><font class="text2" size="2">PE</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Exelon Corp.</font></td>
+<Td align="left"><font class="text2" size="2">EXC</font></td></tr>
+<td></td>
+<tr><Td align="left"><font class="text2" size="2">11/03</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Global Crossing</font></td>
+<td align="left"><font class="text2" size="2">GBLX</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Global Crossing</font></td>
+<Td align="left"><font class="text2" size="2">GX</font></td></tr>
+<td></td>
+<tr><Td align="left"><font class="text2" size="2">11/30</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Automatic Data Processing</font></td>
+<td align="left"><font class="text2" size="2">AUD</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Automatic Data Processing</font></td>
+<Td align="left"><font class="text2" size="2">ADP</font></td></tr>
+<td></td>
+<tr><Td align="left"><font class="text2" size="2">11/30</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Fluor Corp.</font></td>
+<td align="left"><font class="text2" size="2">FLR</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Massey Energy Co.</font></td>
+<Td align="left"><font class="text2" size="2">MEE</font>
+</td></tr>
+<tr><Td align="left"><font class="text2" size="2">12/01</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">PE Corp.-PE Biosystems Group</font></td>
+<td align="left"><font class="text2" size="2">PEB</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Applera Corp.-Applied Biosystems Group</font></td>
+<Td align="left"><font class="text2" size="2">ABI</font>
+</td></tr>
+<tr><Td align="left"><font class="text2" size="2">12/08</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">CP&L Energy, Inc.</font></td>
+<td align="left"><font class="text2" size="2">CPL</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">Progress Energy, Inc.</font></td>
+<Td align="left"><font class="text2" size="2">PGN</font>
+</td></tr>
+<tr><Td align="left"><font class="text2" size="2">12/29</font></td>
+<Td align="left">&nbsp;<font class="text2" size="2">Chase Manhattan Corp.</font></td>
+<td align="left"><font class="text2" size="2">CMB</font></td>
+<td></td>
+<Td align="left"><font class="text2" size="2">J.P. Morgan Chase & Co.</font></td>
+<Td align="left"><font class="text2" size="2">JPM</font>
+</td></tr></table>
+
+</font><br><br><p>
+
+
+
+</FONT></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+                <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"><img height="5" width="5" src="images/1x1_transparent.gif"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+              </tr>
+            </table>
+          <!-- END 3 CELL SAMPLE CONTENT (Text changes end here)-->
+          <!-- END BCD2 CONTENT -->
+          </TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" bgcolor="#cccc99" width="1"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <tr height="1">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" height="1" bgcolor="#cccc99" colspan="5"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+      </table>
+      <!-- BEGIN COPYRIGHT INFORMATION -->
+      <table border="0" cellspacing="0" cellpadding="0" width="777">
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="5"><img src="images/1x1_transparent.gif" width="5" height="5" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="605" valign="bottom"><a href="#" onmouseover="return showStatus('Copyright &copy; 1998-2000 Standard &amp; Poor\'s. All rights reserved.');" onmouseout="return showStatus('');"><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Copyright</font></a><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular"> &copy; 1998-2000 Standard &amp; Poor's. All rights reserved.&nbsp;&nbsp;</font><a href="http://www.mcgraw-hill.com/corporate/news_info/privacy.html" onmouseover="return showStatus('Privacy Policy');" onmouseout="return showStatus('');"><font class="text1" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">Privacy Policy</font></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="165" valign="bottom" align="right"><a href="http://www.mcgraw-hill.com/"><img src="images/mgh_logo.gif" alt="A Division of the McGraw-Hill Companies" width="165" height="30" border="0"></a></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" width="1" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+        <tr>
+          <TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular" colspan="5" bgcolor="#cccc99"><img src="images/1x1_transparent.gif" width="1" height="1" border="0"></TD font class="text2" size="2" face="Arial,Helvetica,Geneva,Swiss,SunSans-Regular">
+        </tr>
+      </table>
+      <!-- END COPYRIGHT INFORMATION -->
+    </center>
+    <!--BEGIN MENU ITEMS-->
+    <script language="JavaScript1.2">
+    <!--
+      //write the menu items to the page only if the browser supports it
+      if (is.ver4up) document.write ("<script language ='JavaScript1.2' src='js/menuitems2.js' type = 'text/javascript'><\/script>")
+    // -->
+    </script>
+    <!--END MENU ITEMS-->
+  </body>
+</html>

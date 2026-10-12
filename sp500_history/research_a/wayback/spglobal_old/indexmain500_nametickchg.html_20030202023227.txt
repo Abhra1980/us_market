@@ -1,0 +1,259 @@
+ 
+ Standard & Poor's 
+ = 4)); 
+ this.navonly = (this.nav && ((agt.indexOf(";nav") != -1) || 
+ (agt.indexOf("; nav") != -1)) ); 
+ this.nav5 = (this.nav && (this.major == 5)); 
+ this.nav5up = (this.nav && (this.major >= 5)); 
+ this.ie = (agt.indexOf("msie") != -1); 
+ this.ie3 = (this.ie && (this.major = 4)); 
+ this.ie5 = (this.ie && (this.major == 4) && (agt.indexOf("msie 5.0")!=-1) ); 
+ this.ie5up = (this.ie && !this.ie3 && !this.ie4); 
+ this.ver4up = (this.ie4up || this.nav4up); 
+ //platform
+ this.mac = (agt.indexOf("mac")!=-1); 
+ } 
+ //create the is.user agent object
+ var is = new Is();
+ //create an array object supported in js 1.0
+ //start at 1 so the date functions make sense
+ function makeArray(i){
+ this.length = i;
+ for(index=1;index 
+ ")
+ else document.write(" function activateMenu(){}\nfunction resetLayout(){} ")
+ // -->
+ Index Values
+ __________
+ Real Time 
+ Closing Values 
+ News
+ __________
+ Index News
+ Conferences
+ Index Coverage
+ ___________
+ S&P Global 1200 Index 
+ S&P 500 
+ S&P/TSX 60
+ S&P Latin America 40
+ S&P/TOPIX 150
+ S&P Asia Pacific 100
+ S&P Europe 350
+ S&P ADR
+ S&P Global 100
+ S&P Australian Indices
+ S&P Canadian Indices
+ S&P Emerging Markets 
+ S&P European Indices
+ S&P Italian Indices
+ S&P Japanese Indices 
+ S&P US Indices
+ ___________
+ S&P Commodity Index
+ S&P Credit Indices
+ S&P JJ Kenny/PERFORM 
+   Sitemap 
+ S&P 500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P MidCap 400 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P SmallCap 600 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ Growth and Value Indices 
+ Sector Indices 
+ S&P 1000 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P SuperComposite 1500 
+ Description 
+ Methodology 
+ Constituents and Data 
+ News 
+ Index Changes 
+ S&P 100 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ S&P REIT Index 
+ Description 
+ Methodology 
+ Constituents 
+ News 
+ Index Changes 
+ Name and Ticker Changes 
+ All S&P Indices 
+ Exchange Links 
+ Global Industry Classification Standard (GICS) 
+ Special Data 
+ S&P 500 Name and Ticker Changes 2001 
+ S&P 500 Name and Ticker Changes 
+Implemented Index Additions and Deletions 
+(all changes effective after close of trading) 
+                FROM 
+                 TO 
+ Date 
+ Company 
+ Ticker 
+ Company 
+ Ticker 
+ 2003 
+ 01/30 
+ Parametric Technology 
+ PMTCE 
+ Parametric Technology
+ PMTC 
+ 01/24 
+ Philip Morris 
+ MO 
+ Altria Group, Inc.
+ MO 
+ 01/16 
+ Parametric Technology 
+ PMTC 
+ Parametic Technology
+ PMTCE 
+ 2002 
+ 12/31 
+ Stilwell Financial 
+ SV 
+ Janus Capital Group
+ JNS 
+ 11/18 
+ AT& T Corp. 
+ T 
+ AT&T Corp.(New)
+ T 
+ 11/18 
+ Comcast Corp. 
+ COMCV 
+ Comcast Corp.
+ CMCSA 
+ 11/12 
+ Countrywide Credit Industries 
+ CCR 
+ Countrywide Financial Corp.
+ CFC 
+ 11/06 
+ Concord EFS Inc. 
+ CEFT 
+ Concord EFS Inc.
+ CE 
+ 09/30 
+ Reliant Energy 
+ REI 
+ CenterPoint Energy
+ CNP 
+ 08/30 
+ Phillips Petroleum 
+ P 
+ Conoco Phillips 
+ COP 
+ 06/25 
+ Nabors Industries, Inc. 
+ NBR 
+ Nabors Industries, Ltd.
+ NBR 
+ 06/19 
+ Morgan Stanley Dean Witter & Co. 
+ MWD 
+ Morgan Stanley
+ MWD 
+ 05/21 
+ The Limited, Inc. 
+ LTD 
+ Limited Brands, Inc.
+ LTD 
+ 05/21 
+ Cooper Industries, Inc. 
+ CBE 
+ Cooper Industries, Ltd.
+ CBE 
+ 05/17 
+ USA Education Inc. 
+ SLM 
+ SLM Corporation
+ SLM 
+ 05/16 
+ Tricon Global Restaurants Inc. 
+ YUM 
+ Yum!Brands, Inc.
+ YUM 
+ 05/15 
+ Equity Residential Properties Trust 
+ EQR 
+ Equity Residential
+ EQR 
+ 05/09 
+ Transocean Sedco Forex Inc. 
+ RIG 
+ Transocean Inc.
+ RIG 
+ 05/03 
+ Hewlett-Packard 
+ HWP 
+ Hewlett-Packard
+ HPQ 
+ 05/02 
+ Regions Financials Corp. 
+ RGBK 
+ Regions Financial Corp.
+ RF 
+ 04/30 
+ Noble Drilling Corp. 
+ NE 
+ Noble Corporation
+ NE 
+ 04/05 
+ Minn. Mining & Mfg. 
+ MMM 
+ 3M Company
+ MMM 
+ 03/14 
+ Delphi Automotive Systems 
+ DPH 
+ Delphi Corporation
+ DPH 
+ 03/08 
+ American Home Products 
+ AHP 
+ Wyeth
+ WYE 
+ 02/25 
+ Rockwell International 
+ ROK 
+ Rockwell Automation, Inc.
+ ROK 
+ 02/15 
+ Newmont Mining Corp. 
+ NEM 
+ Newmont Mining Corp. (Hldg. Co.)
+ NEM 
+ Copyright © 1998-2000 Standard & Poor's. All rights reserved.   Privacy Policy 
+ ")
+ // -->
