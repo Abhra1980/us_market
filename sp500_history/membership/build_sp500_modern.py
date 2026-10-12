@@ -65,6 +65,9 @@ SOURCE_FTD = "sec_fails_to_deliver"
 SOURCE_NAMES = "sec_ncsr_nq_sp500_funds_2010_2019"
 NAME_SUMMARY = HERE / "data/fund_lists_2010_2019_summary.csv"    # fetch_sec_fundlists_2002_2009.py --from/--to
 NAME_HOLDINGS = SEC / "fund_holdings_2010_2019.csv"
+# SPY's daily holdings file from State Street (downloaded by the daily job, not in git): the latest
+# one checks the stretch after the last SEC filing. Only the check's result is stored.
+SPY_DAILY = REPO / "sp500_history/downloads/etf_daily"
 
 # Members filed by every fund with no CUSIP and no ticker the SEC data knows.
 ISIN_TICKER = {
@@ -665,6 +668,33 @@ def main() -> int:
                   for p, cp, mi, ex in results]
     np_confirmed, np_suspects, np_explained = names_check.classify(np_results, steps, rename_list)
 
+    # 8. SPY's latest daily holdings (State Street's file), matched by CUSIP: a label the SEC data
+    #    does not know yet (a ticker change after its last file) pairs with the roll's ticker.
+    daily = None
+    files = sorted(SPY_DAILY.glob("spy_*.xlsx")) if SPY_DAILY.exists() else []
+    if files:
+        import openpyxl  # noqa: PLC0415
+        rows = list(openpyxl.load_workbook(files[-1], read_only=True).active.iter_rows(values_only=True))
+        asof = next((datetime.strptime(str(r[1]).replace("As of ", ""), "%d-%b-%Y").date()
+                     for r in rows[:6] if r[0] == "Holdings:"), None)
+        lines = [r for r in rows[5:] if r[1] and key(r[1]) and r[2] and r[7] == "USD" and "CVR" not in str(r[2])]
+        if asof and lines:
+            eff = next_trading_day(asof)
+            roll = state_on(eff)
+            held = {key(r[1]): str(r[2]) for r in lines}
+            fund_only = {t: c for t, c in held.items() if t not in roll}
+            roll_only = set(roll) - set(held)
+            paired = []
+            for t, c in list(fund_only.items()):
+                twin = next((x for x in roll_only if any(key(p[0]) == x for p in ftd.get(c, []))), None)
+                if twin:
+                    paired.append(f"{t}={twin} (CUSIP {c})")
+                    roll_only.discard(twin)
+                    del fund_only[t]
+            daily = (asof, eff, len(lines), sorted(fund_only), sorted(roll_only), paired, files[-1].name)
+            log(f"SPY daily holdings {asof} ({len(lines)} lines) vs the roll effective {eff}: fund-only "
+                f"{sorted(fund_only)}, roll-only {sorted(roll_only)}, same CUSIP {paired}")
+
     ok = sum(1 for _, _, mi, ex in results if not mi and not ex)
     log(f"anchor {ANCHOR_PERIOD} ({'+'.join(anchor['funds'])}): {len(base)} securities, effective {a_eff}")
     log(f"ticker changes found from CUSIPs: {sum(len(v) for v in renames.values())}")
@@ -683,12 +713,13 @@ def main() -> int:
         return 0
     return write(args.dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
                  sighting_checks, name_results, name_confirmed, name_suspects, name_lists, name_explained,
-                 np_results, np_confirmed, np_explained)
+                 np_results, np_confirmed, np_explained, daily)
 
 
 def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
           sighting_checks, name_results=(), name_confirmed=frozenset(), name_suspects=(), name_lists=None,
-          name_explained=frozenset(), np_results=(), np_confirmed=frozenset(), np_explained=frozenset()) -> int:
+          name_explained=frozenset(), np_results=(), np_confirmed=frozenset(), np_explained=frozenset(),
+          daily=None) -> int:
     import psycopg2  # noqa: PLC0415
     from psycopg2.extras import execute_values  # noqa: PLC0415
 
@@ -704,6 +735,8 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
     cps = {eff[p]: p in np_ok for p in periods}
     for p in {r[0] for r in name_results}:
         cps[next_trading_day(p)] = (p in name_confirmed or p in name_explained) and not name_suspects
+    if daily:                       # the latest daily file agrees when nothing is left unpaired
+        cps[daily[1]] = not daily[3] and not daily[4]
     cp_days = sorted(cps)
 
     def verified(d: date) -> bool:
@@ -818,6 +851,12 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         import build_sp500_2003_2009 as names_check  # noqa: PLC0415
         recon += [(r[0], "month_end_status_nport", *r[2:]) for r in
                   names_check.month_end_status(INDEX, np_results, np_confirmed, np_explained)]
+        if daily:
+            asof, eff_d, n, fo, ro, paired, fname = daily
+            recon.append((INDEX, "spy_daily_holdings", asof, not fo and not ro, n, n - len(fo) + len(ro), fo, ro,
+                          f"State Street's SPY holdings file ({fname}) at the {asof} close vs the roll effective "
+                          f"{eff_d}, by ticker then CUSIP. missing = SPY holds, roll lacks; extra = roll has, SPY "
+                          f"lacks. Same security, label not yet in the SEC data: {paired or 'none'}. CVRs skipped"))
         if name_results:
             recon += names_check.month_end_status(INDEX, own_names, name_confirmed, name_explained)
             recon.append((INDEX, "cross_fund_suspects", date(2019, 8, 30), not name_suspects, 0, len(name_suspects),

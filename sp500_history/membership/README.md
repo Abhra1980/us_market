@@ -31,14 +31,19 @@ name); *unexplained* otherwise.
 | 2010-01 → 2019-08 (names) | 114 | 99 | 15 | 0 |
 | 2019-09 → 2026-07 (NPORT) | 83 | 77 | 6 | 0 |
 
-No cross-fund suspects in any stretch. A list is `is_verified` when the fund month-ends on both
-sides of it are confirmed or explained: every list from 1999 to the last fund filing (Jul 2026)
-is. Lists after the last filing verify as the daily job picks up new filings.
+No cross-fund suspects in any stretch. A list is `is_verified` when the checkpoints on both
+sides of it are confirmed or explained. After the last SEC filing, the checkpoint is SPY's daily
+holdings file from State Street, matched by ticker and then CUSIP (`spy_daily_holdings` in the
+reconciliation table; the file itself stays in `downloads/etf_daily/`, not in git or the
+database). As of 12 Oct 2026 every list, 1999 to today, is verified: SPY's 8 Oct holdings equal
+the 503 members, with Paramount Skydance printed as SKYD on the CUSIP the SEC data still lists as
+PSKY. A change after the latest SPY file is unverified until the next day's file.
 
 ## Daily refresh (Abhrajit's Mac)
 
 A launchd job at 07:30 IST fetches new S&P releases (`fetch_sp_press.py --refresh-archive`), new
-SEC fund filings and fails data (`fetch_sec_holdings.py`) and rebuilds 2010 onward
+SEC fund filings and fails data (`fetch_sec_holdings.py`), SPY's daily holdings file, and rebuilds
+2010 onward
 (`build_sp500_modern.py`), so coverage runs to the day of the last run. It skips quietly if SSD1
 or Postgres is down; the SEC contact comes from the macOS Keychain (service `SEC_USER_AGENT`).
 
