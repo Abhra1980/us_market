@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Complete S&P 500 index-fund holdings lists filed with the SEC, Sep 2002 to Mar 2010.
+"""Complete S&P 500 index-fund holdings lists filed with the SEC, for a configurable range of period-ends.
 
-These are the checkpoints RESEARCH.md §1 proposes for rebuilding S&P 500 membership in 2003-2009, the
-years S&P's own change notices do not cover (decision 1: a fund's list, not S&P's own file). Nothing
-here touches the database.
+The default range is Sep 2002 to Mar 2010 (``--from 2002-09-30 --to 2010-03-31``): the checkpoints
+RESEARCH.md §1 proposes for rebuilding S&P 500 membership in 2003-2009, the years S&P's own change
+notices do not cover (decision 1: a fund's list, not S&P's own file). ``--from 2010-04-30 --to 2019-09-30``
+gives the lists that check the 2010-2019 membership (NPORT-P filings cover Sep 2019 onward). Nothing here
+touches the database.
 
 THE SOURCES (www.sec.gov / data.sec.gov only, fetched with a declared User-Agent)
 -----------
@@ -16,9 +18,15 @@ from its ``index.json``:
   | VFINX | Vanguard 500 Index Fund (Vanguard Index Funds, 36405)   | N-30D, N-CSR(S), N-Q | Mar Jun Sep Dec |
   | FUSEX | Fidelity Spartan U.S. Equity Index (Concord St, 819118) | N-30D, N-CSR(S), N-Q | Feb May Aug Nov |
   | SWPPX | Schwab S&P 500 Index Fund (Schwab Capital Trust, 904333)| N-30D, N-CSR(S), N-Q | Jan Apr Jul Oct |
-  | SPY   | SPDR Trust Series 1 (884394)                            | N-30D, N-CSR       | Sep (and Mar 2010) |
+  | SPY   | SPDR Trust Series 1 (884394)                            | N-30D, N-CSR       | Mar Sep        |
   | IVV   | iShares S&P 500 Index Fund (iShares Trust, 1100663)     | N-30D, N-CSR(S), N-Q | Mar Jun Sep Dec |
   | VINIX | Vanguard Institutional Index Fund (862084), cross-check | N-30D, N-CSR(S), N-Q | Mar Jun Sep Dec |
+
+Later names: Fidelity Spartan 500 Index Fund, then Fidelity 500 Index Fund (same trust, 819118, still a
+February year-end); SPDR S&P 500 ETF Trust; iShares Core S&P 500 ETF (from 2012). N-Q filings stop
+with periods in early 2019 (Form N-PORT replaced them), so the last periods of 2019 may have no list
+here; Vanguard's and SPY's annual and semiannual reports continue. A report date EDGAR has wrong is
+corrected in REPORT_DATE_FIX after reading the filing.
 
 Only filings whose report date is a period-end month of the fund are fetched (an iShares N-CSR for a
 July year-end carries other funds). Text documents only: no images, certifications or codes of ethics.
@@ -31,28 +39,38 @@ THE METHOD
 2. A schedule starts at a "Common Stocks" heading (SPY: its "COMMON STOCKS SHARES VALUE" header) and
    ends at Total Investments / Net Assets / End of Investments, or at the footnotes after the list.
    Lines after "Total Common Stocks" (or after a cash, futures, collateral ... heading) get section
-   ``other:non-stock``, as do warrants and rights printed inside the stock list.
+   ``other:non-stock``, as do warrants and rights printed inside the stock list. Only that position
+   or a warrant/right name makes a line non-stock, never other words in a company's name; a
+   "Foreign Common Stock" list printed right after "Total Common Stock" (Schwab: Invesco Ltd., 2008-09)
+   is part of the stock list and its total is added to the stated one.
 3. A holding line is a name followed by shares and value. A name wrapped over two lines is joined
    (plain text: the second line is indented or reads as a continuation; HTML: a text-only row right
    above a holding row). Industry headings give ``section``. Subtotals, page headers and dates are
    skipped. Values are scaled to dollars when the column header says (000) or x 1,000.
-4. The fund's schedule is the one under its own name (nearest fund heading above the list).
-   Fidelity's schedules carry no such heading, so its trust's single ~500-stock list is taken.
+4. The fund's schedule is the one under its own name (nearest fund heading above the list; (R) and TM
+   marks ignored). A "Common Stock" line that is a row of a valuation table, followed by another
+   fund's name and its list, does not swallow that list. Fidelity's schedules carry no reliable
+   heading, so its trust's ~500-stock list is taken (Fidelity's reports print it twice); from 2017
+   the trust also files Fidelity Flex 500 Index Fund, so a list headed "Flex" is skipped and the
+   largest remaining ~500-stock list is taken.
 5. Checks per list: 480-520 stock lines; the lines add up to the filing's own "Total Common Stocks"
    (or Schwab's holdings-by-category table, or total investments) to within rounding of each line; no
    "Miscellaneous Securities" bucket of unnamed holdings. ``complete`` is true only if all pass.
 6. One row per (fund, period-end) in the summary: the complete list if any, an original before an
    amendment. Period-ends with no filing at all are listed too, complete = false.
 
-Outputs:
-    sp500_history/downloads/sec/fundlists_2002_2009/   raw filings (git-ignored)
-    sp500_history/downloads/sec/fund_holdings_2002_2009.csv   every line of each chosen list (git-ignored)
-    sp500_history/membership/data/fund_lists_2002_2009_summary.csv   one row per fund and period-end
+Outputs, named by the range (<tag> = first year _ last year, a Jan-Mar last period-end counting to
+the year before; ``--tag`` overrides), filings read if dated within nine months after the last period:
+    sp500_history/downloads/sec/fundlists_<tag>/   raw filings (git-ignored)
+    sp500_history/downloads/sec/fund_holdings_<tag>.csv   every line of each chosen list (git-ignored)
+    sp500_history/membership/data/fund_lists_<tag>_summary.csv   one row per fund and period-end
+e.g. fundlists_2002_2009 (default range) and fundlists_2010_2019 (--from 2010-04-30 --to 2019-09-30).
 
 Usage:
     export SEC_USER_AGENT="Your Name you@example.com"
     python3 sp500_history/membership/fetch_sec_fundlists_2002_2009.py            # fetch what is missing, parse
     python3 sp500_history/membership/fetch_sec_fundlists_2002_2009.py --offline  # parse cached files only
+    python3 sp500_history/membership/fetch_sec_fundlists_2002_2009.py --from 2010-04-30 --to 2019-09-30
 """
 from __future__ import annotations
 
@@ -76,9 +94,11 @@ MIN_INTERVAL = 0.26                               # seconds between requests (< 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 OUT = REPO / "sp500_history/downloads/sec"
-CACHE = OUT / "fundlists_2002_2009"
-FIRST_PERIOD = "2002-09-30"
+FIRST_PERIOD = "2002-09-30"                       # default range; --from / --to change it (configure())
 LAST_PERIOD = "2010-03-31"
+RANGE_TAG = "2002_2009"                                 # names the outputs and the raw-file cache
+CACHE = OUT / f"fundlists_{RANGE_TAG}"
+LAST_FILED = "2010-12-31"                         # filings dated after this are not read
 FORMS = {"N-30D", "N-30D/A", "N-CSR", "N-CSR/A", "N-CSRS", "N-CSRS/A", "N-Q", "N-Q/A"}
 
 
@@ -98,21 +118,53 @@ FUNDS = [
     # Fidelity's S&P 500 fund was "Spartan U.S. Equity Index Fund" in these years; its schedules carry no
     # fund-name heading, so the trust's one ~500-stock schedule is taken (the others hold 1,000-3,700).
     Fund("FUSEX", "Fidelity Spartan U.S. Equity Index Fund", 819118, r"(U\.\s?S\.\s+Equity|\b500)\s+Index",
-         (2, 5, 8, 11), by_size=True),
+         (2, 5, 8, 11), exclude=r"\bFlex\b", by_size=True),     # Fidelity Flex 500 Index (2017-): not this fund
     Fund("SWPPX", "Schwab S&P 500 Index Fund", 904333, r"SCHWAB\s+S&(?:amp;)?P\s+500\s+(INDEX\s+)?FUND",
          (1, 4, 7, 10), exclude=r"INSTITUTIONAL|SELECT\s*\(?R?\)?\s+S&P"),
     Fund("SPY", "SPDR Trust Series 1", 884394, r"SPDR", (3, 9)),
-    Fund("IVV", "iShares S&P 500 Index Fund", 1100663, r"S&(?:amp;)?P\s+500\s+Index\s+Fund", (3, 6, 9, 12)),
+    Fund("IVV", "iShares S&P 500 Index Fund", 1100663, r"S&(?:amp;)?P\s+500\s+(Index\s+Fund|ETF)", (3, 6, 9, 12)),
     Fund("VINIX", "Vanguard Institutional Index Fund", 862084, r"Institutional\s+Index\s+Fund", (3, 6, 9, 12)),
 ]
 
 
+# EDGAR report dates that are wrong, checked against the filing's own text.
+REPORT_DATE_FIX: dict[str, str] = {
+    "0001193125-14-428689": "2014-09-30",   # SPY annual report 'September 30, 2014'; EDGAR says 2013-09-30
+}
+
+
 # Findings from reading a filing by eye, added to that list's reason in the summary.
 NOTES = {
+    ("VFINX", "0000932471-11-003264"): "the filing leaves Salesforce.com out of the list: the Information Technology "
+                                      "subtotal is $161,114,000 more than its lines, and Vanguard Institutional "
+                                      "Index's list for the same date has Salesforce.com at that weight",
+    ("SPY", "0001193125-19-302203"): "the filing prints United Rentals, United Technologies and UnitedHealth Group "
+                                    "twice (across a page break); the repeated lines ($3,619,448,116) are exactly "
+                                    "the difference",
     ("VFINX", "0000932471-05-000480"): "the filing prints one row with no name and no shares (value $24,416,000, "
                                       "after Navistar under Auto & Transportation); Vanguard Institutional "
                                       "Index's list for the same date has Dana Corp. there",
 }
+
+
+def month_end(y: int, m: int) -> date:
+    return date(y + (m == 12), m % 12 + 1, 1) - timedelta(days=1)
+
+
+def configure(first: str, last: str, tag: str | None = None) -> None:
+    """Set the range of period-ends. Outputs and cache are named '<first year>_<last year>', where a
+    last period-end in Jan-Mar counts to the year before (its reports close the previous year's cycle):
+    2002-09-30..2010-03-31 -> '2002_2009', 2010-04-30..2019-09-30 -> '2010_2019'. Filings are read if
+    dated after the first period-end and within nine months after the last one."""
+    global FIRST_PERIOD, LAST_PERIOD, RANGE_TAG, CACHE, LAST_FILED
+    d0, d1 = date.fromisoformat(first), date.fromisoformat(last)
+    if d1 < d0:
+        raise SystemExit(f"--to {last} is before --from {first}")
+    FIRST_PERIOD, LAST_PERIOD = d0.isoformat(), d1.isoformat()
+    RANGE_TAG = tag or f"{d0.year}_{d1.year if d1.month > 3 else d1.year - 1}"
+    CACHE = OUT / f"fundlists_{RANGE_TAG}"
+    m = d1.month + 9
+    LAST_FILED = month_end(d1.year + (m - 1) // 12, (m - 1) % 12 + 1).isoformat()
 
 
 def log(msg: str) -> None:
@@ -201,8 +253,9 @@ def list_filings(sec: Sec, fund: Fund) -> list[Filing]:
             form = p["form"][i]
             filed = p["filingDate"][i]
             rep = p["reportDate"][i]
-            if form not in FORMS or not ("2002-10-01" <= filed <= "2010-12-31"):
+            if form not in FORMS or not (FIRST_PERIOD < filed <= LAST_FILED):
                 continue
+            rep = REPORT_DATE_FIX.get(acc, rep)
             if rep and not (FIRST_PERIOD <= rep <= LAST_PERIOD and int(rep[5:7]) in fund.months):
                 continue
             out.append(Filing(fund, form, acc, filed, rep, p["primaryDocument"][i]))
@@ -301,6 +354,10 @@ END = re.compile(r"(?i)^\s*(?:\|\s*)?(?:TOTAL\s+INVESTMENTS|NET\s+ASSETS\b|TOTAL
 AFTER_LIST = re.compile(r"(?i)^\s*\|?\s*(?:\(?\*\)?|\(\w\)|\d)?\s*\|?\s*(non-income[- ]producing|see accompanying|"
                         r"see notes|statement of assets|affiliated issuer|legend\b|notes to)")
 TOTAL_STOCKS = re.compile(r"(?i)^\s*TOTAL\s+(COMMON\s+STOCKS?|EQUITY\s+SECURITIES)")
+# Schwab prints a company incorporated abroad (Invesco Ltd., Bermuda) in a second stock list right after
+# 'Total Common Stock': 'Foreign Common Stock 0.1% of net assets' ... 'Total Foreign Common Stock'
+FOREIGN_START = re.compile(r"(?i)^\s*FOREIGN\s+COMMON\s+STOCKS?\b")
+TOTAL_FOREIGN = re.compile(r"(?i)^\s*TOTAL\s+FOREIGN\s+COMMON\s+STOCKS?")
 OTHER_HEAD = re.compile(
     r"(?i)^\s*(?:\(?\d+(?:\.\d+)?%\)?\s*)?(TEMPORARY\s+CASH|SHORT[- ]TERM|MONEY\s+MARKET|OTHER\s+INVESTMENT\s+COMPAN"
     r"|COLLATERAL|CASH\s+EQUIVALENT|REPURCHASE\s+AGREEMENT|FUTURES|PREFERRED\s+STOCK|RIGHTS\b|WARRANTS\b"
@@ -361,10 +418,18 @@ def split_line(s: str) -> tuple[str, list[float]]:
     """('name text', [numbers at the end of the line])."""
     flat = s.replace("|", "  ")
     flat = re.sub(r"\.{3,}", "  ", flat)
+    # a name cell glued to the share count ('Stanley Black & Decker Inc.1,567,864 | 115,975')
+    flat = re.sub(r"(?<=[A-Za-z.])(?=\d{1,3}(?:,\d{3})+\s{2,}\S)", " ", flat)
     m = TRAIL.match(flat)
     if not m:
         return flat.strip(), []
     nums = nums_of(m.group("nums"))
+    if len(nums) > 2 and "|" in s:
+        # a number that belongs to the name ('Phillips 66 | 5,811,152 | 308,572'): trust the table cells
+        cells = [c.strip() for c in s.split("|")]
+        if len(cells) >= 3 and all(re.fullmatch(rf"{NUM}|{DASH}", c) for c in cells[-2:]) \
+                and re.search(r"[A-Za-z]\s+\d{2,4}$", cells[-3]):     # not a 1-digit footnote mark
+            return "  ".join(cells[:-2]).strip(), nums_of("  ".join(cells[-2:]))
     return m.group("name").strip(), nums
 
 
@@ -403,6 +468,8 @@ class Holding:
             self.in_list = False
         elif re.search(r"(?i)\b(warrants?|rights?)\b", self.name):
             self.section = NON_STOCK          # a warrant or right listed among the stocks
+        elif self.shares is not None and self.shares < 0:
+            self.section = NON_STOCK          # a sale, not a holding: Vanguard's when-issued CDK Global, 2014-09
 
 
 @dataclass
@@ -418,21 +485,31 @@ class Block:
     oddities: list
 
 
-OWNER = re.compile(r"(?i)^vanguard\b.*\bindex$|\bindex\s+fund\b|\bSPDR\b|\bS&P\s+500\s+fund\b|\bindex\s+trust\b|\bindex\s+funds?\b")
+OWNER = re.compile(r"(?i)^vanguard\b.*\bindex$|\bindex\s+fund\b|\bSPDR\b|\bS&P\s+500\s+fund\b|\bindex\s+trust\b|\bindex\s+funds?\b"
+                   r"|\biShares\b.*\bETF\s*$")       # 'iSHARES® CORE S&P 500 ETF' (iShares' names from 2012)
 
 
 def find_owner(lines: list[str], start: int, floor: int) -> str:
     """The nearest fund name above a schedule: a short line, or a table row's first cell."""
     for i in range(start - 1, max(floor, start - 1200) - 1, -1):
-        cell = lines[i].split("|")[0].strip()
+        cell = re.sub(r"\s*(?:®|™|\(R\)|\(TM\))", "", lines[i].split("|")[0]).strip()
         if 3 < len(cell) < 100 and OWNER.search(cell) and not re.search(r"(?i)\bfund'?s\b|\bthe fund\b", cell) \
                 and len(split_line(DATE.sub("", lines[i]))[1]) < 2:   # not a holding row of a fund of funds
             return cell
+        # iShares from 2018: 'Schedule of Investments (unaudited) ... | iShares® Core S&P 500 ETF (Percentages ...)'
+        for c in lines[i].split("|")[1:]:
+            c = re.sub(r"\s*\(Percentages[^)]*\)?$", "", re.sub(r"\s*(?:®|™|\(R\)|\(TM\))", "", c)).strip()
+            if 3 < len(c) < 100 and re.fullmatch(r"(?i)iShares\b.*\bETF", c):
+                return c
     return ""
 
 
-def parse_block(lines: list[str], start: int, stop: int, is_html: bool) -> tuple[list, int, float | None,
-                                                                                float | None, list]:
+def owner_key(s: str) -> str:
+    return re.sub(r"[^a-z0-9&]+", " ", re.sub(r"®|™|\(R\)|\(TM\)", "", s.lower())).strip()
+
+
+def parse_block(lines: list[str], start: int, stop: int, is_html: bool, owner: str = "") -> tuple[
+        list, int, float | None, float | None, list]:
     """Read holdings from lines[start:stop]; return (holdings, end, stated stock total, stated end value, oddities)."""
     hold: list[Holding] = []
     odd: list[str] = []
@@ -441,6 +518,9 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool) -> tuple
     pending: list[tuple[str, int]] = []      # (text, indent) of a name wrapped over lines
     sub_from = 0                             # first holding after the last industry subtotal
     stated_stocks = stated_end = None
+    foreign = False                          # inside a 'Foreign Common Stock' list after the main one
+    held_at_total = -1                       # holdings read when 'Total Common Stocks' was passed
+    owner_at = -1                            # last fund-name line read
     i = start + 1
     end = stop
     while i < stop:
@@ -466,12 +546,36 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool) -> tuple
         if not in_stocks and START.match(s.lstrip("| ")):
             end = i                                   # the next fund's schedule begins
             break
+        if in_stocks and owner_at > start and START.match(s.lstrip("| ")) \
+                and sum(h.line_no > owner_at for h in hold) <= 12:
+            # another fund's name, its holdings-by-category table, then its stock list: the 'Common
+            # Stock' this block started at was not a list (Schwab's Level 3 reconciliation table)
+            end = owner_at
+            hold = [h for h in hold if h.line_no < owner_at]
+            break
+        if not in_stocks and not foreign and len(hold) == held_at_total and FOREIGN_START.match(s.lstrip("| ")):
+            in_stocks, foreign, section, pending = True, True, "Foreign Common Stock", []
+            i += 1
+            continue
+        if foreign and (TOTAL_FOREIGN.match(s) or TOTAL_STOCKS.match(s)):
+            in_stocks, section, pending, held_at_total = False, NON_STOCK, [], -2
+            for j in range(i, min(i + 4, stop)):
+                v = nums_of(re.sub(r"\(\s*Cost[^)]*\)|Cost[:\s]*\$?\s*[\d,]+", "", lines[j]))
+                if v:
+                    stated_stocks = (stated_stocks or 0) + v[-1]
+                    break
+            foreign = False
+            i += 1
+            continue
         if TOTAL_STOCKS.match(s):
+            held_at_total = len(hold) if held_at_total == -1 else -2
             in_stocks = False
             section = NON_STOCK
             pending = []
             for j in range(i, min(i + 4, stop)):
-                v = nums_of(re.sub(r"\(\s*Cost[^)]*\)|Cost[:\s]*\$?\s*[\d,]+", "", lines[j]))
+                tot = re.sub(r"(\d,)\s+(\d{3})\b", r"\1\2", lines[j])      # IVV 2014-06: '57,750, 612,466'
+                tot = re.sub(r"[—–-]\s*\(?\d+(?:\.\d+)?%\)?\s*$", "", tot)   # 'Total Common Stocks — 99.9%'
+                v = nums_of(re.sub(r"\(\s*Cost[^)]*\)|Cost[:\s]*\$?\s*[\d,]+", "", tot))
                 if v:
                     stated_stocks = v[-1]
                     break
@@ -480,7 +584,9 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool) -> tuple
         indent = len(raw) - len(raw.lstrip(" "))
         name, nums = split_line(s)
         name_c = clean_name(name)
-        if in_stocks and OTHER_HEAD.match(name) and len(nums) <= 1:
+        if in_stocks and OTHER_HEAD.match(name) and len(nums) <= 1 \
+                and not (pending and not nums and re.match(r"(?i)\s*(warrants?|rights?)\b", name)):
+            # ('Raytheon Co. / Warrants Exp. / 6/16/2011 | 60,569 | 528': a wrapped name, not a heading)
             in_stocks, section, pending = False, NON_STOCK, []
             i += 1
             continue
@@ -488,6 +594,9 @@ def parse_block(lines: list[str], start: int, stop: int, is_html: bool) -> tuple
             if not re.search(r"[A-Za-z]", name_c) or NOISE.match(name_c) or HEADERISH.search(name_c) \
                     or OWNER.search(name_c):
                 pending = []
+                k1, k2 = owner_key(name_c), owner_key(owner)
+                if OWNER.search(name_c) and not (k2 and (k1 in k2 or k2 in k1)):
+                    owner_at = i                      # another fund's name (not a page header of this one)
             elif is_heading(name_c) and not (pending and CONNECT.search(pending[-1][0])):
                 if in_stocks:
                     head = re.split(r"\s*[-–—:]*\s*\(?\s*\d", name_c)[0].strip(" -–—:(")
@@ -586,13 +695,18 @@ def find_blocks(doc: str, lines: list[str], is_html: bool) -> list[Block]:
     while k < len(starts):
         st = starts[k]
         nxt = len(lines)
-        hold, end, ss, se, odd = parse_block(lines, st, nxt, is_html)
+        owner = find_owner(lines, st, floor)
+        hold, end, ss, se, odd = parse_block(lines, st, nxt, is_html, owner)
         if ss is None:
             ss = summary_total(lines, st)
         window = " ".join(lines[max(0, st - 60):st + 8])
         scale = 1000 if SCALE.search(window) else 1
-        blocks.append(Block(doc, st, end, find_owner(lines, st, floor), scale, hold, ss, se, odd))
-        floor = end
+        blocks.append(Block(doc, st, end, owner, scale, hold, ss, se, odd))
+        # the next schedule's fund name may sit between this list's last line and its parse end
+        # (notes, then 'Vanguard 500 Index Fund / Schedule of Investments', then 'Common Stocks'); cash
+        # or a holdings-by-category table read after the list does not count
+        listed = [h.line_no for h in hold if h.in_list]
+        floor = min(end, max(listed) + 1 if listed else st + 1)
         while k < len(starts) and (starts[k] < end or starts[k] == st):
             k += 1
     return blocks
@@ -669,9 +783,9 @@ def analyse_filing(f: Filing) -> tuple[list[Block], list[Block]]:
         lines, is_html = to_lines(path.read_bytes())
         blocks.extend(find_blocks(path.name, lines, is_html))
     if f.fund.by_size:
-        mine = [b for b in blocks if 470 <= len(stocks_of(b)) <= 530]
-        if len(mine) > 1:
-            log(f"  WARNING {f.accession}: {len(mine)} schedules of ~500 stocks; the longest is taken")
+        mine = [b for b in blocks if 470 <= len(stocks_of(b)) <= 530 and not re.search(f.fund.exclude, b.owner, re.I)]
+        if len({(len(stocks_of(b)), b.stated_stocks) for b in mine}) > 1:     # not just one list printed twice
+            log(f"  WARNING {f.accession}: {len(mine)} schedules of ~500 stocks; the largest by value is taken")
     else:
         mine = [b for b in blocks if re.search(f.fund.match, b.owner, re.I)
                 and not re.search(f.fund.exclude, b.owner, re.I)]
@@ -683,8 +797,7 @@ def month_ends(fund: Fund) -> list[str]:
     y, mth = int(FIRST_PERIOD[:4]), int(FIRST_PERIOD[5:7])
     while f"{y:04d}-{mth:02d}" <= LAST_PERIOD[:7]:
         if mth in fund.months:
-            nxt = date(y + (mth == 12), mth % 12 + 1, 1)
-            out.append((nxt - timedelta(days=1)).isoformat())
+            out.append(month_end(y, mth).isoformat())
         y, mth = y + (mth == 12), mth % 12 + 1
     return out
 
@@ -710,7 +823,14 @@ def main() -> int:
     ap.add_argument("--offline", action="store_true", help="parse cached files only, no requests")
     ap.add_argument("--fund", help="only this fund key (debugging)")
     ap.add_argument("--verbose", action="store_true", help="print every schedule found")
+    ap.add_argument("--from", dest="first", default=FIRST_PERIOD, metavar="YYYY-MM-DD",
+                    help=f"first period-end (default {FIRST_PERIOD})")
+    ap.add_argument("--to", dest="last", default=LAST_PERIOD, metavar="YYYY-MM-DD",
+                    help=f"last period-end (default {LAST_PERIOD})")
+    ap.add_argument("--tag", help="name for outputs and cache instead of '<first year>_<last year>'")
     args = ap.parse_args()
+    configure(args.first, args.last, args.tag)
+    log(f"period-ends {FIRST_PERIOD} .. {LAST_PERIOD}, filed by {LAST_FILED}; cache {CACHE.relative_to(REPO)}")
     sec = Sec(args.offline)
     holdings_rows: list[dict] = []
     summary_rows: list[dict] = []
@@ -731,7 +851,10 @@ def main() -> int:
                     log(f"    {f.accession} {b.doc}:{b.start}-{b.end} owner={b.owner[:60]!r} "
                         f"lines={len(stocks_of(b))} other={len(b.holdings) - len(stocks_of(b))} scale={b.scale}")
             # a fund's own name can head a neighbour's schedule too: prefer the ~500-line one
-            best = min(mine, key=lambda b: (not 470 <= len(stocks_of(b)) <= 530, -len(stocks_of(b))), default=None)
+            # Fidelity's trust also holds small S&P 500 funds from 2017 (Flex 500 Index): take the largest
+            best = min(mine, key=lambda b: (not 470 <= len(stocks_of(b)) <= 530,
+                                            -sum(h.value or 0 for h in stocks_of(b)) * b.scale if fund.by_size
+                                            else -len(stocks_of(b))), default=None)
             if best is not None:
                 url = f"https://www.sec.gov/Archives/edgar/data/{fund.cik}/{acc}/{best.doc}"
             res = judge(f, best, url)
@@ -774,10 +897,10 @@ def main() -> int:
                     "name": h.name, "shares": fmt(h.shares),
                     "value_usd": fmt(None if h.value is None else h.value * r.block.scale), "raw_line": h.raw})
     summary_rows.sort(key=lambda r: (r["fund"], r["period_end"]))
-    write_csv(OUT / "fund_holdings_2002_2009.csv",
+    write_csv(OUT / f"fund_holdings_{RANGE_TAG}.csv",
               ["fund", "cik", "form", "accession", "filing_date", "period_end", "line_no", "section", "name",
                "shares", "value_usd", "raw_line"], holdings_rows)
-    write_csv(HERE / "data/fund_lists_2002_2009_summary.csv",
+    write_csv(HERE / f"data/fund_lists_{RANGE_TAG}_summary.csv",
               ["fund", "period_end", "form", "accession", "url", "stock_lines", "total_value_usd", "complete",
                "reason"], summary_rows)
     log(f"{len(holdings_rows)} holding rows, {len(summary_rows)} (fund, period) rows, "

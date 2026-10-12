@@ -62,6 +62,9 @@ FTD_WINDOW = 60                          # days either side of a date a CUSIP->t
 SOURCE_PRESS = "sp_press_2010_2026"
 SOURCE_FUNDS = "sec_nport_sp500_funds"
 SOURCE_FTD = "sec_fails_to_deliver"
+SOURCE_NAMES = "sec_ncsr_nq_sp500_funds_2010_2019"
+NAME_SUMMARY = HERE / "data/fund_lists_2010_2019_summary.csv"    # fetch_sec_fundlists_2002_2009.py --from/--to
+NAME_HOLDINGS = SEC / "fund_holdings_2010_2019.csv"
 
 # Members filed by every fund with no CUSIP and no ticker the SEC data knows.
 ISIN_TICKER = {
@@ -152,6 +155,11 @@ SOURCES = [
     (SOURCE_FUNDS, "SPY, Vanguard 500, Fidelity 500, Schwab S&P 500, IVV (SEC NPORT-P)", "fund_holdings",
      "sp500_history/downloads/sec/nport_holdings.csv", "https://www.sec.gov/cgi-bin/browse-edgar", None,
      "Quarterly full holdings per fund; together every month-end from 2019-09. Checkpoints only"),
+    (SOURCE_NAMES, "Vanguard 500, Vanguard Institutional, Fidelity 500, Schwab S&P 500, SPY, IVV (SEC N-CSR/N-Q)",
+     "fund_holdings", "sp500_history/downloads/sec/fund_holdings_2010_2019.csv",
+     "https://www.sec.gov/cgi-bin/browse-edgar", None,
+     "Full holdings schedules by name, 2010-2019, before NPORT-P; matched to tickers through the SEC fails data. "
+     "Checkpoints only"),
     (SOURCE_FTD, "SEC", "constituent_list", "sp500_history/downloads/sec/ftd_cusip_symbol.csv",
      "https://www.sec.gov/data-research/sec-markets-data/fails-deliver-data", None,
      "CUSIP <-> ticker pairs with first/last settlement date; used to name fund holdings"),
@@ -622,6 +630,30 @@ def main() -> int:
     log(f"members before Sep 2019 with no SEC sighting within 120 days: "
         f"{[(k, str(a), str(b)) for a, k, n, b in sighting_checks]}")
 
+    # 7. Before Sep 2019 the funds' N-CSR/N-Q schedules give names only. Name each holding and
+    #    compare it with the roll exactly as build_sp500_2003_2009.py does for 2003-2009.
+    name_results, name_confirmed, name_suspects, name_lists = [], set(), [], {}
+    if NAME_SUMMARY.exists() and NAME_HOLDINGS.exists():
+        import build_sp500_2003_2009 as names_check  # noqa: PLC0415
+        name_lists = names_check.load_fund_lists(NAME_SUMMARY, NAME_HOLDINGS)
+        named_ids = names_check.load_ftd_names()
+        known = defaultdict(set)
+        for c in changes:
+            known[key(c.symbol)].add(c.company)
+        dated = [(key(r["new_symbol"]), r["old_company"], date.fromisoformat(r["effective_date"]) - timedelta(days=10),
+                  date.fromisoformat(r["effective_date"]) + timedelta(days=names_check.NAME_WINDOW))
+                 for r in csv.DictReader(TICKER_CHANGES.open())
+                 if r["new_symbol"] and r["old_company"] and r["effective_date"]]
+        namer = names_check.Namer(named_ids, known, dated, rename_list)
+        for fund, p in sorted((fp for fp in name_lists if START <= fp[1] < first_list), key=lambda fp: (fp[1], fp[0])):
+            eff = next_trading_day(p)
+            got = names_check.check_list(namer, name_lists[(fund, p)], state_on(eff), eff)
+            name_results.append((p, fund, len(name_lists[(fund, p)]), *got))
+        name_confirmed, name_suspects = names_check.classify(name_results, steps, rename_list)
+        log(f"name-only fund lists {START}..{first_list}: {sum(1 for r in name_results if not r[4] and not r[5] and not r[6])} "
+            f"of {len(name_results)} exact; month-ends confirmed {len(name_confirmed)} of {len({r[0] for r in name_results})}; "
+            f"cross-fund suspects {name_suspects}")
+
     ok = sum(1 for _, _, mi, ex in results if not mi and not ex)
     log(f"anchor {ANCHOR_PERIOD} ({'+'.join(anchor['funds'])}): {len(base)} securities, effective {a_eff}")
     log(f"ticker changes found from CUSIPs: {sum(len(v) for v in renames.values())}")
@@ -639,11 +671,11 @@ def main() -> int:
         log("dry run: nothing written")
         return 0
     return write(args.dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
-                 sighting_checks)
+                 sighting_checks, name_results, name_confirmed, name_suspects, name_lists)
 
 
 def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
-          sighting_checks) -> int:
+          sighting_checks, name_results=(), name_confirmed=frozenset(), name_suspects=(), name_lists=None) -> int:
     import psycopg2  # noqa: PLC0415
     from psycopg2.extras import execute_values  # noqa: PLC0415
 
@@ -652,11 +684,17 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
     eff = {p: next_trading_day(p) for p in periods}
     matched = {p for p, _, mi, ex in results if not mi and not ex}
 
-    # A snapshot is verified when the fund month-ends on both sides of it match the roll.
+    # A snapshot is verified when the checkpoints on both sides of it agree with the roll: an NPORT
+    # month-end matching exactly, or (2010-2019) a confirmed name-only month-end.
+    cps = {eff[p]: p in matched for p in periods}
+    for p in {r[0] for r in name_results}:
+        cps[next_trading_day(p)] = p in name_confirmed
+    cp_days = sorted(cps)
+
     def verified(d: date) -> bool:
-        before = [p for p in periods if eff[p] <= d]
-        after = [p for p in periods if eff[p] > d]
-        return bool(before and after and before[-1] in matched and after[0] in matched)
+        before = [x for x in cp_days if x <= d]
+        after = [x for x in cp_days if x > d]
+        return bool(before and after and cps[before[-1]] and cps[after[0]])
 
     own = [s[0] for s in SOURCES]
     covered_through = date.today()
@@ -706,6 +744,12 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
                 line += 1
                 rows.append((SOURCE_FUNDS, line, INDEX, p, basis, show(cp["tick"].get(c, "")) or None,
                              cp["names"][c][0], None, c if len(c) == 9 else None, cp["names"][c][1] or None, v))
+        for p, fund, n, named, *_ in name_results:
+            basis = f"{fund} holdings at {p} close (SEC N-CSR/N-Q); names matched to tickers via SEC fails data"
+            for ln, name, section in name_lists[(fund, p)]:
+                line += 1
+                rows.append((SOURCE_NAMES, line, INDEX, p, basis, show(named[ln]) if ln in named else None,
+                             name, section, None, None, 1))
         execute_values(cur, """insert into usmarket.index_constituent_list
             (source, line_no, index_type, as_of_date, as_of_basis, symbol, company, industry, cusip, isin,
              fund_count) values %s""", rows, page_size=5000)
@@ -720,6 +764,9 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         first_cp = eff[periods[0]]
         execute_values(cur, "insert into usmarket.index_membership_coverage values %s", [
             (INDEX, min(snaps), previous_trading_day(first_cp),
+             f"S&P press releases rolled back from the Sep 2019 fund lists; checked against index funds' N-CSR/N-Q "
+             f"holdings by name at {len({r[0] for r in name_results})} month-ends, {len(name_confirmed)} confirmed"
+             if name_results else
              "S&P press releases rolled back from the Sep 2019 fund lists; no fund list checks it (unverified)"),
             (INDEX, first_cp, covered_through,
              "S&P press releases, checked against fund holdings at every month-end Sep 2019 to Jul 2026"),
@@ -744,6 +791,19 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         recon += [(INDEX, "sec_sighting", d, False, None, None, [], [],
                    "Member with no SEC fails-data sighting within 120 days (a ticker change not undone?): "
                    + "; ".join(v)) for d, v in by_day.items()]
+        for p, fund, n, named, missing, extra, unnamed, notes in name_results:
+            recon.append((INDEX, f"fund_month_end_{fund}", p, not missing and not extra and not unnamed, n,
+                          n - len(missing) - len(unnamed) + len(extra), [show(t) for t in missing.values()],
+                          [show(k) for k in extra],
+                          f"{fund} at {p} close (by name) vs the roll effective {next_trading_day(p)}; "
+                          f"{'month-end confirmed' if p in name_confirmed else 'month-end not confirmed'}. "
+                          + (f"Fund lines naming no ticker: {[x[1] for x in unnamed]}. " if unnamed else "")
+                          + (f"Explained: {notes}" if notes else "")))
+        if name_results:
+            recon.append((INDEX, "cross_fund_suspects", date(2019, 8, 30), not name_suspects, 0, len(name_suspects),
+                          [], [], "Members no fund list held within 45 days, and non-members every fund list held, "
+                          "2010-2019 (by name): " + ("; ".join(f"{d}: {m}" for d, m in name_suspects)
+                                                     if name_suspects else "none")))
         execute_values(cur, """insert into usmarket.index_membership_reconciliation
             (index_type, check_name, check_date, reconciled, expected, actual, missing, extra, note) values %s""", recon)
 
@@ -767,7 +827,7 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
              for r in pairs], page_size=10000)
     log(f"wrote {len(mrows)} membership rows ({sum(r[4] for r in mrows)} verified), {len(ev)} change rows, "
         f"{sum(len(v) for v in renames.values())} ticker changes, {len(rows)} fund-list rows, "
-        f"{len(recon)} checks, {len(pairs)} CUSIP-ticker pairs")
+        f"{len(recon)} checks, {len(pairs)} CUSIP-ticker pairs, {len(name_results)} name-only fund lists")
     return 0
 
 

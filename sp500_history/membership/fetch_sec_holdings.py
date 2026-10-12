@@ -340,8 +340,10 @@ def fetch_nport(sec: Sec) -> tuple[list[dict], list[str]]:
 PLACEHOLDER = re.compile(r"(XXXX|ZZZZ)$")
 
 
-def add_ftd_zip(body: bytes, pairs: dict[tuple[str, str], dict]) -> int:
-    """Fold one fails zip (any number of pipe-delimited members) into pairs; returns data lines."""
+def add_ftd_zip(body: bytes, pairs: dict[tuple[str, str], dict], names: dict | None = None) -> int:
+    """Fold one fails zip (any number of pipe-delimited members) into pairs; returns data lines.
+    ``names`` also gets every (cusip, symbol, description) with its own first and last date: the
+    SEC's issuer name as of each date (pairs keep only the latest, e.g. CVS HEALTH for 2010)."""
     n = 0
     with zipfile.ZipFile(io.BytesIO(body)) as z:
         for member in z.namelist():
@@ -356,6 +358,10 @@ def add_ftd_zip(body: bytes, pairs: dict[tuple[str, str], dict]) -> int:
                 if not cusip or not sym:
                     continue
                 n += 1
+                if names is not None:
+                    k = (cusip, sym, p[4].strip())
+                    a, b = names.get(k, (d, d))
+                    names[k] = (min(a, d), max(b, d))
                 rec = pairs.get((cusip, sym))
                 if rec is None:
                     pairs[(cusip, sym)] = {"cusip": cusip, "symbol": sym, "description": p[4].strip(),
@@ -383,7 +389,8 @@ def ftd_page_links(sec: Sec) -> dict[str, str]:
     return links
 
 
-def fetch_ftd_early(sec: Sec, start: tuple[int, int]) -> tuple[list[dict], list[str], dict[str, int]]:
+def fetch_ftd_early(sec: Sec, start: tuple[int, int], names: dict | None = None
+                    ) -> tuple[list[dict], list[str], dict[str, int]]:
     """Quarterly fails files (cnsp_sec_fails_YYYYqN.zip) from start's quarter up to 2009q2,
     the last quarter before the half-month files begin (FTD_START)."""
     links = ftd_page_links(sec)
@@ -406,12 +413,12 @@ def fetch_ftd_early(sec: Sec, start: tuple[int, int]) -> tuple[list[dict], list[
         if body is None:
             missing.append(name)
         else:
-            lines[key] = add_ftd_zip(body, pairs)
+            lines[key] = add_ftd_zip(body, pairs, names)
         y, q = (y + 1, 1) if q == 4 else (y, q + 1)
     return sorted(pairs.values(), key=lambda r: (r["cusip"], r["first_seen"])), missing, lines
 
 
-def fetch_ftd(sec: Sec) -> tuple[list[dict], list[str]]:
+def fetch_ftd(sec: Sec, names: dict | None = None) -> tuple[list[dict], list[str]]:
     today = date.today()
     y, m = FTD_START
     missing: list[str] = []
@@ -428,7 +435,7 @@ def fetch_ftd(sec: Sec) -> tuple[list[dict], list[str]]:
             if body is None:
                 missing.append(name)
                 continue
-            add_ftd_zip(body, pairs)
+            add_ftd_zip(body, pairs, names)
         m += 1
         if m == 13:
             y, m = y + 1, 1
@@ -617,6 +624,14 @@ def write_csv(path: Path, cols: list[str], rows: list[dict]) -> None:
     tmp.replace(path)
 
 
+def write_names(path: Path, names: dict) -> None:
+    """One row per (cusip, symbol, SEC description) with the dates that description was used."""
+    write_csv(path, ["cusip", "symbol", "description", "first_seen", "last_seen"],
+              [{"cusip": c, "symbol": s, "description": d, "first_seen": a, "last_seen": b}
+               for (c, s, d), (a, b) in sorted(names.items(), key=lambda kv: (kv[0][0], kv[1][0]))])
+    log(f"{path.name}: {len(names)} (cusip, symbol, description) rows")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--offline", action="store_true", help="use cached files only, no requests")
@@ -636,9 +651,11 @@ def main() -> int:
         if start >= FTD_START:
             raise SystemExit(f"--ftd-from must be before {FTD_START[0]}-{FTD_START[1]:02d}; "
                              "later months come from the default run")
-        ftd, missing, lines = fetch_ftd_early(sec, start)
+        names: dict = {}
+        ftd, missing, lines = fetch_ftd_early(sec, start, names)
         out = OUT / f"ftd_cusip_symbol_{start[0]}_{FTD_START[0]}.csv"
         write_csv(out, ["cusip", "symbol", "description", "first_seen", "last_seen", "placeholder"], ftd)
+        write_names(OUT / f"ftd_cusip_names_{start[0]}_{FTD_START[0]}.csv", names)
         for k, n in lines.items():
             log(f"  {k}: {n} data lines")
         dates = sorted({r["first_seen"] for r in ftd} | {r["last_seen"] for r in ftd})
@@ -649,7 +666,9 @@ def main() -> int:
         return 0
 
     holdings, notes = fetch_nport(sec)
-    ftd, missing = fetch_ftd(sec)
+    names: dict = {}
+    ftd, missing = fetch_ftd(sec, names)
+    write_names(OUT / "ftd_cusip_names.csv", names)
     write_csv(OUT / "ftd_cusip_symbol.csv", ["cusip", "symbol", "description", "first_seen", "last_seen", "placeholder"],
               ftd)
     log(f"ftd_cusip_symbol.csv: {len(ftd)} (cusip, symbol) rows; files missing: {missing}")

@@ -67,10 +67,12 @@ FUND_SUMMARY = HERE / "data/fund_lists_2002_2009_summary.csv"
 FUND_HOLDINGS = SEC / "fund_holdings_2002_2009.csv"
 FTD_FILES = (SEC / "ftd_cusip_symbol_2004_2009.csv", SEC / "ftd_cusip_symbol.csv")
 LOOKUP_13F = SEC / "cusip_name_symbol_2002_2010.csv"   # fetch_sec_13f_lists.py
+PLACEHOLDER = re.compile(r"XXXX|ZZZZ|YYYY")           # the SEC's temporary symbols around a CUSIP change
+NAME_FILES = (SEC / "ftd_cusip_names_2004_2009.csv", SEC / "ftd_cusip_names.csv")   # fetch_sec_holdings.py
 FIRST = date(2002, 11, 29)      # last day build_sp500_membership.py covers
 LAST = date(2010, 1, 4)         # first day build_sp500_modern.py covers
 FTD_WINDOW = 60                 # days either side of a date a CUSIP->ticker pair may be used
-NAME_WINDOW = 370               # days either side of a date a member's former names still match
+NAME_WINDOW = 3650              # how far back a ticker's earlier CUSIPs (and so their names) still count
 SOURCE_PRESS = "sp_press_2003_2009"
 SOURCE_FUNDS = "sec_ncsr_nq_sp500_funds_2002_2009"
 SOURCE_FTD = "sec_fails_to_deliver_2004_2009"
@@ -116,7 +118,8 @@ NOISE = {
 
 
 ALIASES = {"freddie mac": "federal home loan mortgage", "fannie mae": "federal national mortgage association",
-           "metropolitan life insurance": "metlife", "nasdaq stock market": "nasdaq omx"}
+           "metropolitan life insurance": "metlife", "nasdaq stock market": "nasdaq omx",
+           r"\bibm\b": "international business machines"}
 NOT_COMMON = re.compile(r"\b(PFD|PREF|PREFERRED|WARR|WARRANTS?|WTS?|RIGHTS?|RTS?|DEB|DBCV|NOTES?|UNITS?|CONV|"
                         r"DEPOSITARY|TRUST PFD)\b|%")
 
@@ -143,15 +146,12 @@ def norm_words(s: str) -> list[str]:
     return kept or [w for w in out if w not in ("the", "inc", "co", "corp", "company")]   # "The Limited, Inc."
 
 
-def share_class(s: str) -> str:
-    """'A', 'B', 'SPECIAL', 'NONVOTING' or '' from a fund line or an SEC description."""
+def share_class(s: str) -> tuple[str, bool]:
+    """(class letter or '', special?) from a fund line or an SEC description: "Class C (non-vtg.)"
+    -> ('C', False), "COMCAST CORP CL A SPL" -> ('A', True)."""
     t = s.upper()
-    if re.search(r"\bSPECIAL\b|\bSPL\b|\bSPCL\b", t):
-        return "SPECIAL"
-    if re.search(r"NON[- ]?VOTING|NON[- ]?VTG", t):
-        return "NONVOTING"
     m = re.search(r"\b(?:CLASS|CL)\s*\.?\s*([A-C])\b", t) or re.search(r"\bSER(?:IES)?\s+([A-C])\b", t)
-    return m.group(1) if m else ""
+    return (m.group(1) if m else "", bool(re.search(r"\bSPECIAL\b|\bSPL\b|\bSPCL\b", t)))
 
 
 def similarity(a: list[str], b: list[str]) -> float:
@@ -170,7 +170,8 @@ def similarity(a: list[str], b: list[str]) -> float:
     if all(opens(w, long_) for w in short):
         if len(set(short)) == 1 and len(long_) > 1:        # one word inside a longer name: only as its start
             lead = (b if short is a else a)[0]
-            return 0.86 if len(short[0]) >= 3 and (lead.startswith(short[0]) or short[0].startswith(lead)) else 0.8
+            return 0.86 if short[0] == lead or (len(short[0]) >= 3 and (lead.startswith(short[0])
+                                                                       or short[0].startswith(lead))) else 0.8
         return 0.85 + 0.15 * len(sa & sb) / len(sa | sb)
     ja, jb = "".join(sorted(a)), "".join(sorted(b))
     return difflib.SequenceMatcher(None, " ".join(a), " ".join(b)).ratio() * 0.8 + \
@@ -259,6 +260,20 @@ NOT_A_STOCK = re.compile(r"\b(warrants?|rights?|contingent value|escrow|futures?
                          r"cash|collateral|miscellaneous)\b", re.I)
 
 
+def load_ftd_names() -> dict[str, list[tuple[str, date, date, str]]]:
+    """cusip -> [(ticker, first, last, SEC description)] with each description's own dates (the
+    pairs files keep only the latest description: CVS HEALTH for a 2010 fund line "CVS Caremark")."""
+    if not all(f.exists() for f in NAME_FILES):
+        return load_ftd()
+    out: dict[str, list] = defaultdict(list)
+    for f in NAME_FILES:
+        for r in csv.DictReader(f.open()):
+            if r["symbol"].strip() and not PLACEHOLDER.search(r["symbol"]):
+                out[r["cusip"]].append((key(r["symbol"]), date.fromisoformat(r["first_seen"]),
+                                        date.fromisoformat(r["last_seen"]), r["description"].replace("\x00", "")))
+    return out
+
+
 def load_13f(ftd: dict) -> int:
     """Add the SEC 13(f) lists' issuer names (2002 Q4 onward) to the fails data, under the ticker
     the same CUSIP first traded as. Before Mar 2004 these are the only SEC names with a date."""
@@ -284,14 +299,15 @@ NON_STOCK_OTHER = re.compile(r"cash|fund|money|treasury|bill|note|reserve|trust|
 COMPANY = re.compile(r"\b(inc|ltd|corp|co|plc|company)\.?$", re.I)
 
 
-def load_fund_lists() -> dict[tuple[str, date], list[tuple[int, str, str]]]:
+def load_fund_lists(summary: Path = FUND_SUMMARY, holdings: Path = FUND_HOLDINGS
+                    ) -> dict[tuple[str, date], list[tuple[int, str, str]]]:
     """(fund, period end) -> [(line_no, name, section)] for stock lines of complete schedules."""
     usable = set()
-    for r in csv.DictReader(FUND_SUMMARY.open()):
+    for r in csv.DictReader(summary.open()):
         if r["complete"] == "true":            # 480-520 lines adding up to the filing's own stock total
             usable.add((r["fund"], r["period_end"]))
     lists: dict = defaultdict(list)
-    for r in csv.DictReader(FUND_HOLDINGS.open()):
+    for r in csv.DictReader(holdings.open()):
         name = re.sub(r"^(table of contents\s*)?[\s^*\u2020\u2021#@+()-]*", "", r["name"], flags=re.I).strip()
         if (r["fund"], r["period_end"]) not in usable or NOT_A_STOCK.search(name):
             continue
@@ -299,7 +315,11 @@ def load_fund_lists() -> dict[tuple[str, date], list[tuple[int, str, str]]]:
         # too (Schwab's "Invesco Ltd.", 2008-09). Keep an "other" line only if it reads as a company.
         if r["section"].startswith("other") and (NON_STOCK_OTHER.search(name) or not COMPANY.search(name)):
             continue
-        lists[(r["fund"], date.fromisoformat(r["period_end"]))].append((int(r["line_no"]), name, r["section"]))
+        lst = lists[(r["fund"], date.fromisoformat(r["period_end"]))]
+        # Fidelity prints "News Corp.: Class A" then a line "Class B": give it the company.
+        if re.match(r"(?i)class\s+[a-c]\b", name) and lst and ":" in lst[-1][1]:
+            name = lst[-1][1].split(":")[0] + ": " + name
+        lst.append((int(r["line_no"]), name, r["section"]))
     return lists
 
 
@@ -313,7 +333,7 @@ def db_rows(dsn: str, sql: str, params=()) -> list[tuple]:
 class Namer:
     """Names a fund holding: which ticker's issuer it is, at a date."""
 
-    def __init__(self, ftd: dict, known_names: dict[str, set[str]]):
+    def __init__(self, ftd: dict, known_names: dict[str, set[str]], dated_names=(), renames=()):
         self.rows = [(c, s, a, b, d, norm_words(d)) for c, pairs in ftd.items() for s, a, b, d in pairs]
         self.by_word = defaultdict(list)
         self.by_sym = defaultdict(list)
@@ -325,18 +345,31 @@ class Namer:
                     self.by_word[w].append(i)
             self.by_sym[r[1]].append(i)
         self.known = {k: [norm_words(n) for n in v] for k, v in known_names.items()}   # ticker -> S&P's names
+        self.came_from = defaultdict(list)          # new ticker -> [(rename date, old ticker)]
+        for d, o, n in renames:
+            self.came_from[n].append((d, o))
+        self.dated = defaultdict(list)                                                  # ticker -> (name, from, to)
+        for sym, n, a, b in dated_names:
+            self.dated[sym].append((norm_words(n), a, b))
 
-    def names_of(self, sym: str, d: date) -> list[tuple[list[str], str]]:
+    def names_of(self, sym: str, d: date, depth: int = 0) -> list[tuple[list[str], str]]:
         """Reduced names a ticker went by near d: the SEC's descriptions, then S&P's names."""
         # A member's names over the year around d: funds print a company's old name for months
         # ("Sprint Corp. (FON Group)" in 2006). Safe, as only the roll's members are matched this way.
-        # The CUSIPs are the ones the ticker traded under near d (tickers are reused: S was Sears, then Sprint).
-        near = lambda r, w: r[2] - timedelta(days=w) <= d <= r[3] + timedelta(days=w)  # noqa: E731
-        out = [(r[5], r[4]) for c in {self.rows[i][0] for i in self.by_sym.get(sym, []) if near(self.rows[i], FTD_WINDOW)}
-               for j in self.by_cusip[c] for r in [self.rows[j]] if near(r, NAME_WINDOW)]
+        # The CUSIPs are the ones the ticker traded under up to d (tickers are reused: S was Sears,
+        # then Sprint, so never a later CUSIP); the names are every name those CUSIPs carried up to
+        # d, however old (Fidelity still printed "MGM Mirage" in 2018, eight years after the rename).
+        lo, hi = d - timedelta(days=NAME_WINDOW), d + timedelta(days=FTD_WINDOW)
+        cus = {self.rows[i][0] for i in self.by_sym.get(sym, []) if self.rows[i][2] <= hi and self.rows[i][3] >= lo}
+        out = [(r[5], r[4]) for c in cus for j in self.by_cusip[c] for r in [self.rows[j]] if r[2] <= hi]
         if not out:      # before Mar 2004, or never failed: any sighting, then S&P's own names
             out = [(self.rows[i][5], self.rows[i][4]) for i in self.by_sym.get(sym, [])]
-        return out + [(w, "S&P") for w in self.known.get(sym, [])]
+        # A renamed member also answers to the names of the ticker it came from (Fidelity printed
+        # "McGraw Hill Financial" for S&P Global, SPGI, and "Quintiles Transnational" for IQVIA).
+        older = [x for rd, o in self.came_from.get(sym, []) if rd <= d + timedelta(days=FTD_WINDOW) and depth < 3
+                 for x in self.names_of(o, rd - timedelta(days=1), depth + 1)]
+        return out + older + [(w, "S&P") for w in self.known.get(sym, [])] + \
+            [(w, "S&P, before a ticker change") for w, a, b in self.dated.get(sym, []) if a <= d <= b]
 
     def cusips_of(self, sym: str, d: date) -> set[str]:
         """The CUSIPs a ticker traded under near d (any date if none near)."""
@@ -365,10 +398,11 @@ class Namer:
 
 
 def class_bonus(a: str, b: str) -> float:
-    ca, cb = share_class(a), share_class(b)
-    if ca == cb:
-        return 0.05 if ca else 0.0
-    return -0.1 if ca and cb else 0.0
+    (la, sa), (lb, sb) = share_class(a), share_class(b)
+    bonus = (0.05 if la == lb else -0.1) if la and lb else 0.0
+    if sa or sb:                     # Comcast's special class A line against its class A line
+        bonus += 0.03 if sa == sb else -0.05
+    return bonus
 
 
 MATCH = 0.85
@@ -452,6 +486,91 @@ def ftd_renames(ftd: dict) -> list[tuple[date, str, str, str]]:
     return out
 
 
+def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, list]:
+    """Label every difference between the fund lists and the roll (appended to each result's
+    notes); return the confirmed month-ends and the cross-fund suspects. Shared with
+    build_sp500_modern.py for its 2010-2019 name-only lists."""
+    # Why each difference is there. Funds trade around S&P's dates and keep what a deal or a
+    # spin-off hands them; anything else is a candidate for a change the roll is missing.
+    when = defaultdict(list)                 # ticker -> [(effective, action)]
+    for d in steps:
+        for op, k, new in steps[d]:
+            if op in ("include", "exclude"):
+                when[k].append((d, op))
+
+    def why(t: str, side: str, p: date) -> str:
+        want = "exclude" if side == "fund" else "include"
+        if t not in when and t[-1:] in ("D", "E", "Q") and t[:-1] in when:
+            t = t[:-1]                          # PMTCD, a temporary ticker of PMTC
+        # A fund trades a few days before or after S&P's date (it buys an addition early, keeps
+        # a deletion until a deal closes), so any S&P change of the ticker within 10 days explains it.
+        near = [(d, op) for d, op in when.get(t, []) if -10 <= (d - p).days <= 10]
+        if near:
+            return f"timing: S&P {'deleted' if near[0][1] == 'exclude' else 'added'} {t} effective {near[0][0]}"
+        ren = [d for d, o, n in applied_renames if t in (o, n) and -10 <= (d - p).days <= 10]
+        if ren:
+            return f"timing: {t} changed ticker effective {ren[0]}"
+        if side == "fund":
+            gone = [d for d, op in when.get(t, []) if op == "exclude" and d <= p]
+            if gone:
+                return f"fund still held {t} after S&P deleted it effective {max(gone)}"
+            return f"not an index member: {t} came to the fund from a deal or spin-off, or the fund chose it"
+        return f"fund did not hold member {t}"
+    persist = Counter()
+    for r in results:
+        for t in r[4].values():
+            r[7].append("fund-only " + why(t, "fund", r[0]))
+            if why(t, "fund", r[0]).startswith("not an index"):
+                persist[("fund", t)] += 1
+        for t in r[5]:
+            w = why(t, "roll", r[0])
+            r[7].append("roll-only " + w)
+            if not w.startswith("timing"):
+                persist[("roll", t)] += 1
+    log(f"differences not explained by S&P's dates, by ticker and month-ends seen: "
+        f"{sorted(persist.items(), key=lambda kv: -kv[1])}")
+
+    # Cross-fund: a member one fund did not hold is a fund lag if another fund held it within 45
+    # days; if no fund held it, S&P may have deleted it without a surviving notice. A non-member
+    # every fund held within 45 days may be a missing S&P addition. Both lists should be empty.
+    held = [(r[0], r[1], set(r[3].values())) for r in results]
+    suspects = []
+    for r in results:
+        near = [(p2, f2, h) for p2, f2, h in held if abs((p2 - r[0]).days) <= 45 and (p2, f2) != (r[0], r[1])]
+        for t in r[5]:
+            if why(t, "roll", r[0]).startswith("timing"):
+                continue
+            who = next(((p2, f2) for p2, f2, h in near if t in h), None)
+            if who:
+                r[7].append(f"roll-only {t}: {who[1]} held it at {who[0]} (a lag at {r[1]})")
+            else:
+                suspects.append((r[0], f"member {t} held by no fund list within 45 days of {r[0]}"))
+        for t in r[4].values():
+            if why(t, "fund", r[0]).startswith("not an index") and near and all(t in h for _, _, h in near):
+                suspects.append((r[0], f"non-member {t} held by every fund list within 45 days of {r[0]}"))
+    log(f"cross-fund suspects (a change the roll may be missing): {suspects}")
+
+    # A month-end is confirmed when at least one fund's list there equals the roll exactly, or
+    # when every difference in some fund's list is timing around one of S&P's own dates.
+    by_p = defaultdict(list)
+    for r in results:
+        by_p[r[0]].append(r)
+
+    def clean(r) -> bool:
+        if r[6]:
+            return False
+        diffs = [x for x in r[7] if x.startswith(("fund-only", "roll-only"))]
+        return all(": timing:" in x.replace("only timing", "only: timing") or "timing:" in x for x in diffs)
+    confirmed = {p for p, rs in by_p.items() if any(clean(r) for r in rs)}
+    for p in sorted(set(by_p) - confirmed):
+        best = min(by_p[p], key=lambda r: len(r[4]) + len(r[5]) + len(r[6]))
+        log(f"   unconfirmed {p} {best[1]}: " + "; ".join(x for x in best[7] if x.startswith(("fund-only", "roll-only")))
+            + (f"; unnamed {[u[1] for u in best[6]]}" if best[6] else ""))
+    log(f"month-ends with a fund list matching exactly or only by S&P-date timing: {len(confirmed)} of {len(by_p)}; "
+        f"not confirmed: {sorted(str(p) for p in set(by_p) - confirmed)}")
+    return confirmed, suspects
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--dry-run", action="store_true", help="build and check; write nothing")
@@ -461,7 +580,7 @@ def main() -> int:
 
     changes, other = load_changes()
     ftd = load_ftd()
-    named_ids = {c: list(v) for c, v in ftd.items()}        # fails data + 13(f) names, for naming only
+    named_ids = load_ftd_names()                            # dated SEC names + 13(f) names, for naming only
     n13f = load_13f(named_ids)
     lists = load_fund_lists()
     start = {r[0] for r in db_rows(args.dsn, "select symbol from usmarket.index_members_on(%s, %s)", (INDEX, FIRST))}
@@ -480,6 +599,15 @@ def main() -> int:
         known[key(sym)].add(co)
     for c in changes:
         known[key(c.symbol)].add(c.company)
+    # Around a ticker change S&P listed, the new ticker also answers to the old company name
+    # (funds printed "Stilwell Financial" for Janus, JNS). Dated: S was Sears before it was Sprint.
+    dated_names = []
+    if TICKER_CHANGES.exists():
+        for r in csv.DictReader(TICKER_CHANGES.open()):
+            if r["new_symbol"] and r["old_company"] and r["effective_date"]:
+                eff = date.fromisoformat(r["effective_date"])
+                dated_names.append((key(r["new_symbol"]), r["old_company"], eff - timedelta(days=10),
+                                    eff + timedelta(days=NAME_WINDOW)))
         if "." in c.symbol or key(c.symbol) not in display:
             display[key(c.symbol)] = c.symbol
     log(f"start {FIRST}: {len(start)} members; end {LAST}: {len(end)}; S&P changes {len(changes)} dated, "
@@ -553,7 +681,7 @@ def main() -> int:
         return snaps[max(ds)] if ds else first_state
 
     # Fund month-ends: the list at the close of p against the roll effective the next trading day.
-    namer = Namer(named_ids, known)
+    namer = Namer(named_ids, known, dated_names, [(d, o, n) for d, o, n, _ in renames])
     results = []
     for (fund, p) in sorted((fp for fp in lists if FIRST <= fp[1] < date(2010, 1, 1)), key=lambda fp: (fp[1], fp[0])):
         eff = next_trading_day(p)
@@ -572,61 +700,7 @@ def main() -> int:
                 f"fund-only {[(missing[ln], nm[ln][:28]) for ln in list(missing)[:args.show]]}  "
                 f"roll-only {extra[:args.show]}  unnamed {[x[1][:30] for x in unnamed[:args.show]]}")
 
-    # Why each difference is there. Funds trade around S&P's dates and keep what a deal or a
-    # spin-off hands them; anything else is a candidate for a change the roll is missing.
-    when = defaultdict(list)                 # ticker -> [(effective, action)]
-    for d in steps:
-        for op, k, new in steps[d]:
-            if op in ("include", "exclude"):
-                when[k].append((d, op))
-    ever = set().union(*snaps.values()) | first_state
-
-    def why(t: str, side: str, p: date) -> str:
-        want = "exclude" if side == "fund" else "include"
-        if t not in when and t[-1:] in ("D", "E", "Q") and t[:-1] in when:
-            t = t[:-1]                          # PMTCD, a temporary ticker of PMTC
-        # A fund trades a few days before or after S&P's date (it buys an addition early, keeps
-        # a deletion until a deal closes), so any S&P change of the ticker within 10 days explains it.
-        near = [(d, op) for d, op in when.get(t, []) if -10 <= (d - p).days <= 10]
-        if near:
-            return f"timing: S&P {'deleted' if near[0][1] == 'exclude' else 'added'} {t} effective {near[0][0]}"
-        ren = [d for d, o, n in applied_renames if t in (o, n) and -10 <= (d - p).days <= 10]
-        if ren:
-            return f"timing: {t} changed ticker effective {ren[0]}"
-        if side == "fund":
-            gone = [d for d, op in when.get(t, []) if op == "exclude" and d <= p]
-            if gone:
-                return f"fund still held {t} after S&P deleted it effective {max(gone)}"
-            return f"not an index member: {t} came to the fund from a deal or spin-off, or the fund chose it"
-        return f"fund did not hold member {t}"
-    persist = Counter()
-    for r in results:
-        for t in r[4].values():
-            r[7].append("fund-only " + why(t, "fund", r[0]))
-            if why(t, "fund", r[0]).startswith("not an index"):
-                persist[("fund", t)] += 1
-        for t in r[5]:
-            w = why(t, "roll", r[0])
-            r[7].append("roll-only " + w)
-            if not w.startswith("timing"):
-                persist[("roll", t)] += 1
-    log(f"differences not explained by S&P's dates, by ticker and month-ends seen: "
-        f"{sorted(persist.items(), key=lambda kv: -kv[1])}")
-
-    # A month-end is confirmed when at least one fund's list there equals the roll exactly, or
-    # when every difference in some fund's list is timing around one of S&P's own dates.
-    by_p = defaultdict(list)
-    for r in results:
-        by_p[r[0]].append(r)
-
-    def clean(r) -> bool:
-        if r[6]:
-            return False
-        diffs = [x for x in r[7] if x.startswith(("fund-only", "roll-only"))]
-        return all(": timing:" in x.replace("only timing", "only: timing") or "timing:" in x for x in diffs)
-    confirmed = {p for p, rs in by_p.items() if any(clean(r) for r in rs)}
-    log(f"month-ends with a fund list matching exactly or only by S&P-date timing: {len(confirmed)} of {len(by_p)}; "
-        f"not confirmed: {sorted(str(p) for p in set(by_p) - confirmed)}")
+    confirmed, suspects = classify(results, steps, applied_renames)
 
     final = state_on(LAST)
     end_k = {key(s) for s in end}
@@ -640,11 +714,11 @@ def main() -> int:
         log("dry run: nothing written")
         return 0
     return write(args.dsn, changes, snaps, results, contradictions, applied_renames, renames, display, lists,
-                 final == end_k, sorted(final - end_k), sorted(end_k - final), confirmed)
+                 final == end_k, sorted(final - end_k), sorted(end_k - final), confirmed, suspects)
 
 
 def write(dsn, changes, snaps, results, contradictions, applied_renames, renames, display, lists,
-          end_ok, roll_only, modern_only, confirmed) -> int:
+          end_ok, roll_only, modern_only, confirmed, suspects) -> int:
     import psycopg2  # noqa: PLC0415
     from psycopg2.extras import execute_values  # noqa: PLC0415
 
@@ -757,6 +831,9 @@ def write(dsn, changes, snaps, results, contradictions, applied_renames, renames
                               f"S&P deleted more members than it added on {short_since}; the count returns to 500 "
                               f"when S&P names the replacement" if ok
                               else "Count off 500 that S&P's changes do not explain"))
+        recon.append((INDEX, "cross_fund_suspects", date(2009, 12, 30), not suspects, 0, len(suspects), [], [],
+                      "Members no fund list held within 45 days, and non-members every fund list held, "
+                      "2002-12 to 2009-12: " + ("; ".join(f"{d}: {m}" for d, m in suspects) if suspects else "none")))
         recon.append((INDEX, "end_vs_2010_list", date(2009, 12, 31), end_ok, None, None,
                       [display.get(k, k) for k in modern_only], [display.get(k, k) for k in roll_only],
                       f"Roll on {LAST} vs build_sp500_modern.py's {LAST} list. missing = modern list has, roll "

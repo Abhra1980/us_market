@@ -14,8 +14,8 @@ select * from usmarket.index_membership_coverage order by covered_from;  -- whic
 | Stretch | How it is built | Checked by | `is_verified` |
 |---|---|---|---|
 | 1999-01-04 → 2002-11-29 | S&P's 1999–2002 change lists and its 2000–2002 name and ticker change pages, rolled from S&P's own full list `500alpha.csv` (June 2001) | SPDR's Sep 2001 holdings: 491 of 500 by name automatically, the last 9 paired by eye | June 2001 snapshot only |
-| 2002-11-30 → 2010-01-03 | S&P's own "Implemented Index Additions and Deletions" table (complete July 2002 – Nov 2009 by S&P's printed row count), its releases and ticker-change table, rolled forward from Nov 2002 | Arrives exactly at the 4 Jan 2010 list the 2010 build rolls back to; fund holdings at 79 month-ends (138 lists): 57 confirmed | Between two confirmed month-ends |
-| 2010-01-04 → 2019-09-30 | S&P's press releases rolled back from the Sep 2019 fund lists | Every member traded under its ticker near each date (SEC fails data) | No |
+| 2002-11-30 → 2010-01-03 | S&P's own "Implemented Index Additions and Deletions" table (complete July 2002 – Nov 2009 by S&P's printed row count), its releases and ticker-change table, rolled forward from Nov 2002 | Arrives exactly at the 4 Jan 2010 list the 2010 build rolls back to; fund holdings by name at 79 month-ends (129 lists): 59 confirmed, the rest explained, no cross-fund suspects | Between two confirmed month-ends |
+| 2010-01-04 → 2019-09-30 | S&P's press releases rolled back from the Sep 2019 fund lists | Fund holdings by name (N-CSR/N-Q) at 111 month-ends (197 lists): 96 confirmed, the rest explained, no cross-fund suspects; every member traded under its ticker near each date (SEC fails data) | Between two confirmed month-ends |
 | 2019-10-01 → today | S&P's press releases rolled from the 30 Jun 2026 fund lists | Fund holdings at all 83 month-ends Sep 2019–Jul 2026: 68 match exactly | Where the month-ends on both sides match |
 
 Every membership change comes from S&P's text. Fund lists only check it (RESEARCH.md decision 1,
@@ -29,6 +29,7 @@ python3 sp500_history/membership/fetch_sp_press.py          # S&P releases -> da
 python3 sp500_history/membership/fetch_sec_holdings.py      # SEC NPORT-P + fails data (cached; sec.gov)
 python3 sp500_history/membership/fetch_sp_press_2003_2009.py        # S&P 2003-2009 pages (Wayback) -> data/*_2003_2009.csv
 python3 sp500_history/membership/fetch_sec_fundlists_2002_2009.py   # fund N-CSR/N-Q schedules 2002-2010 (sec.gov)
+python3 sp500_history/membership/fetch_sec_fundlists_2002_2009.py --from 2010-04-30 --to 2019-09-30   # ... 2010-2019
 python3 sp500_history/membership/fetch_sec_13f_lists.py             # SEC 13(f) lists 2002-2010 (sec.gov; OCR for 2002-03 scans)
 python3 sp500_history/membership/fetch_sec_holdings.py --ftd-from 2004-03   # SEC fails data Mar 2004 - Jun 2009
 python3 sp500_history/membership/build_sp500_membership.py  # 1999 to Nov 2002 rows
@@ -71,8 +72,9 @@ go to `sp500_history/downloads/` (not in git).
   month-end (Citrix, Duke Realty, IHS Markit), rights and warrants, and a same-week ticker change.
 - Schwab's fund holds one Fox and one News Corp line from Oct 2023; its month-ends are checked
   with FOX and NWS excused, and say so in `note`.
-- 2010–2019 has no fund list in this build. Every member traded under its ticker within 120 days
-  of each snapshot, except old Fox's one-day tickers TFCF/TFCFA (19 Mar 2019).
+- 2010–2019 is checked against the funds' N-CSR/N-Q lists by name (98 of 197 exact, 96 of 111
+  month-ends confirmed) and every member traded under its ticker within 120 days of each
+  snapshot, except old Fox's one-day tickers TFCF/TFCFA (19 Mar 2019).
 
 ## Things to know before using it
 
@@ -107,8 +109,15 @@ go to `sp500_history/downloads/` (not in git).
   closes), a stock kept after S&P deleted it, a stock handed over in a deal or spin-off (Tronox B,
   Teva for Barr, McClatchy for Knight Ridder), or a member the fund did not hold (Schwab lagged
   the index by months in early 2007).
+- **Matching names to tickers:** the SEC's issuer name as of each date (`ftd_cusip_names*.csv`,
+  written by `fetch_sec_holdings.py`), the 13(f) lists, S&P's own company names, and every name a
+  member's CUSIPs and former tickers carried before (Fidelity printed "MGM Mirage" in 2018).
+  Another share class of a member, and an old name on the same CUSIP, are not differences.
+- **Cross-fund check:** a member one fund lacks must be held by another fund within 45 days, and
+  a non-member every fund holds would mean a missing addition. Both lists are empty for
+  2003–2009 and for 2010–2019 (`cross_fund_suspects` in the reconciliation table).
 - **Results:** 0 roll contradictions; the roll lands on the 2010 build's 4 Jan 2010 list with
-  all 500 members equal; 49 of 129 fund lists match exactly and 57 of 79 month-ends are
+  all 500 members equal; 54 of 129 fund lists match exactly and 59 of 79 month-ends are
   confirmed. Counts below 500 (14 days, e.g. Fannie Mae and Freddie Mac, Sep 2008) are S&P
   deleting a member before naming its replacement.
 - **Earlier years corrected:** S&P's 2000–2002 ticker pages now date the 1999–2002 build's ticker
