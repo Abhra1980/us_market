@@ -294,6 +294,14 @@ def load_13f(ftd: dict) -> int:
     return added
 
 
+# Names a filing misprints, read as the holding they are. Each with its evidence.
+FUND_NAME_FIXES = {
+    ("FUSEX", "Pricoa Global Funding I"): (
+        "Prudential Financial, Inc.",
+        "Fidelity's Feb and May 2016 schedules print Prudential's funding subsidiary in Prudential's "
+        "alphabetical place among the insurers; Feb 2016: 2,279,841 shares worth $150.7M ($66.09 a share, "
+        "Prudential's price that month)"),
+}
 NON_STOCK_OTHER = re.compile(r"cash|fund|money|treasury|bill|note|reserve|trust|portfolio|deposit|liquid|govern|"
                              r"agency|paper|coupon|face|expires|\d", re.I)
 COMPANY = re.compile(r"\b(inc|ltd|corp|co|plc|company)\.?$", re.I)
@@ -315,6 +323,7 @@ def load_fund_lists(summary: Path = FUND_SUMMARY, holdings: Path = FUND_HOLDINGS
         # too (Schwab's "Invesco Ltd.", 2008-09). Keep an "other" line only if it reads as a company.
         if r["section"].startswith("other") and (NON_STOCK_OTHER.search(name) or not COMPANY.search(name)):
             continue
+        name = FUND_NAME_FIXES.get((r["fund"], name), (name,))[0]
         lst = lists[(r["fund"], date.fromisoformat(r["period_end"]))]
         # Fidelity prints "News Corp.: Class A" then a line "Class B": give it the company.
         if re.match(r"(?i)class\s+[a-c]\b", name) and lst and ":" in lst[-1][1]:
@@ -446,6 +455,17 @@ def check_list(namer: Namer, lines: list, roll: frozenset, d: date):
         else:
             unnamed.append((ln, name))
     extra = sorted(roll - used)
+    # A misprinted name ("ennar Corp." for Lennar, Schwab Jul 2009): an unnamed line whose spelling is
+    # very close to the name of a member no line matched.
+    for u in list(unnamed):
+        j = "".join(norm_words(u[1]))
+        hit = max(((difflib.SequenceMatcher(None, j, "".join(rw)).ratio(), x) for x in extra
+                   for rw, _ in names[x] if rw), default=(0, None))
+        if hit[0] >= 0.9:
+            named[u[0]] = hit[1]
+            extra.remove(hit[1])
+            unnamed.remove(u)
+            excused.append(f"{u[1]!r} read as {hit[1]} (misprinted name)")
     # A fund-only ticker and a roll-only ticker on the same CUSIP are one security under two
     # labels (a fund printing the old name after a rename, or the SEC's ticker lagging S&P's).
     # A fund-only ticker whose issuer (CUSIP's first six characters) is a member's is another
@@ -486,7 +506,7 @@ def ftd_renames(ftd: dict) -> list[tuple[date, str, str, str]]:
     return out
 
 
-def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, list]:
+def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, list, set]:
     """Label every difference between the fund lists and the roll (appended to each result's
     notes); return the confirmed month-ends and the cross-fund suspects. Shared with
     build_sp500_modern.py for its 2010-2019 name-only lists."""
@@ -562,13 +582,44 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
         diffs = [x for x in r[7] if x.startswith(("fund-only", "roll-only"))]
         return all(": timing:" in x.replace("only timing", "only: timing") or "timing:" in x for x in diffs)
     confirmed = {p for p, rs in by_p.items() if any(clean(r) for r in rs)}
+
+    def open_items(r) -> list[str]:
+        """Differences with no stored cause: a member no other fund held either, a fund line
+        that names no ticker, a non-member every fund held."""
+        lagged = {x.split(":")[0].split()[-1] for x in r[7] if "(a lag at" in x}
+        out = [f"member {t} not held" for t in r[5]
+               if not why(t, "roll", r[0]).startswith("timing") and t not in lagged]
+        out += [f"unnamed line {u[1]!r}" for u in r[6]]
+        out += [m for d, m in suspects if d == r[0] and any(t in m for t in r[4].values())]
+        return out
+    explained = {p for p, rs in by_p.items() if p not in confirmed and any(not open_items(r) for r in rs)}
+    for r in results:
+        r[7].append("open: " + ("; ".join(open_items(r)) or "none"))
     for p in sorted(set(by_p) - confirmed):
         best = min(by_p[p], key=lambda r: len(r[4]) + len(r[5]) + len(r[6]))
         log(f"   unconfirmed {p} {best[1]}: " + "; ".join(x for x in best[7] if x.startswith(("fund-only", "roll-only")))
             + (f"; unnamed {[u[1] for u in best[6]]}" if best[6] else ""))
-    log(f"month-ends with a fund list matching exactly or only by S&P-date timing: {len(confirmed)} of {len(by_p)}; "
-        f"not confirmed: {sorted(str(p) for p in set(by_p) - confirmed)}")
-    return confirmed, suspects
+    unexplained = sorted(set(by_p) - confirmed - explained)
+    log(f"month-ends: {len(confirmed)} confirmed (a fund list matches exactly or only by S&P-date timing), "
+        f"{len(explained)} explained (every difference in some fund's list has a stored cause), "
+        f"{len(unexplained)} unexplained {[str(p) for p in unexplained]}, of {len(by_p)}")
+    return confirmed, suspects, explained
+
+
+def month_end_status(index: str, results: list, confirmed: set, explained: set) -> list[tuple]:
+    """One reconciliation row per fund month-end: confirmed, explained or unexplained."""
+    rows = []
+    for p in sorted({r[0] for r in results}):
+        st = "confirmed" if p in confirmed else "explained" if p in explained else "unexplained"
+        funds = "+".join(r[1] for r in results if r[0] == p)
+        rows.append((index, "month_end_status", p, st != "unexplained", None, None, [], [],
+                     f"{st}: " + {"confirmed": "a fund list matches the roll exactly or differs only by timing "
+                                                "around S&P's own dates",
+                                  "explained": "every difference in at least one fund's list has a stored cause "
+                                               "(timing, a stock kept after S&P deleted it, deal or spin-off shares, "
+                                               "another fund holding the member)",
+                                  "unexplained": "a difference with no stored cause"}[st] + f" ({funds})"))
+    return rows
 
 
 def main() -> int:
@@ -700,7 +751,7 @@ def main() -> int:
                 f"fund-only {[(missing[ln], nm[ln][:28]) for ln in list(missing)[:args.show]]}  "
                 f"roll-only {extra[:args.show]}  unnamed {[x[1][:30] for x in unnamed[:args.show]]}")
 
-    confirmed, suspects = classify(results, steps, applied_renames)
+    confirmed, suspects, explained = classify(results, steps, applied_renames)
 
     final = state_on(LAST)
     end_k = {key(s) for s in end}
@@ -714,11 +765,11 @@ def main() -> int:
         log("dry run: nothing written")
         return 0
     return write(args.dsn, changes, snaps, results, contradictions, applied_renames, renames, display, lists,
-                 final == end_k, sorted(final - end_k), sorted(end_k - final), confirmed, suspects)
+                 final == end_k, sorted(final - end_k), sorted(end_k - final), confirmed, suspects, explained)
 
 
 def write(dsn, changes, snaps, results, contradictions, applied_renames, renames, display, lists,
-          end_ok, roll_only, modern_only, confirmed, suspects) -> int:
+          end_ok, roll_only, modern_only, confirmed, suspects, explained) -> int:
     import psycopg2  # noqa: PLC0415
     from psycopg2.extras import execute_values  # noqa: PLC0415
 
@@ -831,6 +882,7 @@ def write(dsn, changes, snaps, results, contradictions, applied_renames, renames
                               f"S&P deleted more members than it added on {short_since}; the count returns to 500 "
                               f"when S&P names the replacement" if ok
                               else "Count off 500 that S&P's changes do not explain"))
+        recon += month_end_status(INDEX, results, confirmed, explained)
         recon.append((INDEX, "cross_fund_suspects", date(2009, 12, 30), not suspects, 0, len(suspects), [], [],
                       "Members no fund list held within 45 days, and non-members every fund list held, "
                       "2002-12 to 2009-12: " + ("; ".join(f"{d}: {m}" for d, m in suspects) if suspects else "none")))

@@ -14,9 +14,32 @@ select * from usmarket.index_membership_coverage order by covered_from;  -- whic
 | Stretch | How it is built | Checked by | `is_verified` |
 |---|---|---|---|
 | 1999-01-04 → 2002-11-29 | S&P's 1999–2002 change lists and its 2000–2002 name and ticker change pages, rolled from S&P's own full list `500alpha.csv` (June 2001) | SPDR's Sep 2001 holdings: 491 of 500 by name automatically, the last 9 paired by eye | June 2001 snapshot only |
-| 2002-11-30 → 2010-01-03 | S&P's own "Implemented Index Additions and Deletions" table (complete July 2002 – Nov 2009 by S&P's printed row count), its releases and ticker-change table, rolled forward from Nov 2002 | Arrives exactly at the 4 Jan 2010 list the 2010 build rolls back to; fund holdings by name at 79 month-ends (129 lists): 59 confirmed, the rest explained, no cross-fund suspects | Between two confirmed month-ends |
-| 2010-01-04 → 2019-09-30 | S&P's press releases rolled back from the Sep 2019 fund lists | Fund holdings by name (N-CSR/N-Q) at 111 month-ends (197 lists): 96 confirmed, the rest explained, no cross-fund suspects; every member traded under its ticker near each date (SEC fails data) | Between two confirmed month-ends |
+| 2002-11-30 → 2010-01-03 | S&P's own "Implemented Index Additions and Deletions" table (complete July 2002 – Nov 2009 by S&P's printed row count), its releases and ticker-change table, rolled forward from Nov 2002 | Arrives exactly at the 4 Jan 2010 list the 2010 build rolls back to; fund holdings by name at 79 month-ends (129 lists): 59 confirmed, 20 explained, no cross-fund suspects | Between two confirmed month-ends |
+| 2010-01-04 → 2019-09-30 | S&P's press releases rolled back from the Sep 2019 fund lists | Fund holdings by name (N-CSR/N-Q) at 111 month-ends (197 lists): 97 confirmed, 14 explained, no cross-fund suspects; every member traded under its ticker near each date (SEC fails data) | Between two confirmed month-ends |
 | 2019-10-01 → today | S&P's press releases rolled from the 30 Jun 2026 fund lists | Fund holdings at all 83 month-ends Sep 2019–Jul 2026: 68 match exactly | Where the month-ends on both sides match |
+
+**Every fund month-end has a status** (`check_name = 'month_end_status'`, `'month_end_status_nport'`):
+*confirmed* when a fund list matches the roll exactly or differs only by timing around S&P's own
+dates; *explained* when every difference in some fund's list has a stored cause (a stock kept
+after S&P deleted it, deal or spin-off shares, another fund holding the member, a misprinted
+name); *unexplained* otherwise.
+
+| Stretch | Month-ends | Confirmed | Explained | Unexplained |
+|---|---|---|---|---|
+| 2002-12 → 2009-12 (names) | 79 | 59 | 20 | 0 |
+| 2010-01 → 2019-08 (names) | 111 | 97 | 14 | 0 |
+| 2019-09 → 2026-07 (NPORT) | 83 | 77 | 6 | 0 |
+
+## Daily refresh (Abhrajit's Mac)
+
+A launchd job at 07:30 IST fetches new S&P releases (`fetch_sp_press.py --refresh-archive`), new
+SEC fund filings and fails data (`fetch_sec_holdings.py`) and rebuilds 2010 onward
+(`build_sp500_modern.py`), so coverage runs to the day of the last run. It skips quietly if SSD1
+or Postgres is down; the SEC contact comes from the macOS Keychain (service `SEC_USER_AGENT`).
+
+- Job: `~/Library/LaunchAgents/com.abhra.usmarket-sp500-daily.plist`, script
+  `~/.local/bin/com.abhra.usmarket-sp500-daily.sh`, log `~/Library/Logs/com.abhra.usmarket-sp500-daily.log`
+- Run now: `launchctl kickstart gui/$(id -u)/com.abhra.usmarket-sp500-daily`
 
 Every membership change comes from S&P's text. Fund lists only check it (RESEARCH.md decision 1,
 accepted 2026-10-12). Where S&P's archive has no release, the change is listed in the build
@@ -72,8 +95,8 @@ go to `sp500_history/downloads/` (not in git).
   month-end (Citrix, Duke Realty, IHS Markit), rights and warrants, and a same-week ticker change.
 - Schwab's fund holds one Fox and one News Corp line from Oct 2023; its month-ends are checked
   with FOX and NWS excused, and say so in `note`.
-- 2010–2019 is checked against the funds' N-CSR/N-Q lists by name (98 of 197 exact, 96 of 111
-  month-ends confirmed) and every member traded under its ticker within 120 days of each
+- 2010–2019 is checked against the funds' N-CSR/N-Q lists by name (99 of 197 exact, 97 of 111
+  month-ends confirmed, 14 explained) and every member traded under its ticker within 120 days of each
   snapshot, except old Fox's one-day tickers TFCF/TFCFA (19 Mar 2019).
 
 ## Things to know before using it

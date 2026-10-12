@@ -632,7 +632,7 @@ def main() -> int:
 
     # 7. Before Sep 2019 the funds' N-CSR/N-Q schedules give names only. Name each holding and
     #    compare it with the roll exactly as build_sp500_2003_2009.py does for 2003-2009.
-    name_results, name_confirmed, name_suspects, name_lists = [], set(), [], {}
+    name_results, name_confirmed, name_suspects, name_lists, name_explained = [], set(), [], {}, set()
     if NAME_SUMMARY.exists() and NAME_HOLDINGS.exists():
         import build_sp500_2003_2009 as names_check  # noqa: PLC0415
         name_lists = names_check.load_fund_lists(NAME_SUMMARY, NAME_HOLDINGS)
@@ -649,10 +649,17 @@ def main() -> int:
             eff = next_trading_day(p)
             got = names_check.check_list(namer, name_lists[(fund, p)], state_on(eff), eff)
             name_results.append((p, fund, len(name_lists[(fund, p)]), *got))
-        name_confirmed, name_suspects = names_check.classify(name_results, steps, rename_list)
+        name_confirmed, name_suspects, name_explained = names_check.classify(name_results, steps, rename_list)
         log(f"name-only fund lists {START}..{first_list}: {sum(1 for r in name_results if not r[4] and not r[5] and not r[6])} "
             f"of {len(name_results)} exact; month-ends confirmed {len(name_confirmed)} of {len({r[0] for r in name_results})}; "
             f"cross-fund suspects {name_suspects}")
+
+    # The NPORT month-ends get the same status as the name-only ones (confirmed / explained /
+    # unexplained), from the same labelling of each difference.
+    import build_sp500_2003_2009 as names_check  # noqa: PLC0415
+    np_results = [(p, "+".join(cp["funds"]), len(cp["keys"]), {}, dict(enumerate(mi)), list(ex), [], [])
+                  for p, cp, mi, ex in results]
+    np_confirmed, np_suspects, np_explained = names_check.classify(np_results, steps, rename_list)
 
     ok = sum(1 for _, _, mi, ex in results if not mi and not ex)
     log(f"anchor {ANCHOR_PERIOD} ({'+'.join(anchor['funds'])}): {len(base)} securities, effective {a_eff}")
@@ -671,11 +678,13 @@ def main() -> int:
         log("dry run: nothing written")
         return 0
     return write(args.dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
-                 sighting_checks, name_results, name_confirmed, name_suspects, name_lists)
+                 sighting_checks, name_results, name_confirmed, name_suspects, name_lists, name_explained,
+                 np_results, np_confirmed, np_explained)
 
 
 def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, display, a_eff,
-          sighting_checks, name_results=(), name_confirmed=frozenset(), name_suspects=(), name_lists=None) -> int:
+          sighting_checks, name_results=(), name_confirmed=frozenset(), name_suspects=(), name_lists=None,
+          name_explained=frozenset(), np_results=(), np_confirmed=frozenset(), np_explained=frozenset()) -> int:
     import psycopg2  # noqa: PLC0415
     from psycopg2.extras import execute_values  # noqa: PLC0415
 
@@ -799,7 +808,11 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
                           f"{'month-end confirmed' if p in name_confirmed else 'month-end not confirmed'}. "
                           + (f"Fund lines naming no ticker: {[x[1] for x in unnamed]}. " if unnamed else "")
                           + (f"Explained: {notes}" if notes else "")))
+        import build_sp500_2003_2009 as names_check  # noqa: PLC0415
+        recon += [(r[0], "month_end_status_nport", *r[2:]) for r in
+                  names_check.month_end_status(INDEX, np_results, np_confirmed, np_explained)]
         if name_results:
+            recon += names_check.month_end_status(INDEX, name_results, name_confirmed, name_explained)
             recon.append((INDEX, "cross_fund_suspects", date(2019, 8, 30), not name_suspects, 0, len(name_suspects),
                           [], [], "Members no fund list held within 45 days, and non-members every fund list held, "
                           "2010-2019 (by name): " + ("; ".join(f"{d}: {m}" for d, m in name_suspects)
