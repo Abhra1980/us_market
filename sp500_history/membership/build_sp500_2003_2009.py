@@ -119,7 +119,7 @@ NOISE = {
 
 ALIASES = {"freddie mac": "federal home loan mortgage", "fannie mae": "federal national mortgage association",
            "metropolitan life insurance": "metlife", "nasdaq stock market": "nasdaq omx",
-           r"\bibm\b": "international business machines"}
+           r"\bibm\b": "international business machines", "america online": "aol"}
 NOT_COMMON = re.compile(r"\b(PFD|PREF|PREFERRED|WARR|WARRANTS?|WTS?|RIGHTS?|RTS?|DEB|DBCV|NOTES?|UNITS?|CONV|"
                         r"DEPOSITARY|TRUST PFD)\b|%")
 
@@ -129,7 +129,7 @@ def norm_words(s: str) -> list[str]:
     for nick, full in ALIASES.items():
         s = re.sub(nick, full, s, flags=re.I)
     s = s.lower().replace("'", "").replace(".", " ").replace("at&t", "att")
-    s = re.sub(r"\b([a-z])\s*&\s*([a-z])\b", r"\1\2", s)       # H&R, AT&T -> hr, att
+    s = re.sub(r"\b([a-z]{1,3})\s*&\s*([a-z])\b", r"\1\2", s)  # H&R, AT&T, CP&L -> hr, att, cpl
     s = re.sub(r"[^a-z0-9 ]", " ", s.replace("&", " and "))
     words = s.split()
     joined = []                                                 # "W W Grainger", "V F" -> ww, vf
@@ -160,8 +160,8 @@ def similarity(a: list[str], b: list[str]) -> float:
     names: "GRAINGER W W INC", "LILLY ELI & CO"); else their spelling ratio."""
     if not a or not b:
         return 0.0
-    if a == b or sorted(a) == sorted(b) or "".join(a) == "".join(b):
-        return 1.0
+    if a == b or sorted(a) == sorted(b) or "".join(a) == "".join(b) or "".join(sorted(a)) == "".join(sorted(b)):
+        return 1.0                      # "JCPenney" against "PENNEY J C"
     sa, sb = set(a), set(b)
 
     def opens(w: str, ys: set[str]) -> bool:
@@ -173,6 +173,8 @@ def similarity(a: list[str], b: list[str]) -> float:
             return 0.86 if short[0] == lead or (len(short[0]) >= 3 and (lead.startswith(short[0])
                                                                        or short[0].startswith(lead))) else 0.8
         return 0.85 + 0.15 * len(sa & sb) / len(sa | sb)
+    if difflib.SequenceMatcher(None, "".join(a), "".join(b)).ratio() >= 0.92:
+        return 0.9                      # "USAirways" against "US Airways"
     ja, jb = "".join(sorted(a)), "".join(sorted(b))
     return difflib.SequenceMatcher(None, " ".join(a), " ".join(b)).ratio() * 0.8 + \
         0.2 * difflib.SequenceMatcher(None, ja, jb).ratio()
@@ -256,7 +258,7 @@ def load_ftd() -> dict[str, list[tuple[str, date, date, str]]]:
     return {c: [(s, a, b, d) for (s, d), (a, b) in v.items()] for c, v in out.items()}
 
 
-NOT_A_STOCK = re.compile(r"\b(warrants?|rights?|contingent value|escrow|futures?|repurchase|money market|"
+NOT_A_STOCK = re.compile(r"\b(warrants?|rights?|contingent value|escrow|futures?|repurchase|money market|contra|"
                          r"cash|collateral|miscellaneous)\b", re.I)
 
 
@@ -301,6 +303,10 @@ FUND_NAME_FIXES = {
         "Fidelity's Feb and May 2016 schedules print Prudential's funding subsidiary in Prudential's "
         "alphabetical place among the insurers; Feb 2016: 2,279,841 shares worth $150.7M ($66.09 a share, "
         "Prudential's price that month)"),
+    ("SPY", "Tyco Laboratories, Inc."): (
+        "Tyco International Ltd.",
+        "SPY's Sep 2000 report still prints Tyco's name from before 1993 (Tyco Laboratories); "
+        "every other fund list that month names Tyco International"),
 }
 NON_STOCK_OTHER = re.compile(r"cash|fund|money|treasury|bill|note|reserve|trust|portfolio|deposit|liquid|govern|"
                              r"agency|paper|coupon|face|expires|\d", re.I)
@@ -362,17 +368,17 @@ class Namer:
             self.dated[sym].append((norm_words(n), a, b))
 
     def names_of(self, sym: str, d: date, depth: int = 0) -> list[tuple[list[str], str]]:
-        """Reduced names a ticker went by near d: the SEC's descriptions, then S&P's names."""
-        # A member's names over the year around d: funds print a company's old name for months
-        # ("Sprint Corp. (FON Group)" in 2006). Safe, as only the roll's members are matched this way.
+        """Reduced names a ticker went by up to d: the SEC's descriptions, then S&P's names.
+        Only the roll's members are matched this way, so old names are safe to keep."""
         # The CUSIPs are the ones the ticker traded under up to d (tickers are reused: S was Sears,
         # then Sprint, so never a later CUSIP); the names are every name those CUSIPs carried up to
         # d, however old (Fidelity still printed "MGM Mirage" in 2018, eight years after the rename).
         lo, hi = d - timedelta(days=NAME_WINDOW), d + timedelta(days=FTD_WINDOW)
         cus = {self.rows[i][0] for i in self.by_sym.get(sym, []) if self.rows[i][2] <= hi and self.rows[i][3] >= lo}
         out = [(r[5], r[4]) for c in cus for j in self.by_cusip[c] for r in [self.rows[j]] if r[2] <= hi]
-        if not out:      # before Mar 2004, or never failed: any sighting, then S&P's own names
-            out = [(self.rows[i][5], self.rows[i][4]) for i in self.by_sym.get(sym, [])]
+        if not out:      # before Mar 2004: the ticker's first sightings (not a later reuse: U was US Airways)
+            out = [(self.rows[i][5], self.rows[i][4]) for i in self.by_sym.get(sym, [])
+                   if self.rows[i][2] <= d + timedelta(days=5 * 365)]
         # A renamed member also answers to the names of the ticker it came from (Fidelity printed
         # "McGraw Hill Financial" for S&P Global, SPGI, and "Quintiles Transnational" for IQVIA).
         older = [x for rd, o in self.came_from.get(sym, []) if rd <= d + timedelta(days=FTD_WINDOW) and depth < 3
@@ -386,8 +392,8 @@ class Namer:
         near = {r[0] for r in rows if r[2] - timedelta(days=FTD_WINDOW) <= d <= r[3] + timedelta(days=FTD_WINDOW)}
         return near or {r[0] for r in rows}
 
-    def candidates(self, name: str, d: date) -> list[tuple[float, str, str]]:
-        """Tickers trading near d whose SEC description matches the name, best first."""
+    def candidates(self, name: str, d: date, any_time: bool = False) -> list[tuple[float, str, str]]:
+        """Tickers trading near d (or ever, with any_time) whose SEC description matches, best first."""
         w = norm_words(name)
         if not w:
             return []
@@ -398,7 +404,8 @@ class Namer:
         out = {}
         for i in idx:
             c, s, a, b, desc, rw = self.rows[i]
-            if not (a - timedelta(days=FTD_WINDOW) <= d <= b + timedelta(days=FTD_WINDOW)) or NOT_COMMON.search(desc):
+            if not (any_time or a - timedelta(days=FTD_WINDOW) <= d <= b + timedelta(days=FTD_WINDOW)) \
+                    or NOT_COMMON.search(desc):
                 continue
             sc = similarity(w, rw) + class_bonus(name, desc)
             if sc > out.get(s, (0,))[0]:
@@ -427,10 +434,11 @@ def check_list(namer: Namer, lines: list, roll: frozenset, d: date):
         for rw, _ in ns:
             for x in rw + ["".join(rw)]:
                 near[x[:4]].add(sym)
+            near["=" + "".join(rw)[:1]].add(sym)     # "USAirways" vs "US Airways": same first letter
     scores = []
     for ln, name, _ in lines:
         w = norm_words(name)
-        for sym in {s for x in w + ["".join(w)] for s in near.get(x[:4], ())}:
+        for sym in {s for x in w + ["".join(w)] for s in near.get(x[:4], ())} | near.get("=" + "".join(w)[:1], set()):
             best = max((similarity(w, rw) + class_bonus(name, desc) for rw, desc in names[sym]), default=0.0)
             if best >= MATCH:
                 scores.append((best, ln, sym))
@@ -449,6 +457,12 @@ def check_list(namer: Namer, lines: list, roll: frozenset, d: date):
             excused.append(f"{name} (another line of member {sib})")
             continue
         cands = [c for c in namer.candidates(name, d) if c[0] >= MATCH and c[1] not in used]
+        if not cands:               # a company gone before the SEC's name data: S&P's own names for it
+            cands = sorted(((similarity(w, kw), t, "S&P") for t, kws in namer.known.items() if t not in used
+                            for kw in kws), reverse=True)[:1]
+            cands = [c for c in cands if c[0] >= 0.95]
+        if not cands and d < date(2004, 3, 22):     # before the SEC's fails data: its later names
+            cands = [c for c in namer.candidates(name, d, any_time=True) if c[0] >= 0.9 and c[1] not in used][:1]
         if cands:
             missing[ln] = cands[0][1]
             named[ln] = cands[0][1]
@@ -535,6 +549,10 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
             if gone:
                 return f"fund still held {t} after S&P deleted it effective {max(gone)}"
             return f"not an index member: {t} came to the fund from a deal or spin-off, or the fund chose it"
+        later = [d for d, op in when.get(t, []) if op == "exclude" and 0 < (d - p).days <= 60]
+        if later:                               # a cash deal: funds tender before S&P's deletion
+            return (f"fund had already sold {t}; S&P deleted it effective {later[0]}, "
+                    f"{(later[0] - p).days} days later")
         return f"fund did not hold member {t}"
     persist = Counter()
     for r in results:
@@ -558,7 +576,7 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
     for r in results:
         near = [(p2, f2, h) for p2, f2, h in held if abs((p2 - r[0]).days) <= 45 and (p2, f2) != (r[0], r[1])]
         for t in r[5]:
-            if why(t, "roll", r[0]).startswith("timing"):
+            if why(t, "roll", r[0]).startswith(("timing", "fund had already sold")):
                 continue
             who = next(((p2, f2) for p2, f2, h in near if t in h), None)
             if who:
@@ -588,7 +606,7 @@ def classify(results: list, steps: dict, applied_renames: list) -> tuple[set, li
         that names no ticker, a non-member every fund held."""
         lagged = {x.split(":")[0].split()[-1] for x in r[7] if "(a lag at" in x}
         out = [f"member {t} not held" for t in r[5]
-               if not why(t, "roll", r[0]).startswith("timing") and t not in lagged]
+               if not why(t, "roll", r[0]).startswith(("timing", "fund had already sold")) and t not in lagged]
         out += [f"unnamed line {u[1]!r}" for u in r[6]]
         out += [m for d, m in suspects if d == r[0] and any(t in m for t in r[4].values())]
         return out
@@ -778,12 +796,15 @@ def write(dsn, changes, snaps, results, contradictions, applied_renames, renames
     eff_of = {next_trading_day(r[0]): r[0] for r in results}
     effs = sorted(eff_of)
 
+    agree = set(confirmed) | set(explained)
+
     def verified(d: date) -> bool:
-        """The fund month-ends on both sides of d are confirmed (see main) and so is the end."""
+        """The fund month-ends on both sides of d agree with the roll (confirmed, or every difference
+        a recorded fund-side cause with no cross-fund suspect), and so does the end."""
         before = [x for x in effs if x <= d]
         after = [x for x in effs if x > d]
-        return bool(before and eff_of[before[-1]] in confirmed
-                    and (eff_of[after[0]] in confirmed if after else end_ok))
+        return bool(not suspects and before and eff_of[before[-1]] in agree
+                    and (eff_of[after[0]] in agree if after else end_ok))
 
     own = [s[0] for s in SOURCES]
     with psycopg2.connect(dsn) as conn, conn.cursor() as cur:

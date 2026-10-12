@@ -636,6 +636,9 @@ def main() -> int:
     if NAME_SUMMARY.exists() and NAME_HOLDINGS.exists():
         import build_sp500_2003_2009 as names_check  # noqa: PLC0415
         name_lists = names_check.load_fund_lists(NAME_SUMMARY, NAME_HOLDINGS)
+        # the Dec 2009 lists close the stretch before the first 2010 list
+        name_lists.update({fp: v for fp, v in names_check.load_fund_lists().items() if fp[1] >= date(2009, 12, 31)
+                           and fp not in name_lists})
         named_ids = names_check.load_ftd_names()
         known = defaultdict(set)
         for c in changes:
@@ -645,7 +648,8 @@ def main() -> int:
                  for r in csv.DictReader(TICKER_CHANGES.open())
                  if r["new_symbol"] and r["old_company"] and r["effective_date"]]
         namer = names_check.Namer(named_ids, known, dated, rename_list)
-        for fund, p in sorted((fp for fp in name_lists if START <= fp[1] < first_list), key=lambda fp: (fp[1], fp[0])):
+        for fund, p in sorted((fp for fp in name_lists if START <= next_trading_day(fp[1]) and fp[1] < first_list),
+                              key=lambda fp: (fp[1], fp[0])):
             eff = next_trading_day(p)
             got = names_check.check_list(namer, name_lists[(fund, p)], state_on(eff), eff)
             name_results.append((p, fund, len(name_lists[(fund, p)]), *got))
@@ -693,11 +697,13 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
     eff = {p: next_trading_day(p) for p in periods}
     matched = {p for p, _, mi, ex in results if not mi and not ex}
 
-    # A snapshot is verified when the checkpoints on both sides of it agree with the roll: an NPORT
-    # month-end matching exactly, or (2010-2019) a confirmed name-only month-end.
-    cps = {eff[p]: p in matched for p in periods}
+    # A snapshot is verified when the checkpoints on both sides of it agree with the roll.
+    # A month-end agrees when it is confirmed or explained (every difference a recorded fund-side
+    # cause, and no cross-fund suspect); month_end_status in the reconciliation keeps which.
+    np_ok = set(np_confirmed) | set(np_explained)
+    cps = {eff[p]: p in np_ok for p in periods}
     for p in {r[0] for r in name_results}:
-        cps[next_trading_day(p)] = p in name_confirmed
+        cps[next_trading_day(p)] = (p in name_confirmed or p in name_explained) and not name_suspects
     cp_days = sorted(cps)
 
     def verified(d: date) -> bool:
@@ -753,7 +759,8 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
                 line += 1
                 rows.append((SOURCE_FUNDS, line, INDEX, p, basis, show(cp["tick"].get(c, "")) or None,
                              cp["names"][c][0], None, c if len(c) == 9 else None, cp["names"][c][1] or None, v))
-        for p, fund, n, named, *_ in name_results:
+        own_names = [r for r in name_results if r[0] >= date(2010, 1, 1)]   # Dec 2009 is the 2003-2009 build's
+        for p, fund, n, named, *_ in own_names:
             basis = f"{fund} holdings at {p} close (SEC N-CSR/N-Q); names matched to tickers via SEC fails data"
             for ln, name, section in name_lists[(fund, p)]:
                 line += 1
@@ -800,7 +807,7 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         recon += [(INDEX, "sec_sighting", d, False, None, None, [], [],
                    "Member with no SEC fails-data sighting within 120 days (a ticker change not undone?): "
                    + "; ".join(v)) for d, v in by_day.items()]
-        for p, fund, n, named, missing, extra, unnamed, notes in name_results:
+        for p, fund, n, named, missing, extra, unnamed, notes in own_names:
             recon.append((INDEX, f"fund_month_end_{fund}", p, not missing and not extra and not unnamed, n,
                           n - len(missing) - len(unnamed) + len(extra), [show(t) for t in missing.values()],
                           [show(k) for k in extra],
@@ -812,7 +819,7 @@ def write(dsn, changes, checkpoints, renames, snaps, results, contradictions, di
         recon += [(r[0], "month_end_status_nport", *r[2:]) for r in
                   names_check.month_end_status(INDEX, np_results, np_confirmed, np_explained)]
         if name_results:
-            recon += names_check.month_end_status(INDEX, name_results, name_confirmed, name_explained)
+            recon += names_check.month_end_status(INDEX, own_names, name_confirmed, name_explained)
             recon.append((INDEX, "cross_fund_suspects", date(2019, 8, 30), not name_suspects, 0, len(name_suspects),
                           [], [], "Members no fund list held within 45 days, and non-members every fund list held, "
                           "2010-2019 (by name): " + ("; ".join(f"{d}: {m}" for d, m in name_suspects)

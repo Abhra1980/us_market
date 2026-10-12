@@ -91,6 +91,8 @@ SOURCES = [
      "sp500_history/sp500probe/spy2001.txt", None, None,
      "Annual report, holdings at 30 Sep 2001; names only"),
 ]
+FUND_SUMMARY = HERE / "data/fund_lists_1998_2002_summary.csv"
+FUND_HOLDINGS = REPO / "sp500_history/downloads/sec/fund_holdings_1998_2002.csv"
 YEAR_OF = {"sp_changes_1999": 1999, "sp_changes_2000": 2000, "sp_changes_2001": 2001, "sp_changes_2002": 2002}
 TICKCHG_YEAR = {"sp_tickchg_2000": 2000, "sp_tickchg_2001": 2001, "sp_tickchg_2002": 2002}
 LAST_DAY = date(2002, 11, 29)          # build_sp500_2003_2009.py takes over after this
@@ -184,6 +186,9 @@ SKIP_TICKER_CHANGES = {
 }
 
 
+NAME_ROWS: list[tuple[str, str, str, str]] = []   # (old ticker, old company, new ticker, new company)
+
+
 def parse_ticker_changes(source: str, path: Path) -> list[tuple]:
     """S&P's "Name and Ticker Changes" page: rows of date, old company, old ticker, new company,
     new ticker. Only ticker changes up to LAST_DAY, in the RENAMES tuple shape."""
@@ -199,6 +204,7 @@ def parse_ticker_changes(source: str, path: Path) -> list[tuple]:
         if m and i + 4 < len(lines):
             ac = date(year, int(m[1]), int(m[2]))
             old_co, old, new_co, new = lines[i + 1:i + 5]
+            NAME_ROWS.append((old, old_co, new, new_co))           # every row names its companies
             if old != new and ac <= LAST_DAY and (old, new) not in SKIP_TICKER_CHANGES:
                 out.append((ac, old, new, new_co, source,
                             f"S&P {year} name and ticker changes, effective after the close of {ac}: "
@@ -394,6 +400,57 @@ def main() -> int:
 
     first, last_change = min(snaps), dates[-1]
     covered_through = date(2002, 11, 29)   # last trading day before the 2002 list's 1 Dec capture
+
+    # Index funds' full holdings filed with the SEC (N-30D), names only, checked month by month
+    # with build_sp500_2003_2009.py's matcher (fetch_sec_fundlists_2002_2009.py --from 1998-12-31
+    # --to 2002-08-31). Before 2004 the SEC's names come from the same securities' later filings.
+    name_res, name_ok = [], set()
+    if FUND_SUMMARY.exists() and FUND_HOLDINGS.exists():
+        import build_sp500_2003_2009 as names_check  # noqa: PLC0415
+        k = names_check.key
+        flists = names_check.load_fund_lists(FUND_SUMMARY, FUND_HOLDINGS)
+        flists.update({fp: v for fp, v in names_check.load_fund_lists().items()      # Sep-Nov 2002
+                       if fp[1] <= covered_through and fp not in flists})
+        ids = names_check.load_ftd_names()
+        names_check.load_13f(ids)
+        known = defaultdict(set)
+        for e in events:
+            known[k(e.symbol)].add(e.company)
+        for _, sym, co, _ in alpha:
+            known[k(sym)].add(co)
+        ren = [(next_trading_day(ac), k(o), k(n)) for ac, o, n, *_ in renames]
+        for ac, o, n, co, _, note in renames:
+            known[k(n)].add(co)
+            m = re.search(r": (.+?) \((\S+)\) -> ", note)       # S&P's ticker pages name the old company
+            known[k(o)] |= {co, m.group(1)} if m else {co}
+        for o, oco, n, nco in NAME_ROWS:             # name-only rows too: Kaufman & Broad became KB Home as KBH
+            known[k(o)] |= {oco, nco}
+            known[k(n)] |= {oco, nco}
+        namer = names_check.Namer(ids, known, (), ren)
+        ksteps = {d: [(a, k(x), None) for a, x in st] for d, st in steps.items()}
+
+        def state(d: date) -> frozenset:
+            return frozenset(k(x) for x in snaps[max(x for x in snaps if x <= d)])
+        for fund, p in sorted((fp for fp in flists if first <= next_trading_day(fp[1]) <= covered_through),
+                              key=lambda fp: (fp[1], fp[0])):
+            eff = next_trading_day(p)
+            name_res.append((p, fund, len(flists[(fund, p)]),
+                             *names_check.check_list(namer, flists[(fund, p)], state(eff), eff)))
+        conf, susp, expl = names_check.classify(name_res, ksteps, ren)
+        name_ok = (conf | expl) if not susp else set()
+        log(f"fund lists by name: {sum(1 for r in name_res if not r[4] and not r[5] and not r[6])} of "
+            f"{len(name_res)} exact; month-ends {len(conf)} confirmed, {len(expl)} explained, "
+            f"{len({r[0] for r in name_res}) - len(conf) - len(expl)} unexplained; suspects {susp}")
+        for p, fund, n, named, missing, extra, unnamed, notes in name_res:
+            checks.append((f"fund_month_end_{fund}", p, not missing and not extra and not unnamed, n,
+                           n - len(missing) - len(unnamed) + len(extra), sorted(missing.values()), list(extra),
+                           f"{fund} at {p} close (SEC N-30D, by name) vs the roll effective {next_trading_day(p)}. "
+                           + (f"Fund lines naming no ticker: {[x[1] for x in unnamed]}. " if unnamed else "")
+                           + (f"Explained: {notes}" if notes else "")))
+        checks += [c[1:] for c in names_check.month_end_status(INDEX, name_res, conf, expl)]
+        checks.append(("cross_fund_suspects", date(2002, 11, 29), not susp, 0, len(susp), [], [],
+                       "Members no fund list held within 45 days, and non-members every fund list held, "
+                       "2000-2002: " + ("; ".join(f"{d}: {m}" for d, m in susp) if susp else "none")))
     log(f"snapshots: {len(snaps)} from {first} to {last_change}; coverage {first}..{covered_through}")
     failed = [c for c in checks if not c[2]]
     log(f"checks: {len(checks)} run, {len(failed)} not reconciled")
@@ -439,10 +496,17 @@ def main() -> int:
             [("sp_500alpha", ln, INDEX, anchor, as_of_basis, sym, co, ind) for ln, sym, co, ind in alpha]
             + [("spdr_n30d_20010930", ln, INDEX, date(2001, 9, 30), "Stated: annual report date",
                 None, n, None) for ln, n in spdr])
+        # Verified: S&P's own full list, or a stretch between two fund month-ends that agree.
+        cps = sorted((next_trading_day(r[0]), r[0] in name_ok) for r in name_res)
+
+        def verified(d: date) -> bool:
+            before = [ok for x, ok in cps if x <= d]
+            after = [ok for x, ok in cps if x > d]
+            return d == anchor or bool(before and after and before[-1] and after[0])
         rows = []
         for d, m in snaps.items():
             src = "sp_500alpha" if d == anchor else "sp_changes:roll_from_sp_500alpha"
-            rows += [(INDEX, d, s, src, d == anchor) for s in sorted(m)]
+            rows += [(INDEX, d, s, src, verified(d)) for s in sorted(m)]
         execute_values(cur, """insert into usmarket.index_membership
             (index_type, effective_date, symbol, source, is_verified) values %s""", rows, page_size=5000)
         cur.execute("""insert into usmarket.index_membership_coverage values (%s, %s, %s, %s)""",
